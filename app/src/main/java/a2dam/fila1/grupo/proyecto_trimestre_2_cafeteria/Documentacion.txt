@@ -1,0 +1,4 @@
+Antes de hacer nada necesitamos nuestra base de datos creada sobre la que vamos a trabajar en el proyecto (se proporcionara dicha base al principio de la defensa del proyecto).
+Una vez la tengamos terminada se procede a su conexion con el proyecto android abierto
+
+1º
