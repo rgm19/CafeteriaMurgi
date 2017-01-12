@@ -1,11 +1,11 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd;
 
 /**
- * Created by usuario on 12/01/17.
+ * Created by Raquel on 12/01/17.
  */
 
 public class Pedido {
-    int idPedido, idCliente, cantidad;
+    private int idPedido, idCliente, cantidad;
 
     public int getIdPedido() {
         return idPedido;
