@@ -1,0 +1,22 @@
+Antes de hacer nada necesitamos nuestra base de datos creada sobre la que vamos a trabajar en el
+proyecto (se proporcionara dicha base al principio de la defensa del proyecto).
+Una vez la tengamos terminada se procede a su conexion con el proyecto android abierto
+
+1º- Crear nuestras clases Java para los objetos de la BBDD para poder trabajar con ellos
+2º-
+
+
+//------------------------------------------------------------------------------------------------\\
+Gand: Para la parte gráfica yo sólo explicaría el contenido de los Activitys
+    Cliente:
+        -ListView con adapter para mostar el menú de la cafetería
+        -Vista detalles de cada producto de la cafetería
+        -Vista resumen con adapter para confirmar pedido con precio
+    Camarero:
+        -ListView con adapter para mostar lista de pedidos
+        -Vista detalles con adapter para los productos de cada pedido
+        -Vista resumen con adapter para pagar el pedido
+
+    Y ya que cada uno lo implemente como quiera y con el diseño que quiera, que creo que de esto no
+    hay que explicar mucho porque se debería saber como hacerlo.
+//------------------------------------------------------------------------------------------------\\
