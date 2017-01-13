@@ -7,6 +7,8 @@ package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd;
 public class BdConex {
     private final String servidor = "localhost";
 
+    //public static Producto getProducto() {}
+    //public static Cliente getCliente() {}
+    //public static Pedido getPedido() {}
 
-    //public static Producto getProducto() {    }
 }
