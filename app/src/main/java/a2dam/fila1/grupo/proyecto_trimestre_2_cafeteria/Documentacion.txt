@@ -48,3 +48,48 @@ Manolo: Permisos
     Mirar el archivo manifest para apreciar donde van situadas las etiquetas
 
 //------------------------------------------------------------------------------------------------\\
+
+//------------------------------------------------------------------------------------------------\\
+Manolo: AsynTask
+
+    AsysTask, al igual que lo Thread, son hilos que se ejecutan en segundo plano con la peculiaridad
+    de disponer de metodos para poder realizar cambios en el hilo principal de manera mas facil
+
+    Ejemplo de uso basico:
+
+    import android.os.AsyncTask;
+
+    public void metodo()
+    {
+     new AsyncTask<Void,Void, ResultSet>()//Variables envolventes, no funcionan primitivos. Solo se especifica el tipo, se asociara al objeto mas adelante. p1 - parametro de doInBackGround p2 - Parametro de onProgressUpdate p3 - Parametro de onPostExecute
+            {
+                protected ResultSet doInBackground(Void... voids)//Metodo que se ejecuta en 2º plano, no puede realizar cambios directos en el hilo principal de la UI
+                {
+                    publishProgress(); //Llama al metodo onProgressUpdate (si, la llamada es diferente al nombre del metodo)
+                    return resultado;
+                }
+
+                protected void onProgressUpdate(Void... mensaje)//Metodo lanzado desde el segundo plano que realiza cambios en la UI
+                {
+                }
+
+                @Override
+                protected void onPostExecute(ResultSet resultSet)//Igual que onProgressUpdate, la diferencia esta en que el anterior puede ser llamado tantas veces y cuando se quiera mientras que este se llama automaticamente al finalizar el onDoInBackground
+                {
+                    super.onPostExecute(resultSet);
+
+                }
+            }.execute(null, null, null); Parametros de entrada (objetos) p1 - parametro de doInBackGround p2 - Parametro de onProgressUpdate p3 - Parametro de onPostExecute
+
+            //Nota 1: Aunque usemos por ejemplo un String, el metodo lo tratara como un array. Hay que especificar la posicion
+                           // Ejemplo:
+
+                 protected void doInBackground(String... palabras)
+                 {
+                        String auxiliar = palabras[0];
+                        return null;
+                 }
+        }
+     }
+
+//------------------------------------------------------------------------------------------------\\
