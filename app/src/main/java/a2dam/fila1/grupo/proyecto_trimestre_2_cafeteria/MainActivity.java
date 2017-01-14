@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         //Actualmente tiene datos falsos
         HiloConexionBBDD.consultaProductos();
         HiloConexionBBDD.consultaUltimoPedido();
-        //HiloConexionBBDD.insertarPedido();
+        //HiloConexionBBDD.insertarPedido();;
     }
 
 
