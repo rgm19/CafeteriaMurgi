@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //Actualmente tiene datos falsos
+        //Actualmente tiene datos falsos, para comprobar funcionamiento uso Log.d (Verbose)
         HiloConexionBBDD.consultaProductos();
-        HiloConexionBBDD.consultaUltimoPedido();
+        //HiloConexionBBDD.consultaUltimoPedido();
         //HiloConexionBBDD.insertarPedido();;
     }
 

@@ -36,3 +36,15 @@ Manolo: Conexion a MySQL
     6 - Se necesita cargar en algun momento antes de la conexion la sentencia:
             "Class.forName("com.mysql.jdbc.Driver");"
 //------------------------------------------------------------------------------------------------\\
+
+Manolo: Permisos
+
+    Para poder usar internet hay que agregar los permisos:
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+        <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    Mirar el archivo manifest para apreciar donde van situadas las etiquetas
+
+//------------------------------------------------------------------------------------------------\\
