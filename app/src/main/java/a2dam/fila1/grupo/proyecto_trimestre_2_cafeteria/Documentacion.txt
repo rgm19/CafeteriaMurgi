@@ -20,3 +20,19 @@ Gand: Para la parte gráfica yo sólo explicaría el contenido de los Activitys
     Y ya que cada uno lo implemente como quiera y con el diseño que quiera, que creo que de esto no
     hay que explicar mucho porque se debería saber como hacerlo.
 //------------------------------------------------------------------------------------------------\\
+
+//------------------------------------------------------------------------------------------------\\
+Manolo: Conexion a MySQL
+    Para agregar correctamente el conector:
+
+    0 - Copiar el conector a la carpeta del proyecto "Proyecto_Trimestre_2_Cafeteria\app"
+
+    1 - Ir a: File / Proyect Structure/
+    2 - Hacer simple click en "app" (a la izquierda)
+    3 - Hacer simple click en "Dependencies" (arriba a la derecha)
+    4 - Pulsar el simbolo + (el de la derecha, no el de la izquierda)
+    5 - Agregar "File Dependenci" (se abre un buscador y agregamos nuestro archivo copiado anteriormente)
+
+    6 - Se necesita cargar en algun momento antes de la conexion la sentencia:
+            "Class.forName("com.mysql.jdbc.Driver");"
+//------------------------------------------------------------------------------------------------\\
