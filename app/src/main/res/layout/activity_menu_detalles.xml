@@ -6,48 +6,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.ActivityMenuDetalles">
-
-    <android.support.v7.widget.Toolbar
+    <android.support.v7.widget.ActionBarContainer
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:theme="?attr/actionBarTheme"
-        android:minHeight="?attr/actionBarSize"
-        android:id="@+id/toolbar2"
-        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_height="48dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:text="Pedir"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:id="@+id/button"
-        android:elevation="2dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
-        app:layout_constraintRight_toRightOf="@+id/toolbar2"
-        android:layout_marginEnd="32dp"
-        android:background="@color/accent"
-        android:textSize="18sp"
-        android:textColor="#fff" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/actionBarContainer">
+        <include layout="@layout/action_bar"/>
+    </android.support.v7.widget.ActionBarContainer>
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/ic_menu_camera"
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_md_Foto"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
         app:layout_constraintRight_toLeftOf="@+id/guideline"
         android:layout_marginEnd="8dp"
-        android:scaleType="center" />
+        android:scaleType="center"
+        app:layout_constraintTop_toBottomOf="@+id/actionBarContainer"
+        android:layout_marginTop="16dp" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
-        android:layout_height="567dp"
+        android:layout_height="0dp"
         android:id="@+id/guideline"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
@@ -58,33 +42,60 @@
         android:text="TextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
+        android:id="@+id/tv_md_Nombre"
         app:layout_constraintLeft_toLeftOf="@+id/guideline"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/actionBarContainer"
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:text="TextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        app:layout_constraintLeft_toLeftOf="@+id/textView3"
+        android:id="@+id/tv_md_Precio"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_md_Nombre"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintRight_toRightOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_md_Nombre"
+        app:layout_constraintRight_toRightOf="@+id/tv_md_Nombre" />
 
     <TextView
         android:text="TextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5"
+        android:id="@+id/tv_md_Ingredientes"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/iv_md_Foto"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="368dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/linearLayout">
+        <include layout="@layout/menu_cantidad"/>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_restaurant_menu_black_24dp"
+        android:id="@+id/fab_md"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:fabSize="normal"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+
 </android.support.constraint.ConstraintLayout>
