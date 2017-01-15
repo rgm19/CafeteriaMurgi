@@ -9,6 +9,14 @@ public class Producto {
     private String nombre, img, ingredientes;
     private float precio;
 
+    public Producto(int id, String nombre, String ingredientes, float precio, String img) {
+        this.id=id;
+        this.nombre=nombre;
+        this.ingredientes=ingredientes;
+        this.precio=precio;
+        this.img=img;
+    }
+
     public int getId() {
         return id;
     }

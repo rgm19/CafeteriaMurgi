@@ -9,6 +9,13 @@ public class Cliente {
     private String nombre, pass;
     private boolean camarero;
 
+    public Cliente(int id, String nombre, String pass, boolean camarero) {
+        this.id = id;
+        this.nombre = nombre;
+        this.pass = pass;
+        this.camarero = camarero;
+    }
+
     public int getId() {
         return id;
     }

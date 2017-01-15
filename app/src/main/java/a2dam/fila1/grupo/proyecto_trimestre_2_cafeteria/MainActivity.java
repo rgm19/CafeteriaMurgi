@@ -1,9 +1,11 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.HiloConexionBBDD;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,27 +18,29 @@ public class MainActivity extends AppCompatActivity {
         //No modificar ni cambiar la posicion del siguiente metodo
         cargarDriverJDBC();
 
+        if (BDPruebas.productos.size()==0) {BDPruebas.iniciarBBDD();}
+        Intent i = new Intent(getApplicationContext(),ActivityMenu.class);
+        startActivity(i);
+
 
 
         //Actualmente tiene datos falsos, para comprobar funcionamiento uso Log.d (Verbose)
-        HiloConexionBBDD.consultaProductos();
+        //HiloConexionBBDD.consultaProductos();
         //HiloConexionBBDD.consultaUltimoPedido();
-        //HiloConexionBBDD.insertarPedido();;
+        //HiloConexionBBDD.insertarPedido();
+
+
     }
 
 
 
 
 
-    private void cargarDriverJDBC()//No modificar
-    {
-        try
-        {
+    private void cargarDriverJDBC(){//No modificar
+        try {
             Class.forName("com.mysql.jdbc.Driver");///////////////////DOCUMENTAR LA NECESIDAD DE ESTA LINEA para el funcionamiento de BBDD
-        }
-        catch(Exception ex)
-        {
+        }catch(Exception ex){
             Log.e("Conexion BBDD", "No se ha podido establecer conexion: " + ex.getMessage());
         }
-    }
+    }//Fin cargarDriverJDBC No Modificar
 }
