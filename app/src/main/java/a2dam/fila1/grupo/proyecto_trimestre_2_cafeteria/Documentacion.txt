@@ -87,7 +87,7 @@ Manolo: AsynTask
                  protected void doInBackground(String... palabras)
                  {
                         String auxiliar = palabras[0];
-                        return null;
+                        return null;g
                  }
         }
      }
