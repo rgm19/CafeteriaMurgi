@@ -1,4 +1,4 @@
-package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
+package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd;
 
 
 
@@ -230,57 +230,3 @@ public class HiloConexionBBDD {
         }.execute(producto, null, null);
     }
 }
-
-
-/*
-create table productos(
-	id_pro int (2) PRIMARY KEY auto_increment,
-    nom_pro varchar(40),
-    precio float(4,2),
-    img varchar(50),
-    ingredientes varchar(200)
-);
-
-create table clientes(
-	id_cli int (2) PRIMARY KEY auto_increment,
-    nom_cli varchar(40),
-    camarero boolean default false,
-    mesa int(2),
-    pass int(4)
-);
-
-create table pedidos(
-	num_pedido int(6) NOT NULL,
-	idProducto int(2) NOT NULL,
-    idCliente int(2) NOT NULL,
-	fecha date NOT NULL,
-    cantidad int(2),
-
-    constraint pk_producto_cliente_fecha primary key (num_pedido,idProducto, idCliente),
-    constraint fk_pedido_producto foreign key (idProducto) references productos(id_pro),
-    constraint fk_pedido_cliente foreign key (idCliente) references clientes(id_cli)
-);
-
--- Inserciones de ejemplo
-
-INSERT into productos (nom_pro,precio,img,ingredientes) values ('cafe',1.3,'url','cafe y leche');
-INSERT into productos (nom_pro,precio,img,ingredientes) values ('cafe con leche',1.3,'url','cafe y leche');
-INSERT into productos (nom_pro,precio,img,ingredientes) values ('tostada mantequilla',1.3,'url','cafe y leche');
-INSERT into clientes (nom_cli) values ('juan');
-INSERT into pedidos values (1,1,1,curdate(),1);
-
-
--- Consultas para el proyecto
-
--- select max(num_pedido) from pedidos; para saber cual es el ultimo pedido
-
--- INSERT into clientes (nom_cli) values ('juan'); para agregar cliente
-
--- select nom_cli, nom_pro from productos, pedidos,clientes where productos.id_pro=pedidos.idProducto and pedidos.idCliente=clientes.id_cli and num_pedido=1; para saber los nombre de productos de un pedido concreto por nombre de cliente
---
-
-
-
---
-
- */
