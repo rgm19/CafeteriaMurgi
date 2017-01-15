@@ -131,8 +131,8 @@ public class ActivityMenuDetalles extends AppCompatActivity {
 
     private void setCantidad(int i) {
         int cant=Integer.parseInt(cantidad.getText().toString());
-        if ((cant+i)==0){
-            Toast.makeText(getApplicationContext(),"Mínima cantidad 1", Toast.LENGTH_SHORT).show();
+        if ((cant+i)==0 || (cant+i)==31){
+            Toast.makeText(getApplicationContext(),"Cantidad mínima 1, cantidad máxima 30", Toast.LENGTH_SHORT).show();
         }else{
             cantidad.setText(""+(cant+i));
         }

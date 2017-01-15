@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.ActivityMenuDetalles">
-    <android.support.v7.widget.ActionBarContainer
+
+    <android.support.design.widget.AppBarLayout
         android:layout_width="0dp"
         tools:layout_editor_absoluteY="0dp"
         android:layout_height="48dp"
@@ -14,7 +15,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/actionBarContainer">
         <include layout="@layout/action_bar"/>
-    </android.support.v7.widget.ActionBarContainer>
+    </android.support.design.widget.AppBarLayout>
 
     <ImageView
         android:layout_width="0dp"
