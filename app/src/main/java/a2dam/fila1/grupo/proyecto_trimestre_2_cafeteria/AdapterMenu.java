@@ -44,11 +44,11 @@ public class AdapterMenu extends BaseAdapter {
             Context cnt=parent.getContext();
             vista= LayoutInflater.from(cnt).inflate(R.layout.list_producto,null);
         }
-        final Producto currentProducto= productos.get(position);
+        Producto currentProducto= productos.get(position);
 
-        TextView nombre=(TextView)parent.findViewById(R.id.tv_lp_Nombre);
+        TextView nombre=(TextView)vista.findViewById(R.id.tv_lp_Nombre);
         nombre.setText(""+currentProducto.getNombre());
-        TextView precio=(TextView)parent.findViewById(R.id.tv_lp_Precio);
+        TextView precio=(TextView)vista.findViewById(R.id.tv_lp_Precio);
         precio.setText(""+currentProducto.getPrecio()+" €");
 
 
