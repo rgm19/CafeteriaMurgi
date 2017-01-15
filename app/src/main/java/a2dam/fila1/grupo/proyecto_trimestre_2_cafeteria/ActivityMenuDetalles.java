@@ -21,7 +21,7 @@ import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
 public class ActivityMenuDetalles extends AppCompatActivity {
 
     static Producto producto;
-    Button pedir, mas, menos;
+    Button pedir, volver, mas, menos;
     ImageView foto;
     TextView nombre, precio, ingredientes, cantidad;
     FloatingActionButton fab;
@@ -56,6 +56,7 @@ public class ActivityMenuDetalles extends AppCompatActivity {
 
     private void inflar() {
         pedir = (Button)findViewById(R.id.btn_Pedir);
+        volver = (Button)findViewById(R.id.btn_md_Volver);
         mas = (Button)findViewById(R.id.btn_md_mas);
         menos = (Button)findViewById(R.id.btn_md_menos);
         foto = (ImageView) findViewById(R.id.iv_md_Foto);
@@ -92,6 +93,16 @@ public class ActivityMenuDetalles extends AppCompatActivity {
     }
 
     private void listener() {
+        //----------- VOLVER ----------------------------------------------------------------------
+        volver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), ActivityMenu.class);
+                startActivity(i);
+            }
+        });//Fin volver
+        //----------- VOLVEr ----------------------------------------------------------------------44
+
         //----------- PEDIR -----------------------------------------------------------------------
         pedir.setOnClickListener(new View.OnClickListener() {
             @Override
