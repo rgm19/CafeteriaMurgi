@@ -81,7 +81,7 @@ Manolo: AsynTask
                 }
             }.execute(null, null, null); Parametros de entrada (Instancias inicializadas) p1 - parametro de doInBackGround p2 - Parametro de onProgressUpdate p3 - Parametro de onPostExecute
 
-            //Nota 1: Aunque usemos por ejemplo un parametro de entrada String, el metodo lo tratara como un array. Hay que especificar la posicion, suele ser 0
+            //Nota 1: Aunque usemos por ejemplo un parametro de entrada String, el metodo lo tratara como un array. Hay que especificar la posicion, suele ser posicion 0
                            // Ejemplo:
 
                  protected void doInBackground(String... palabras)
