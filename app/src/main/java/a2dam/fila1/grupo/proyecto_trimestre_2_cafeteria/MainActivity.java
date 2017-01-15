@@ -38,10 +38,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void cargarDriverJDBC(){//No modificar
-        try {
+        try
+        {
             Class.forName("com.mysql.jdbc.Driver");///////////////////DOCUMENTAR LA NECESIDAD DE ESTA LINEA para el funcionamiento de BBDD
-        }catch(Exception ex){
-            Log.e("Conexion BBDD", "No se ha podido establecer conexion: " + ex.getMessage());
+            Log.d("Carga Driver JDBC: ","Driver cargado correctamente");
+        }
+        catch(Exception ex)
+        {
+            Log.e("Carga Driver JDBC: ", "No se ha podido cargar el driver JDBC: " + ex.getMessage());
         }
     }//Fin cargarDriverJDBC No Modificar
 }
