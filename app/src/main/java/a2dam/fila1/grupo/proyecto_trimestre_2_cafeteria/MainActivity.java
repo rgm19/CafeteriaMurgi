@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
         //No modificar ni cambiar la posicion del siguiente metodo
         cargarDriverJDBC();
 
-        if (BDPruebas.productos.size()==0) {BDPruebas.iniciarBBDD();}
+//        if (BDPruebas.productos.size()==0)
+            BDPruebas.iniciarBBDD();
         Intent i = new Intent(getApplicationContext(),ActivityMenu.class);
         startActivity(i);
 
