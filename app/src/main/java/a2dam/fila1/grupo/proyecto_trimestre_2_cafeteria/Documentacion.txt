@@ -25,7 +25,7 @@ Gand: Para la parte gráfica yo sólo explicaría el contenido de los Activitys
 Manolo: Conexion a MySQL
     Para agregar correctamente el conector:
 
-    0 - Copiar el conector a la carpeta del proyecto "Proyecto_Trimestre_2_Cafeteria\app"
+    0 - Copiar el conector (3.0.17-ga-bin, el 5 no funciona)a la carpeta del proyecto "Proyecto_Trimestre_2_Cafeteria\app"
 
     1 - Ir a: File / Proyect Structure/
     2 - Hacer simple click en "app" (a la izquierda)
