@@ -93,3 +93,14 @@ Manolo: AsynTask
      }
 
 //------------------------------------------------------------------------------------------------\\
+
+
+Conexion Base datos: base20171
+         usuario: ubase20171
+         pass: pbase20171
+
+         host
+         	- Desde casa www.iesmurgi.org
+         	- Desde el centro 10.10.4.150
+
+         	"mysql -h direccion -u usuario  -p
