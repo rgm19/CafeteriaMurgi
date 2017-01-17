@@ -28,7 +28,8 @@
         <activity android:name=".ActivityPedidosDetalles" />
         <activity android:name=".ActivityPedidosPago" />
         <activity android:name=".ActivityLogin" />
-        <activity android:name=".ActivityCafe"></activity>
+        <activity android:name=".ActivityCafe" />
+        <activity android:name=".ActivityDetalles"></activity>
     </application>
 
 </manifest>
