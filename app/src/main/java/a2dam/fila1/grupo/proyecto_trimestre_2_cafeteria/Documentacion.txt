@@ -94,7 +94,7 @@ Manolo: AsynTask
 
 //------------------------------------------------------------------------------------------------\\
 
-
+Manolo conexion a BBDD:
 Conexion Base datos: base20171
          usuario: ubase20171
          pass: pbase20171
