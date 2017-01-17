@@ -1,11 +1,13 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
@@ -17,6 +19,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     EditText usuario, pass;
     Button entrar;
+    ImageButton ayuda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +27,35 @@ public class ActivityLogin extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         inflar();
+        listener();
 
         if (USER==null){
             login();
         }else{
             lanzarActivity();
         }
+    }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        if (USER==null){
+//            login();
+//        }else{
+//            lanzarActivity();
+//        }
+//    }
+
+    private void listener() {
+        ayuda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog_pass dialogo= new Dialog_pass();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                dialogo.show(ft, "Contraseñas");
+            }
+        });
 
     }
 
@@ -37,6 +63,7 @@ public class ActivityLogin extends AppCompatActivity {
         usuario = (EditText) findViewById(R.id.et_lg_usuario);
         pass = (EditText) findViewById(R.id.et_lg_pass);
         entrar = (Button) findViewById(R.id.btn_lg_entrar);
+        ayuda = (ImageButton) findViewById(R.id.ibtn_lg_ayuda);
     }
 
     private void login() {
@@ -46,14 +73,17 @@ public class ActivityLogin extends AppCompatActivity {
                 if (usuario.getText().toString().trim().equals("") || pass.getText().toString().trim().equals("")){
                     Toast.makeText(getApplicationContext(), "Debe rellenar todos los campos",Toast.LENGTH_SHORT).show();
                 }else{
+                    boolean user = false;
                     for (Usuario u : BDPruebas.usuarios){
                         if (usuario.getText().toString().trim().equals(u.getNombre())){
                             if (pass.getText().toString().trim().equals(u.getPass())){
                                 USER=u;
                                 lanzarActivity();
+                                user = true;
                             }
                         }
                     }
+                    if (!user)
                     Toast.makeText(getApplicationContext(), "Usuario o Contraseña incorrectos",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -77,4 +107,4 @@ public class ActivityLogin extends AppCompatActivity {
             default:
         }
     }
-}
+}//Fin Acticity
