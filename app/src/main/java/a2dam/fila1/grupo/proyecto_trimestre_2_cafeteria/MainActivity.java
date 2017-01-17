@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        if (BDPruebas.productos.size()==0)
             BDPruebas.iniciarBBDD();
-        Intent i = new Intent(getApplicationContext(),ActivityMenu.class);
+        Intent i = new Intent(getApplicationContext(),ActivityLogin.class);
         startActivity(i);
 
 

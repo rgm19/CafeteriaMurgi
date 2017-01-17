@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class Pedido {
     private int idPedido;
-    private Cliente cliente;
+    private Usuario usuario;
     private ArrayList<Producto> productos;
     private ArrayList<Integer> cantidad;
 
-    public Pedido(int idPedido, Cliente cliente, ArrayList<Producto> productos, ArrayList<Integer> cantidad) {
+    public Pedido(int idPedido, Usuario usuario, ArrayList<Producto> productos, ArrayList<Integer> cantidad) {
         this.idPedido = idPedido;
-        this.cliente = cliente;
+        this.usuario = usuario;
         this.productos = productos;
         this.cantidad = cantidad;
     }

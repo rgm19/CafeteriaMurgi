@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class BDPruebas {
     public static ArrayList<Producto> productos = new ArrayList<>();
-    public static ArrayList<Cliente> clientes = new ArrayList<>();
+    public static ArrayList<Usuario> usuarios = new ArrayList<>();
     public static ArrayList<Pedido> pedidos = new ArrayList<>();
 
 
@@ -19,9 +19,10 @@ public class BDPruebas {
         productos.add(new Producto(4,"Tostada bacon","Pan, bacon",1.75f,"foto"));
         productos.add(new Producto(5,"Tostada jamón","Pan, jamón",2.0f,"foto"));
 
-        clientes.add(new Cliente(1,"Paco",null,false));
-        clientes.add(new Cliente(2,"Juan",null,false));
-        clientes.add(new Cliente(3,"Sebastian","pass",true));
+        usuarios.add(new Usuario(1,"usuario1","pass1","666111111",2));
+        usuarios.add(new Usuario(2,"usuario1","pass2","666222222",2));
+        usuarios.add(new Usuario(3,"camarero","camarero","666333333",1));
+        usuarios.add(new Usuario(4,"admin","admin","666444444",0));
 
         ArrayList<Producto> pedido1=new ArrayList<>();
         ArrayList<Integer> cantidad1=new ArrayList<>();
@@ -33,8 +34,8 @@ public class BDPruebas {
         pedido2.add(productos.get(1));cantidad2.add(10);
         pedido2.add(productos.get(3));cantidad2.add(1);
 
-        pedidos.add(new Pedido(1,clientes.get(0),pedido1,cantidad1));
-        pedidos.add(new Pedido(1,clientes.get(1),pedido2,cantidad2));
+        pedidos.add(new Pedido(1, usuarios.get(0),pedido1,cantidad1));
+        pedidos.add(new Pedido(1, usuarios.get(1),pedido2,cantidad2));
 
     }
 

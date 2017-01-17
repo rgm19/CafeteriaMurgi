@@ -42,9 +42,9 @@ INSERT into pedidos values (1,1,1,curdate(),1);
 
 -- select max(num_pedido) from pedidos; para saber cual es el ultimo pedido
 
--- INSERT into clientes (nom_cli) values ('juan'); para agregar cliente
+-- INSERT into clientes (nom_cli) values ('juan'); para agregar usuario
 
--- select nom_cli, nom_pro from productos, pedidos,clientes where productos.id_pro=pedidos.idProducto and pedidos.idCliente=clientes.id_cli and num_pedido=1; para saber los nombre de productos de un pedido concreto por nombre de cliente
+-- select nom_cli, nom_pro from productos, pedidos,clientes where productos.id_pro=pedidos.idProducto and pedidos.idCliente=clientes.id_cli and num_pedido=1; para saber los nombre de productos de un pedido concreto por nombre de usuario
 --
 
 

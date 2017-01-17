@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/Dropbox/2_DAM/PMDA/Proyecto/Proyecto_Trimestre_2_Cafeteria/Proyecto_Trimestre_2_Cafeteria.iml" filepath="$USER_HOME$/Dropbox/2_DAM/PMDA/Proyecto/Proyecto_Trimestre_2_Cafeteria/Proyecto_Trimestre_2_Cafeteria.iml" />
-      <module fileurl="file://$USER_HOME$/Dropbox/2_DAM/PMDA/Proyecto/Proyecto_Trimestre_2_Cafeteria/app/app.iml" filepath="$USER_HOME$/Dropbox/2_DAM/PMDA/Proyecto/Proyecto_Trimestre_2_Cafeteria/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Proyecto_Trimestre_2_Cafeteria.iml" filepath="$PROJECT_DIR$/Proyecto_Trimestre_2_Cafeteria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>

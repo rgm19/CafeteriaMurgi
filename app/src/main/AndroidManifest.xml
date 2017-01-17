@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,7 +26,9 @@
         <activity android:name=".ActivityMenuConfirmacion" />
         <activity android:name=".ActivityPedidos" />
         <activity android:name=".ActivityPedidosDetalles" />
-        <activity android:name=".ActivityPedidosPago"></activity>
+        <activity android:name=".ActivityPedidosPago" />
+        <activity android:name=".ActivityLogin" />
+        <activity android:name=".ActivityCafe"></activity>
     </application>
 
 </manifest>
