@@ -47,6 +47,7 @@ public class ActivityLogin extends AppCompatActivity {
 //        }
 //    }
 
+
     private void listener() {
         ayuda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +75,9 @@ public class ActivityLogin extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Debe rellenar todos los campos",Toast.LENGTH_SHORT).show();
                 }else{
                     boolean user = false;
+    //_______________________________________________________________________________________________
+    // Comprobar en BBDD usuario y contraseña ------------------------------------------------------
+                    // usuario y pass y devuvelce un boleano
                     for (Usuario u : BDPruebas.usuarios){
                         if (usuario.getText().toString().trim().equals(u.getNombre())){
                             if (pass.getText().toString().trim().equals(u.getPass())){

@@ -19,10 +19,10 @@ public class BDPruebas {
         productos.add(new Producto(4,"Tostada bacon","Pan, bacon",1.75f,"foto"));
         productos.add(new Producto(5,"Tostada jamón","Pan, jamón",2.0f,"foto"));
 
-        usuarios.add(new Usuario(1,"usuario1","pass1","666111111",2));
-        usuarios.add(new Usuario(2,"usuario1","pass2","666222222",2));
-        usuarios.add(new Usuario(3,"camarero","camarero","666333333",1));
-        usuarios.add(new Usuario(4,"admin","admin","666444444",0));
+        usuarios.add(new Usuario(1,"usuario1","pass1",666111111,2));
+        usuarios.add(new Usuario(2,"usuario1","pass2",666222222,3));
+        usuarios.add(new Usuario(3,"camarero","camarero",666333333,1));
+        usuarios.add(new Usuario(4,"admin","admin",666444444,0));
 
         ArrayList<Producto> pedido1=new ArrayList<>();
         ArrayList<Integer> cantidad1=new ArrayList<>();
