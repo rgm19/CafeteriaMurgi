@@ -31,8 +31,8 @@ public class ActivityCafe extends AppCompatActivity {
         setContentView(R.layout.activity_cafe);
 
         inflar();
-        spiner();
-        listener();
+        metodosSpinner();
+        metodosListener();
 
 //        llevaLeche(leche);
 
@@ -56,7 +56,7 @@ public class ActivityCafe extends AppCompatActivity {
         fotoMenu = (ImageView) findViewById(R.id.iv_cf_menu);
     }
 
-    private void spiner() {
+    private void metodosSpinner() {
         String[] arrayTipo = {"Espreso","Doble","Cortado","Capuchino","Bombón"};
         spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayTipo));
         spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -122,7 +122,7 @@ public class ActivityCafe extends AppCompatActivity {
         });//Fin Spinner Leche
     }
 
-    private void listener() {
+    private void metodosListener() {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
