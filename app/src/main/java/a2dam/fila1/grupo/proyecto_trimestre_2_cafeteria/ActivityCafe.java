@@ -1,8 +1,12 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +40,32 @@ public class ActivityCafe extends AppCompatActivity {
 
 //        llevaLeche(leche);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Log.e("ERRRRRRRRRRRRRROR", "Captura backpresed");
+
+        new AlertDialog.Builder(getApplicationContext())
+                .setTitle("Salir")
+                .setMessage("Si sale se cerrará la sesión y se perderán los pedidos almacenados. \n¿Salir?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityLogin.USER=null;
+                        Intent i = new Intent(getApplicationContext(), ActivityLogin.class);
+                        startActivity(i);
+                        // pedidos.clear();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     private void inflar() {
@@ -137,6 +167,33 @@ public class ActivityCafe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fotoMenu.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        //----------------------------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------//
+
+        volver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getApplicationContext())
+                        .setTitle("Salir")
+                        .setMessage("Si sale se cerrará la sesión y se perderán los pedidos almacenados. \n¿Salir?")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityLogin.USER=null;
+                                Intent i = new Intent(getApplicationContext(), ActivityLogin.class);
+                                startActivity(i);
+                                // pedidos.clear();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //dismiss();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             }
         });
     }
