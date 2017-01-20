@@ -201,7 +201,9 @@ public class ActivityCafe extends AppCompatActivity {
                         producto = BDPruebas.productos.get(i);
                 }
 
-                BDPruebas.pedidos.add(new Pedido(ActivityLogin.USER, producto,Integer.parseInt(cantidad.getText().toString().trim()),comentarios));
+                BDPruebas.pedidos.add(new Pedido(ActivityLogin.USER, producto,
+                        Integer.parseInt(cantidad.getText().toString().trim()),
+                        Float.parseFloat(precio.getText().toString().trim()),comentarios));
                 Toast.makeText(getApplicationContext(),"Café "+producto.getNombre()+" añadido a tus pedidos",Toast.LENGTH_SHORT).show();
                 limpiar();
             }
@@ -231,12 +233,24 @@ public class ActivityCafe extends AppCompatActivity {
         cantidad.setText(""+1);
 
         setPrecio();
-    }
+    }//Fin limpiar
 
     private String generarComentarios() {
+        String comentarios=null;
+        if (leche)
+            comentarios.concat(spLeche.getSelectedItem().toString().trim()+", ");
+//        comentarios.concat(spAzucar.getSelectedItem().toString().trim()+"");
+//        if (lactosa.isChecked())
+//            comentarios.concat(", Sin lactosa");
+//        if (crema.isChecked())
+//            comentarios.concat(", Crema");
+//        if (chocolate.isChecked())
+//            comentarios.concat(", Chocolate");
+//        if (hielo.isChecked())
+//            comentarios.concat(", Hielo");
 
-        return null;
-    }
+        return comentarios;
+    }//Fin generarComentarios
 
     private void setCantidad(int i) {
         int cant = Integer.parseInt(cantidad.getText().toString().trim());
@@ -246,7 +260,7 @@ public class ActivityCafe extends AppCompatActivity {
             cantidad.setText("" + (cant + i));
 
         setPrecio();
-    }
+    }//Fin setCantidad
 
     private void setPrecio(){
         float pFinal = p;
