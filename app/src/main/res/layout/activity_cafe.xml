@@ -90,7 +90,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/cb_cf_choco"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/sp_cf_azucar" />
+        app:layout_constraintTop_toBottomOf="@+id/sp_cf_azucar"
+        android:onClick="metodosCheked" />
 
     <CheckBox
         android:text="Chocolate"
@@ -99,7 +100,8 @@
         android:id="@+id/cb_cf_choco"
         app:layout_constraintLeft_toRightOf="@+id/cb_cf_crema"
         app:layout_constraintBaseline_toBaselineOf="@+id/cb_cf_crema"
-        app:layout_constraintRight_toLeftOf="@+id/cb_cf_hielo" />
+        app:layout_constraintRight_toLeftOf="@+id/cb_cf_hielo"
+        android:onClick="metodosCheked" />
 
     <CheckBox
         android:text="Hielo"
@@ -108,7 +110,8 @@
         android:id="@+id/cb_cf_hielo"
         app:layout_constraintLeft_toRightOf="@+id/cb_cf_choco"
         app:layout_constraintBaseline_toBaselineOf="@+id/cb_cf_choco"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:onClick="metodosCheked"/>
 
     <TextView
         android:text="Precio:"
@@ -120,7 +123,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_cf_precioNum" />
 
     <TextView
-        android:text="€€€"
+        android:text="000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_cf_precioNum"
@@ -197,7 +200,8 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/sp_cf_leche"
-        app:layout_constraintBottom_toBottomOf="@+id/sp_cf_azucar" />
+        app:layout_constraintBottom_toBottomOf="@+id/sp_cf_azucar"
+        android:onClick="metodosCheked"/>
 
     <TextView
         android:text="Azúcar:"
@@ -225,8 +229,8 @@
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/tb_cf"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="147dp"
+        android:layout_height="191dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="8dp"
         app:layout_constraintVertical_bias="0.0"
@@ -234,5 +238,17 @@
         app:layout_constraintRight_toRightOf="parent"
         android:scaleType="fitCenter"
         android:visibility="invisible" />
+
+    <TextView
+        android:text="€"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_cf_eur"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_cf_precioNum"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_cf_precioNum"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"/>
 
 </android.support.constraint.ConstraintLayout>
