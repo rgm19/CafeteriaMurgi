@@ -111,6 +111,7 @@ public class ActivityCafe extends AppCompatActivity {
 
         spAzucar.setAdapter(adapterAzc);
         //Fin Spinner Azucar
+
     }//Fin Spinner
 
     private void metodosListener() {
