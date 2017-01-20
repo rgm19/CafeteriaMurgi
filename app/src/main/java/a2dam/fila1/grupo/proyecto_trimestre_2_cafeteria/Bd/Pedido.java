@@ -7,21 +7,15 @@ import java.util.ArrayList;
  */
 
 public class Pedido {
-    private int idPedido;
     private Usuario usuario;
-    private ArrayList<Producto> productos;
-    private ArrayList<Integer> cantidad;
+    private Producto producto;
+    private int cantidad;
+    private String comentarios;
 
-    public Pedido(int idPedido, Usuario usuario, ArrayList<Producto> productos, ArrayList<Integer> cantidad) {
-        this.idPedido = idPedido;
+    public Pedido(Usuario usuario, Producto producto, int cantidad, String comentarios) {
         this.usuario = usuario;
-        this.productos = productos;
+        this.producto = producto;
         this.cantidad = cantidad;
+        this.comentarios = comentarios;
     }
-
-    public int getIdPedido() {
-        return idPedido;
-    }
-
-
 }

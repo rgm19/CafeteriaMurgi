@@ -7,46 +7,15 @@ import android.os.Parcelable;
  * Created by usuario on 12/01/17.
  */
 
-public class Producto implements Parcelable{
-    private int id;
-    private String nombre, img, ingredientes;
+public class Producto {
+    private String nombre;
     private float precio;
 
-    public Producto(int id, String nombre, String ingredientes, float precio, String img) {
-        this.id=id;
-        this.nombre=nombre;
-        this.ingredientes=ingredientes;
-        this.precio=precio;
-        this.img=img;
+    public Producto(String nombre, float precio) {
+        this.nombre = nombre;
+        this.precio = precio;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public String getIngredientes() {
-        return ingredientes;
-    }
-
-    public float getPrecio() {
-        return precio;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
+    public String getNombre() {        return nombre;    }
+    public float getPrecio() {        return precio;    }
 }

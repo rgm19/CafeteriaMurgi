@@ -21,6 +21,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_logout;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_pass;
 
@@ -87,21 +90,20 @@ public class ActivityCafe extends AppCompatActivity {
     }
 
     private void metodosSpinner() {
-        String[] arrayTipo = {"Selecciona un café...","Espreso","Doble","Cortado","Capuchino","Bombón"};
+        final String[] arrayTipo = new String[BDPruebas.productos.size()];
+        for (int i = 0; i < arrayTipo.length; i++){
+            arrayTipo[i] = BDPruebas.productos.get(i).getNombre();
+        }
         spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayTipo));
         spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (parent.getSelectedItemPosition()){
-                    case 0: p = 0.0f;   break;
-                    case 1: p = 1.0f;   break;
-                    case 2: p = 1.2f;   break;
-                    case 3: p = 1.4f;   break;
-                    case 4: p = 1.6f;   break;
-                    case 5: p = 1.8f;   break;
-                    default: p = 1.2f;
+                for (int i = 0; i < arrayTipo.length; i++){
+                    if (parent.getSelectedItem().toString().trim().equals(BDPruebas.productos.get(i).getNombre()))
+                        p=BDPruebas.productos.get(i).getPrecio();
                 }
+
                 setPrecio();
             }
 
@@ -185,7 +187,56 @@ public class ActivityCafe extends AppCompatActivity {
             }
         });
 
+        //----------------------------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------//
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Producto producto = null;
+                String comentarios = generarComentarios();
+
+                for (int i = 0; i < BDPruebas.productos.size(); i++){
+                    if (spTipo.getSelectedItem().toString().trim().equals(BDPruebas.productos.get(i).getNombre()))
+                        producto = BDPruebas.productos.get(i);
+                }
+
+                BDPruebas.pedidos.add(new Pedido(ActivityLogin.USER, producto,Integer.parseInt(cantidad.getText().toString().trim()),comentarios));
+                Toast.makeText(getApplicationContext(),"Café "+producto.getNombre()+" añadido a tus pedidos",Toast.LENGTH_SHORT).show();
+                limpiar();
+            }
+        });
+
+        //----------------------------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------//
+
+        pedir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ActivityDetalles.class);
+                startActivity(i);
+            }
+        });
+
     }//Fin Listener
+
+    private void limpiar() {
+        spTipo.setSelection(0);
+        spLeche.setSelection(0);
+        spAzucar.setSelection(0);
+        lactosa.setChecked(false);
+        crema.setChecked(false);
+        chocolate.setChecked(false);
+        hielo.setChecked(false);
+        cantidad.setText(""+1);
+
+        setPrecio();
+    }
+
+    private String generarComentarios() {
+
+        return null;
+    }
 
     private void setCantidad(int i) {
         int cant = Integer.parseInt(cantidad.getText().toString().trim());
@@ -193,6 +244,8 @@ public class ActivityCafe extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Cantidad mínima 1, catidad máxima 20", Toast.LENGTH_SHORT).show();
         else
             cantidad.setText("" + (cant + i));
+
+        setPrecio();
     }
 
     private void setPrecio(){
@@ -205,6 +258,8 @@ public class ActivityCafe extends AppCompatActivity {
             pFinal += 0.4f;
         if (chocolate.isChecked())
             pFinal += 0.5f;
+
+        pFinal = pFinal * Integer.parseInt(cantidad.getText().toString().trim());
 
         precio.setText(""+pFinal);
     }//Fin setPrecio

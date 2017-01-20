@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 public class ActivityDetalles extends AppCompatActivity {
 
+//    static
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
