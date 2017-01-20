@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_logout;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_pass;
@@ -27,7 +28,7 @@ public class ActivityCafe extends AppCompatActivity {
 
     Spinner spTipo, spLeche, spAzucar;
     CheckBox lactosa, crema, chocolate, hielo;
-    TextView precio;
+    TextView precio, cantidad;
     ImageButton volver, menu;
     Button pedir, menos, mas;
     FloatingActionButton fab;
@@ -58,6 +59,7 @@ public class ActivityCafe extends AppCompatActivity {
         chocolate = (CheckBox) findViewById(R.id.cb_cf_choco);
         hielo = (CheckBox) findViewById(R.id.cb_cf_hielo);
         precio = (TextView) findViewById(R.id.tv_cf_precioNum);
+        cantidad = (TextView) findViewById(R.id.tv_cnt_cantidad);
         volver = (ImageButton) findViewById(R.id.ib_cf_volver);
         menu = (ImageButton) findViewById(R.id.ib_cf_menu);
         pedir = (Button) findViewById(R.id.btn_cf_pedir);
@@ -163,7 +165,35 @@ public class ActivityCafe extends AppCompatActivity {
             }
         });
 
+        //----------------------------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------//
+
+        menos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCantidad(-1);
+            }
+        });
+
+        //----------------------------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------//
+
+        mas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCantidad(1);
+            }
+        });
+
     }//Fin Listener
+
+    private void setCantidad(int i) {
+        int cant = Integer.parseInt(cantidad.getText().toString().trim());
+        if ((cant + i) < 1 || (cant + i) > 20 )
+            Toast.makeText(getApplicationContext(), "Cantidad mínima 1, catidad máxima 20", Toast.LENGTH_SHORT).show();
+        else
+            cantidad.setText("" + (cant + i));
+    }
 
     private void setPrecio(){
         float pFinal = p;
