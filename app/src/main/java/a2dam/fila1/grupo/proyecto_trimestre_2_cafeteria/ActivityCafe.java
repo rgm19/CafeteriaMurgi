@@ -1,5 +1,6 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_logout;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_pass;
 
 public class ActivityCafe extends AppCompatActivity {
 
@@ -64,25 +68,22 @@ public class ActivityCafe extends AppCompatActivity {
     }
 
     private void metodosSpinner() {
-        String[] arrayTipo = {"Espreso","Doble","Cortado","Capuchino","Bombón"};
+        String[] arrayTipo = {"Selecciona un café...","Espreso","Doble","Cortado","Capuchino","Bombón"};
         spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayTipo));
         spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (parent.getSelectedItemPosition()){
-                    case 0: p = 1f;     setPrecio();
-                        break;
-                    case 1: p = 1.2f;   setPrecio();
-                        break;
-                    case 2: p = 1.4f;   setPrecio();
-                        break;
-                    case 3: p = 1.6f;   setPrecio();
-                        break;
-                    case 4: p = 1.8f;   setPrecio();
-                        break;
-                    default: p = 1.2f;  setPrecio();
+                    case 0: p = 0.0f;   break;
+                    case 1: p = 1.0f;   break;
+                    case 2: p = 1.2f;   break;
+                    case 3: p = 1.4f;   break;
+                    case 4: p = 1.6f;   break;
+                    case 5: p = 1.8f;   break;
+                    default: p = 1.2f;
                 }
+                setPrecio();
             }
 
             @Override
@@ -135,33 +136,12 @@ public class ActivityCafe extends AppCompatActivity {
         //----------------------------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------//
 
-        //---NO FUNCIONA :'(--------------------------
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(getApplicationContext());
-                builder1.setMessage("Write your message here.");
-                builder1.setCancelable(false);
-
-                builder1.setPositiveButton(
-                        "Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                builder1.setNegativeButton(
-                        "No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
+                Dialog_logout dialogo= new Dialog_logout();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                dialogo.show(ft, "Salir");
             }
         });
 

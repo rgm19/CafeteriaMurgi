@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Usuario;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_pass;
 
 public class ActivityLogin extends AppCompatActivity {
 

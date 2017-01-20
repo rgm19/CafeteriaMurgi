@@ -1,4 +1,4 @@
-package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
+package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.R;
+
 /**
  * Created by Gand on 03/12/16.
  */
@@ -17,9 +19,9 @@ import android.widget.Button;
  * Clase para mostrar un AlertDialog personalizado con los datos licencias de imagenes
  * Layout asociada dialog_licencia.xml
  */
-public class Dialog_logout extends DialogFragment {
+public class Dialog_pass extends DialogFragment {
 
-    public Dialog_logout() {
+    public Dialog_pass() {
     }
 
     @NonNull
