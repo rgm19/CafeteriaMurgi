@@ -47,7 +47,7 @@ public class ActivityCafe extends AppCompatActivity {
 
 //        llevaLeche(leche);
 
-    }
+    }//Fin onCreate
 
     private void inflar() {
         spTipo = (Spinner) findViewById(R.id.sp_cf_tipo);
@@ -65,6 +65,23 @@ public class ActivityCafe extends AppCompatActivity {
         mas = (Button) findViewById(R.id.btn_cnt_mas);
         fab = (FloatingActionButton) findViewById(R.id.fab_cf);
         fotoMenu = (ImageView) findViewById(R.id.iv_cf_menu);
+    }//Fin inflar
+
+    @Override
+    public void onBackPressed() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Cerrar Sesión")
+                .setMessage("Si sale se cerrará la sesión y se perderán los pedidos no realizados\n¿Continuar?")
+                .setNegativeButton("Cancelar", null)
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        ActivityLogin.USER=null;
+                        Intent i = new Intent(getApplicationContext(), ActivityLogin.class);
+                        startActivity(i);
+                    }
+                }).create().show();
     }
 
     private void metodosSpinner() {
@@ -139,9 +156,10 @@ public class ActivityCafe extends AppCompatActivity {
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog_logout dialogo= new Dialog_logout();
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                dialogo.show(ft, "Salir");
+//                Dialog_logout dialogo= new Dialog_logout();
+//                FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                dialogo.show(ft, "Salir");
+                onBackPressed();
             }
         });
 
@@ -159,14 +177,14 @@ public class ActivityCafe extends AppCompatActivity {
             pFinal += 0.5f;
 
         precio.setText(""+pFinal);
-    }
+    }//Fin setPrecio
 
     private void llevaLeche(boolean b) {
         spLeche.setEnabled(b);
         lactosa.setEnabled(b);
-    }
+    }//Fin llevaLeche
 
     public void metodosCheked(View view) {
         setPrecio();
-    }
+    }//Fin metodosCheked
 }//Fin Activity
