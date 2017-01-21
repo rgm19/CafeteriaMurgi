@@ -223,22 +223,6 @@
         app:layout_constraintTop_toTopOf="@+id/tv_cf_azucar"
         app:layout_constraintBottom_toBottomOf="@+id/tv_cf_azucar" />
 
-    <ImageView
-        app:srcCompat="@drawable/cafe"
-        android:id="@+id/iv_cf_menu"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tb_cf"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="147dp"
-        android:layout_height="191dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="8dp"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:scaleType="fitCenter"
-        android:visibility="invisible" />
-
     <TextView
         android:text="€"
         android:layout_width="wrap_content"
@@ -250,5 +234,21 @@
         android:textColor="@android:color/holo_red_dark"
         android:textSize="24sp"
         android:textStyle="normal|bold"/>
+
+    <ImageView
+        app:srcCompat="@drawable/cafe"
+        android:id="@+id/iv_cf_menu"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/tb_cf"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:scaleType="fitCenter"
+        android:visibility="invisible" />
 
 </android.support.constraint.ConstraintLayout>

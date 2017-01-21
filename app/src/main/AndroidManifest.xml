@@ -21,9 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityMenu" />
-        <activity android:name=".ActivityMenuDetalles" />
-        <activity android:name=".ActivityMenuConfirmacion" />
         <activity android:name=".ActivityPedidos" />
         <activity android:name=".ActivityPedidosDetalles" />
         <activity android:name=".ActivityPedidosPago" />
