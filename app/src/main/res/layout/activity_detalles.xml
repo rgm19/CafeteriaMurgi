@@ -18,12 +18,23 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_back"
+        android:id="@+id/ib_dt_volver"
+        app:layout_constraintTop_toTopOf="@+id/tb_dt"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_dt"
+        app:layout_constraintLeft_toLeftOf="@+id/tb_dt"
+        android:background="#00000000"
+        android:layout_marginStart="16dp" />
+
     <TextView
         android:text="Resumen:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_dt_resumen"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/tb_dt"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -45,11 +56,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_dt_espacio2"
         android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/lv_dt"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        android:layout_marginBottom="8dp" />
 
     <Button
         android:text="Confirmar pedido"
@@ -58,7 +70,7 @@
         android:id="@+id/btn_dt_confirmar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
@@ -78,16 +90,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_dt_precio"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dt_espacio2"
-        app:layout_constraintBottom_toTopOf="@+id/btn_dt_confirmar"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintRight_toLeftOf="@+id/tv_dt_eur"
         android:layout_marginEnd="8dp"
         android:textSize="24sp"
         android:textColor="@android:color/holo_red_dark"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dt_espacio2" />
 
     <TextView
         android:text="€"
@@ -103,25 +111,36 @@
 
     <TimePicker
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         android:id="@+id/timePicker2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dt_total"
         app:layout_constraintBottom_toTopOf="@+id/btn_dt_confirmar"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/tv_dt_total" />
+        app:layout_constraintRight_toLeftOf="@+id/tv_dt_total"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:text="Hora de recogida:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        app:layout_constraintLeft_toLeftOf="@+id/lv_dt"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/timePicker2" />
 
     <ListView
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/tv_dt_espacio1"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginEnd="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/lv_dt">
+        android:id="@+id/lv_dt"
+        app:layout_constraintBottom_toTopOf="@+id/tv_dt_espacio2">
 
     </ListView>
 

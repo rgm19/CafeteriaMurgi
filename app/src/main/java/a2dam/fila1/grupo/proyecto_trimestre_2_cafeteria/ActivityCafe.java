@@ -74,7 +74,6 @@ public class ActivityCafe extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         new AlertDialog.Builder(this)
                 .setTitle("Cerrar Sesión")
                 .setMessage("Si sale se cerrará la sesión y se perderán los pedidos no realizados\n¿Continuar?")

@@ -1,14 +1,20 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.R;
 
@@ -40,7 +46,7 @@ public class AdapterDetalles extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View vista, ViewGroup parent) {
+    public View getView(int position, View vista, final ViewGroup parent) {
         if (vista==null){
             Context cnt=parent.getContext();
             vista= LayoutInflater.from(cnt).inflate(R.layout.list_producto,null);
@@ -48,10 +54,27 @@ public class AdapterDetalles extends BaseAdapter {
         final Pedido pedidoActual=pedidos.get(position);
 
         ((TextView)vista.findViewById(R.id.tv_dt_list_nombre)).setText(pedidoActual.getProducto().getNombre());
-        ((TextView)vista.findViewById(R.id.tv_dt_list_precio)).setText(""+pedidoActual.getPrecio());
+        ((TextView)vista.findViewById(R.id.tv_dt_list_precio)).setText(""+pedidoActual.getPrecio()+" €");
         ((TextView)vista.findViewById(R.id.tv_dt_list_cantidad)).setText(""+pedidoActual.getCantidad());
         ((TextView)vista.findViewById(R.id.tv_dt_list_comentarios)).setText(pedidoActual.getComentarios());
 
+        ((ImageButton)vista.findViewById(R.id.ib_dy_list_delete)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(parent.getContext())
+                        .setTitle("Eliminar producto")
+                        .setMessage("¿Quiere eliminar el producto?")
+                        .setNegativeButton("Cancelar", null)
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                pedidos.remove(pedidoActual);
+                                BDPruebas.pedidos = pedidos;
+                                ActivityDetalles.lanzarAdapter();
+                            }
+                        }).create().show();
+            }
+        });
 
         return vista;
     }
