@@ -89,10 +89,12 @@ public class ActivityLogin extends AppCompatActivity {
 //                    if(user)
                                 lanzarActivity();
                                 user = true;
-                                BDFinal.usuarioFinal.clear();
+
                             }
                         }
                     }
+                    if (user)
+                        BDFinal.usuarioFinal.clear();
                     if (!user)
                     Toast.makeText(getApplicationContext(), "Usuario o Contraseña incorrectos",Toast.LENGTH_SHORT).show();
                 }
