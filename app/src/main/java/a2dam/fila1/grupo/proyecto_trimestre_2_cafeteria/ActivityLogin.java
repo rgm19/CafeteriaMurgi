@@ -104,9 +104,9 @@ public class ActivityLogin extends AppCompatActivity {
 
     private void lanzarActivity() {
         switch (USER.getCategoria()){
-//            case 0: Intent i0 = new Intent(getApplicationContext(), ActivityAdmin.class);
-//                startActivity(i0);
-//                break;
+            case 0: Intent i0 = new Intent(getApplicationContext(), ActivityPedidos.class);
+                startActivity(i0);
+                break;
             case 1: Intent i1 = new Intent(getApplicationContext(), ActivityPedidos.class);
                 startActivity(i1);
                 break;

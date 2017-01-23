@@ -235,18 +235,18 @@ public class ActivityCafe extends AppCompatActivity {
     }//Fin limpiar
 
     private String generarComentarios() {
-        String comentarios=null;
+        String comentarios="";
         if (leche)
-            comentarios.concat(spLeche.getSelectedItem().toString().trim()+", ");
-//        comentarios.concat(spAzucar.getSelectedItem().toString().trim()+"");
-//        if (lactosa.isChecked())
-//            comentarios.concat(", Sin lactosa");
-//        if (crema.isChecked())
-//            comentarios.concat(", Crema");
-//        if (chocolate.isChecked())
-//            comentarios.concat(", Chocolate");
-//        if (hielo.isChecked())
-//            comentarios.concat(", Hielo");
+            comentarios=comentarios.concat(spLeche.getSelectedItem().toString().trim()+", ");
+        comentarios.concat(spAzucar.getSelectedItem().toString().trim()+"");
+        if (lactosa.isChecked())
+            comentarios=comentarios.concat(", Sin lactosa");
+        if (crema.isChecked())
+            comentarios=comentarios.concat(", Crema");
+        if (chocolate.isChecked())
+            comentarios=comentarios.concat(", Chocolate");
+        if (hielo.isChecked())
+            comentarios=comentarios.concat(", Hielo");
 
         return comentarios;
     }//Fin generarComentarios
