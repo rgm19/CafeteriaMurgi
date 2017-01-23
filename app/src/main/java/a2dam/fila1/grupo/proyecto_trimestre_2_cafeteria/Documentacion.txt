@@ -1,11 +1,3 @@
-Antes de hacer nada necesitamos nuestra base de datos creada sobre la que vamos a trabajar en el
-proyecto (se proporcionara dicha base al principio de la defensa del proyecto).
-Una vez la tengamos terminada se procede a su conexion con el proyecto android abierto
-
-1º- Crear nuestras clases Java para los objetos de la BBDD para poder trabajar con ellos
-2º-
-
-
 //------------------------------------------------------------------------------------------------\\
 Gand: Para la parte gráfica yo sólo explicaría el contenido de los Activitys
     Cliente:
@@ -21,7 +13,7 @@ Gand: Para la parte gráfica yo sólo explicaría el contenido de los Activitys
     hay que explicar mucho porque se debería saber como hacerlo.
 //------------------------------------------------------------------------------------------------\\
 
-//------------------------------------------------------------------------------------------------\\
+//--------------------------AÑADIDO AL DOCUMENTO FINAL----------------------------------------------------\\
 Manolo: Conexion a MySQL
     Para agregar correctamente el conector:
 
@@ -35,7 +27,8 @@ Manolo: Conexion a MySQL
 
     6 - Se necesita cargar en algun momento antes de la conexion la sentencia:
             "Class.forName("com.mysql.jdbc.Driver");"
-//------------------------------------------------------------------------------------------------\\
+
+//---------------------Añadido a la documentacion final----------------------------------------------------------------\\
 
 Manolo: Permisos
 
@@ -92,7 +85,7 @@ Manolo: AsynTask
         }
      }
 
-//------------------------------------------------------------------------------------------------\\
+//------------------------------------AÑADIDO ALDOCUMENTO FINAL ----------------------------------------\\
 
 Manolo conexion a BBDD:
 Conexion Base datos: base20171
