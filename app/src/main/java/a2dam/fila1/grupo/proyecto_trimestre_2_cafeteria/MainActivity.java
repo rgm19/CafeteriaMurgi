@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.HiloConexionBBDD;
 
 public class MainActivity extends AppCompatActivity {
 

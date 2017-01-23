@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Usuario;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_pass;
@@ -18,15 +19,17 @@ public class ActivityLogin extends AppCompatActivity {
 
     public static Usuario USER = null;
 
-    EditText usuario, pass;
+    static EditText usuario, pass;
     Button entrar;
     ImageButton ayuda;
+
+    static boolean user = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        HiloConexionBBDD.comprobarUsuario();
         inflar();
         listener();
 
@@ -75,16 +78,18 @@ public class ActivityLogin extends AppCompatActivity {
                 if (usuario.getText().toString().trim().equals("") || pass.getText().toString().trim().equals("")){
                     Toast.makeText(getApplicationContext(), "Debe rellenar todos los campos",Toast.LENGTH_SHORT).show();
                 }else{
-                    boolean user = false;
+
     //_______________________________________________________________________________________________
     // Comprobar en BBDD usuario y contraseña ------------------------------------------------------
                     // usuario y pass y devuvelce un boleano
-                    for (Usuario u : BDPruebas.usuarios){
+                    for (Usuario u : BDFinal.usuarioFinal){
                         if (usuario.getText().toString().trim().equals(u.getNombre())){
                             if (pass.getText().toString().trim().equals(u.getPass())){
                                 USER=u;
+//                    if(user)
                                 lanzarActivity();
                                 user = true;
+                                BDFinal.usuarioFinal.clear();
                             }
                         }
                     }
