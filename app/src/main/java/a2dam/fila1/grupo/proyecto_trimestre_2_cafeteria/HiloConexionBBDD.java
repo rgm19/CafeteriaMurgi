@@ -26,6 +26,7 @@ public class HiloConexionBBDD {
 
 
     static Connection conexion;
+    static Connection conexion2;
     static Statement sentencia;
     static ResultSet resultado;
 
@@ -104,6 +105,9 @@ public class HiloConexionBBDD {
                 {
                     Log.e("Hasta Aqui"," Bien");
                     conexion= DriverManager.getConnection("jdbc:mysql://10.10.4.150/base20171", "ubase20171", "pbase20171");
+
+                    conexion2= DriverManager.getConnection("jdbc:mysql://10.10.4.150/base20171", "ubase20171", "pbase20171");
+
                     sentencia = conexion.createStatement();
                     resultado = null;
                     Log.d("Conexion", "Establecida");
@@ -114,21 +118,21 @@ public class HiloConexionBBDD {
                     resultado = sentencia.executeQuery(consulta);
 
                 } catch (Exception e) {
-                    try
-                    {
-                        conexion= DriverManager.getConnection("jdbc:mysql://10.10.4.150/base20171", "ubase20171", "pbase20171");
-                        sentencia = conexion.createStatement();
-                        resultado = null;
-                        Log.e("Conexion", "Establecida");
-                        publishProgress();//Este metodo llama a metodo onProgressUpdate de abajo: realiza cambios en la UI que desde 2º plano no se puede hacer. No esta en uso
-
-                        String consulta = "Select * from usuarios";///Estas sentencias no se puede usar hasta que dispongamos de BBDD
-
-                        resultado = sentencia.executeQuery(consulta);
-
-                    } catch (Exception ex) {
-                        Log.e("Conexion", "Fallida: " + ex.getMessage());
-                    }
+//                    try
+//                    {
+//                        conexion= DriverManager.getConnection("jdbc:mysql://10.10.4.150/base20171", "ubase20171", "pbase20171");
+//                        sentencia = conexion.createStatement();
+//                        resultado = null;
+//                        Log.e("Conexion", "Establecida");
+//                        publishProgress();//Este metodo llama a metodo onProgressUpdate de abajo: realiza cambios en la UI que desde 2º plano no se puede hacer. No esta en uso
+//
+//                        String consulta = "Select * from usuarios";///Estas sentencias no se puede usar hasta que dispongamos de BBDD
+//
+//                        resultado = sentencia.executeQuery(consulta);
+//
+//                    } catch (Exception ex) {
+//                        Log.e("Conexion", "Fallida: " + ex.getMessage());
+//                    }
 
                     Log.e("FALLO DE CONEXION",""+e.getMessage());
                 }
