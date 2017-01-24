@@ -1,13 +1,17 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
+import dmax.dialog.SpotsDialog;
 
 public class MainActivity extends AppCompatActivity {
+
+    SpotsDialog dialogo=new SpotsDialog(this,"Cargando...");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

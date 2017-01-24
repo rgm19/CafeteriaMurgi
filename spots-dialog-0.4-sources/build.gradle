@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('spots-dialog-0.4-sources.jar'))
