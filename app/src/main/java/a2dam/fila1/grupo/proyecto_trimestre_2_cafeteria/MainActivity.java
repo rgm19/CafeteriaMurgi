@@ -11,8 +11,6 @@ import dmax.dialog.SpotsDialog;
 
 public class MainActivity extends AppCompatActivity {
 
-    SpotsDialog dialogo=new SpotsDialog(this,"Cargando...");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

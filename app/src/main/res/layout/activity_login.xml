@@ -81,4 +81,32 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <RadioGroup
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/btn_lg_entrar"
+        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginTop="72dp"
+        app:layout_constraintRight_toRightOf="@+id/btn_lg_entrar"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_lg_entrar">
+
+        <RadioButton
+            android:text="Red local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rb_lg_local"
+            android:layout_weight="1"
+            android:checked="true"
+            android:onClick="radio"/>
+
+        <RadioButton
+            android:text="Red externa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rb_lg_externa"
+            android:layout_weight="1"
+            android:onClick="radio"/>
+    </RadioGroup>
 </android.support.constraint.ConstraintLayout>
