@@ -188,7 +188,7 @@ public class ActivityLogin extends AppCompatActivity {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            dialog.dismiss();
+//            dialog.dismiss();
             return resultLg;
         }
 
