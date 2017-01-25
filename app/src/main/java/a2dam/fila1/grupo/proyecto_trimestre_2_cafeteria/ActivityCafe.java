@@ -81,7 +81,8 @@ public class ActivityCafe extends AppCompatActivity {
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
-                        ActivityLogin.USER=null;
+                        //ActivityLogin.USER=null;
+                        ActivityLogin.loginCorrecto=false;
                         Intent i = new Intent(getApplicationContext(), ActivityLogin.class);
                         startActivity(i);
                     }

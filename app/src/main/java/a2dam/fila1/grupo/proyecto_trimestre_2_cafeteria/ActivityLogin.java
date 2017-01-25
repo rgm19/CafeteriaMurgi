@@ -55,11 +55,11 @@ public class ActivityLogin extends AppCompatActivity {
         calcularIP();
         listener();
 
-        if (USER==null){
+//        if (USER==null){
             login();
-        }else{
-            lanzarActivity();
-        }
+//        }else{
+//            lanzarActivity();
+//        }
     }
 
     private void calcularIP() {
@@ -104,7 +104,6 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
 
-
     private void login() {
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,26 +113,7 @@ public class ActivityLogin extends AppCompatActivity {
                 }else{
                     dialogo.show();
                     new ComprobarUsuario(usuario.getText().toString().trim(),pass.getText().toString().trim(),dialogo).execute("");
-    //_______________________________________________________________________________________________
-    // Comprobar en BBDD usuario y contraseña ------------------------------------------------------
-                    // usuario y pass y devuvelce un boleano
-//                    for (Usuario u : BDFinal.usuarioFinal){
-//                        if (usuario.getText().toString().trim().equals(u.getNombre())){
-//                            if (pass.getText().toString().trim().equals(u.getPass())){
-//                                USER=u;
-////                    if(user)
-//                                lanzarActivity();
-//                                loginCorrecto = true;
-//
-//                            }
-//                        }
-//                    }
-//                    if (loginCorrecto)
-//                        lanzarActivity();
-////                        BDFinal.usuarioFinal.clear();
-//                    if (!loginCorrecto)
-//                    Toast.makeText(getApplicationContext(), "Usuario o Contraseña incorrectos",Toast.LENGTH_SHORT).show();
-                }
+               }
             }
         });
     }
@@ -178,17 +158,17 @@ public class ActivityLogin extends AppCompatActivity {
         protected ResultSet doInBackground(String... params) {
 
             try {
-                conexLg = DriverManager.getConnection("jdbc:mysql://" +ip+"/base20171", "ubase20171", "pbase20171");
+                conexLg = DriverManager.getConnection("jdbc:mysql://" + ip + "/base20171", "ubase20171", "pbase20171");
                 sentenciaLg = conexLg.createStatement();
                 resultLg = null;
                 publishProgress();
 
-                String consulta = "Select * from usuarios;";
-                resultLg = sentencia.executeQuery(consulta);
+                String consulta = "Select * from usuarios";
+                resultLg = sentenciaLg.executeQuery(consulta);
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-//            dialog.dismiss();
             return resultLg;
         }
 
@@ -198,7 +178,7 @@ public class ActivityLogin extends AppCompatActivity {
 
             try
             {
-                while (resultSet.next())//prueba de la base de datos
+                while (resultSet.next())
                 {
                         if(resultSet.getString("username").equals(user))
                         {
@@ -206,11 +186,11 @@ public class ActivityLogin extends AppCompatActivity {
                             {
                                 loginCorrecto=true;
                                 USER=new Usuario(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5));
+                                dialog.dismiss();
                                 lanzarActivity();
                                 Log.e("DATOS",""+resultSet.getString("username"));
                             }
                         }
-//                    BDFinal.usuarioFinal.add(new Usuario(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5)));
                 }
 
                 if (!loginCorrecto)
