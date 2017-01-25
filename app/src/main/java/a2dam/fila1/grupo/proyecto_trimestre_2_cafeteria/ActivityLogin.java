@@ -178,7 +178,7 @@ public class ActivityLogin extends AppCompatActivity {
         protected ResultSet doInBackground(String... params) {
 
             try {
-                conexLg = DriverManager.getConnection("jdbc:mysql://www.iesmurgi.org/base20171", "ubase20171", "pbase20171");
+                conexLg = DriverManager.getConnection("jdbc:mysql://" +ip+"/base20171", "ubase20171", "pbase20171");
                 sentenciaLg = conexLg.createStatement();
                 resultLg = null;
                 publishProgress();
