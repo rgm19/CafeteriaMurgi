@@ -2,7 +2,7 @@
 Gand: Para la parte gráfica yo sólo explicaría el contenido de los Activitys
     Cliente:
         -ListView con adapter para mostar el menú de la cafetería
-        -Vista detalles de cada producto de la cafetería
+        -Vista detalles hora de recogida del pedido
         -Vista resumen con adapter para confirmar pedido con precio
     Camarero:
         -ListView con adapter para mostar lista de pedidos
@@ -43,6 +43,10 @@ Manolo: Permisos
 //------------------------------------------------------------------------------------------------\\
 
 //------------------------------------------------------------------------------------------------\\
+****
+Ruben: Añadida explicacion al documento, falta el ejemplo de ilustracion una vez terminado en HiloConexionBBDD
+***
+
 Manolo: AsynTask
 
     AsysTask, al igual que lo Thread, son hilos que se ejecutan en segundo plano con la peculiaridad
@@ -85,7 +89,7 @@ Manolo: AsynTask
         }
      }
 
-//------------------------------------AÑADIDO ALDOCUMENTO FINAL ----------------------------------------\\
+//------------------------------------AÑADIDO AL DOCUMENTO FINAL ----------------------------------------\\
 
 Manolo conexion a BBDD:
 Conexion Base datos: base20171
