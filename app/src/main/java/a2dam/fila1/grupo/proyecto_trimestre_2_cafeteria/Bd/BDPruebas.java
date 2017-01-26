@@ -16,7 +16,7 @@ public class BDPruebas {
         productos.add(new Producto("Espresso", 1.0f));
         productos.add(new Producto("Doble", 1.2f));
         productos.add(new Producto("Cortado", 1.4f));
-        productos.add(new Producto("Capuchino", 1.6f));
+        productos.add(new Producto("Cappuchino", 1.6f));
         productos.add(new Producto("Bombón", 1.8f));
 
         usuarios.add(new Usuario(1,"usuario1","pass1",666111111,2));

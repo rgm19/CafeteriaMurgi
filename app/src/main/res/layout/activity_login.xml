@@ -98,7 +98,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/rb_lg_local"
             android:layout_weight="1"
-            android:checked="true"
             android:onClick="radio"/>
 
         <RadioButton
@@ -107,6 +106,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/rb_lg_externa"
             android:layout_weight="1"
-            android:onClick="radio"/>
+            android:onClick="radio"
+            android:checked="true" />
     </RadioGroup>
 </android.support.constraint.ConstraintLayout>

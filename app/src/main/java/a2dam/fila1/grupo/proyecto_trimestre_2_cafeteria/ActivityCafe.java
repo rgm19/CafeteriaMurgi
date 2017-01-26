@@ -1,33 +1,40 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
-import android.app.FragmentTransaction;
+
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_logout;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_pass;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Usuario;
+import dmax.dialog.SpotsDialog;
 
 public class ActivityCafe extends AppCompatActivity {
+
+    AlertDialog dialogo;
 
     Spinner spTipo, spLeche, spAzucar;
     CheckBox lactosa, crema, chocolate, hielo;
@@ -37,8 +44,9 @@ public class ActivityCafe extends AppCompatActivity {
     FloatingActionButton fab;
     ImageView fotoMenu;
 
-    Boolean leche = false;
-    Float p = 0f;
+    static ArrayList<String> arrayTipo = new ArrayList<>();
+    static Boolean leche = false;
+    static Float p = 0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +54,19 @@ public class ActivityCafe extends AppCompatActivity {
         setContentView(R.layout.activity_cafe);
 
         inflar();
+
+        dialogo.show();
+        new ConsultasCafe("Select nom_pro from productos",dialogo).execute("");
+
         metodosSpinner();
         metodosListener();
 
-//        llevaLeche(leche);
+        llevaLeche(leche);
 
     }//Fin onCreate
 
     private void inflar() {
+        dialogo =new SpotsDialog(this,"Cargando...");
         spTipo = (Spinner) findViewById(R.id.sp_cf_tipo);
         spLeche = (Spinner) findViewById(R.id.sp_cf_leche);
         spAzucar = (Spinner) findViewById(R.id.sp_cf_azucar);
@@ -90,21 +103,28 @@ public class ActivityCafe extends AppCompatActivity {
     }
 
     private void metodosSpinner() {
-        final String[] arrayTipo = new String[BDPruebas.productos.size()];
-        for (int i = 0; i < arrayTipo.length; i++){
-            arrayTipo[i] = BDPruebas.productos.get(i).getNombre();
+        final String[] arrayT = new String[BDPruebas.productos.size()];
+        for (int i = 0; i < arrayT.length; i++){
+            arrayT[i] = BDPruebas.productos.get(i).getNombre();
         }
-        spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayTipo));
+        spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayT));
+//        ArrayAdapter<String> adapterTipo = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayTipo);
+//        adapterTipo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spTipo.setAdapter(adapterTipo);
+//        spTipo.setSelection(0);
         spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                for (int i = 0; i < arrayTipo.length; i++){
-                    if (parent.getSelectedItem().toString().trim().equals(BDPruebas.productos.get(i).getNombre()))
-                        p=BDPruebas.productos.get(i).getPrecio();
-                }
+//                for (int i = 0; i < arrayTipo.size(); i++){
+//                    if (parent.getSelectedItem().toString().trim().equals(BDPruebas.productos.get(i).getNombre()))
+//                        p=BDPruebas.productos.get(i).getPrecio();
+//                }
+                dialogo.show();
+                new ConsultasCafe("Select precio, leche from productos where nom_pro = '"+parent.getSelectedItem().toString().trim()+"'",dialogo).execute("");
 
-                setPrecio();
+//                llevaLeche(leche);
+//                setPrecio();
             }
 
             @Override
@@ -284,4 +304,72 @@ public class ActivityCafe extends AppCompatActivity {
     public void metodosCheked(View view) {
         setPrecio();
     }//Fin metodosCheked
-}//Fin Activity
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class ConsultasCafe extends AsyncTask<String,Void,ResultSet> {
+
+        String consultaCf;
+        Connection conexCf;
+        Statement sentenciaCf;
+        android.app.AlertDialog dialog;
+        ResultSet resultCf;
+
+        public ConsultasCafe(String consulta, android.app.AlertDialog dialog){
+            this.consultaCf=consulta;
+            this.dialog=dialog;
+        }
+
+        @Override
+        protected ResultSet doInBackground(String... params) {
+
+            try {
+                conexCf = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");
+                sentenciaCf = conexCf.createStatement();
+                resultCf = null;
+                publishProgress();
+
+//                String consulta = "";
+                resultCf = sentenciaCf.executeQuery(consultaCf);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return resultCf;
+        }
+
+        @Override
+        protected void onPostExecute(ResultSet resultSet) {
+            super.onPostExecute(resultSet);
+
+            try
+            {
+                while (resultSet.next())
+                {
+                    if (consultaCf.contains("nom_pro")){
+                        Log.e("Nombre tipo:", ""+resultSet.getString(1));
+                        arrayTipo.add(resultSet.getString(1));
+                    }
+                    if (consultaCf.contains("precio")){
+                        p=resultSet.getFloat(1);
+                        leche=resultSet.getBoolean(2);
+                        llevaLeche(leche);
+                        setPrecio();
+                    }
+                }
+
+                conexCf.close();
+                sentenciaCf.close();
+                resultCf.close();
+                dialog.dismiss();
+
+            }
+            catch (Exception ex)
+            {
+                Log.d("Fallo de cojones","");
+            }
+        }
+    }//Fin AsynTack
+
+}//Fin Acticity

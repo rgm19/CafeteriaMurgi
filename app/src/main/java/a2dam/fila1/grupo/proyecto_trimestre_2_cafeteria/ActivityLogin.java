@@ -3,8 +3,6 @@ package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,22 +13,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
-import java.io.InputStream;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Usuario;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_pass;
 import dmax.dialog.SpotsDialog;
-
-import static a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.HiloConexionBBDD.resultado;
-import static a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.HiloConexionBBDD.sentencia;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -55,31 +45,15 @@ public class ActivityLogin extends AppCompatActivity {
         calcularIP();
         listener();
 
-//        if (USER==null){
-            login();
-//        }else{
-//            lanzarActivity();
-//        }
-    }
+        login();
+    }//Fin onCreate
 
     private void calcularIP() {
         if (local.isChecked())
             ip = "10.10.4.150";
         if (externa.isChecked())
             ip = "www.iesmurgi.org";
-    }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        if (USER==null){
-//            login();
-//        }else{
-//            lanzarActivity();
-//        }
-//    }
-
+    }//Fin calcularIP
 
     private void listener() {
         ayuda.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +64,7 @@ public class ActivityLogin extends AppCompatActivity {
                 dialogo.show(ft, "Contraseñas");
             }
         });
-
-    }
+    }//Fin listener
 
     private void inflar() {
         dialogo =new SpotsDialog(this,"Cargando...");
@@ -101,7 +74,7 @@ public class ActivityLogin extends AppCompatActivity {
         ayuda = (ImageButton) findViewById(R.id.ibtn_lg_ayuda);
         local = (RadioButton) findViewById(R.id.rb_lg_local);
         externa = (RadioButton) findViewById(R.id.rb_lg_externa);
-    }
+    }//Fin inflar
 
 
     private void login() {
@@ -116,7 +89,7 @@ public class ActivityLogin extends AppCompatActivity {
                }
             }
         });
-    }
+    }//Fin login
 
     private void lanzarActivity() {
         switch (USER.getCategoria()){
@@ -134,11 +107,13 @@ public class ActivityLogin extends AppCompatActivity {
                 break;
             default:
         }
-    }
+    }//Fin lanzarActivity
 
     public void radio(View view) {
         calcularIP();
-    }
+    }//Fin radio
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
     public class ComprobarUsuario extends AsyncTask<String,Void,ResultSet> {
 
@@ -207,6 +182,6 @@ public class ActivityLogin extends AppCompatActivity {
                 Log.d("Fallo de cojones","");
             }
         }
-    }
+    }//Fin AsynTack
 
 }//Fin Acticity
