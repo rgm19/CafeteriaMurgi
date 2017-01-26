@@ -107,7 +107,7 @@ public class ActivityCafe extends AppCompatActivity {
         for (int i = 0; i < arrayT.length; i++){
             arrayT[i] = BDPruebas.productos.get(i).getNombre();
         }
-        spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayT));
+        spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayTipo));
 //        ArrayAdapter<String> adapterTipo = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayTipo);
 //        adapterTipo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        spTipo.setAdapter(adapterTipo);
@@ -138,8 +138,8 @@ public class ActivityCafe extends AppCompatActivity {
         //----------------------------------------------------------------------------------------//
 
         ArrayAdapter<CharSequence> adapterLch = ArrayAdapter.createFromResource(this,
-                R.array.leche, android.R.layout.simple_spinner_item);
-        adapterLch.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.leche, android.R.layout.simple_spinner_dropdown_item);
+//        adapterLch.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spLeche.setAdapter(adapterLch);
         //Fin Spinner Leche
@@ -148,8 +148,8 @@ public class ActivityCafe extends AppCompatActivity {
         //----------------------------------------------------------------------------------------//
 
         ArrayAdapter<CharSequence> adapterAzc = ArrayAdapter.createFromResource(this,
-                R.array.azucar, android.R.layout.simple_spinner_item);
-        adapterAzc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.azucar, android.R.layout.simple_spinner_dropdown_item);
+//        adapterAzc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spAzucar.setAdapter(adapterAzc);
         //Fin Spinner Azucar
@@ -258,8 +258,9 @@ public class ActivityCafe extends AppCompatActivity {
         if (leche)
             comentarios=comentarios.concat(spLeche.getSelectedItem().toString().trim()+", ");
         comentarios.concat(spAzucar.getSelectedItem().toString().trim()+"");
-        if (lactosa.isChecked())
-            comentarios=comentarios.concat(", Sin lactosa");
+        if (leche)
+            if (lactosa.isChecked())
+                comentarios=comentarios.concat(", Sin lactosa");
         if (crema.isChecked())
             comentarios=comentarios.concat(", Crema");
         if (chocolate.isChecked())
@@ -282,8 +283,9 @@ public class ActivityCafe extends AppCompatActivity {
 
     private void setPrecio(){
         float pFinal = p;
-        if (lactosa.isChecked())
-            pFinal += 0.2f;
+        if (leche)
+            if (lactosa.isChecked())
+                pFinal += 0.2f;
         if (hielo.isChecked())
             pFinal += 0.3f;
         if (crema.isChecked())
@@ -347,10 +349,10 @@ public class ActivityCafe extends AppCompatActivity {
             {
                 while (resultSet.next())
                 {
-                    if (consultaCf.contains("nom_pro")){
-                        Log.e("Nombre tipo:", ""+resultSet.getString(1));
-                        arrayTipo.add(resultSet.getString(1));
-                    }
+//                    if (consultaCf.contains("nom_pro")){
+//
+//                        arrayTipo.add(resultSet.getString(1));
+//                    }
                     if (consultaCf.contains("precio")){
                         p=resultSet.getFloat(1);
                         leche=resultSet.getBoolean(2);

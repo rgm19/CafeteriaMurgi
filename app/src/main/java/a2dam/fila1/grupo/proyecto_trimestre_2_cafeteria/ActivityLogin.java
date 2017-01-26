@@ -85,13 +85,17 @@ public class ActivityLogin extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Debe rellenar todos los campos",Toast.LENGTH_SHORT).show();
                 }else{
                     dialogo.show();
-                    new ComprobarUsuario(usuario.getText().toString().trim(),pass.getText().toString().trim(),dialogo).execute("");
+//                    new ComprobarUsuario(usuario.getText().toString().trim(),pass.getText().toString().trim(),dialogo).execute("");
+                    new ComprobarUsuario("Select * from usuarios where username='"+
+                            usuario.getText().toString().trim()+"' and pass='"+
+                            pass.getText().toString().trim()+"'",dialogo).execute("");
                }
             }
         });
     }//Fin login
 
     private void lanzarActivity() {
+
         switch (USER.getCategoria()){
             case 0: Intent i0 = new Intent(getApplicationContext(), ActivityPedidos.class);
                 startActivity(i0);
@@ -117,15 +121,14 @@ public class ActivityLogin extends AppCompatActivity {
 
     public class ComprobarUsuario extends AsyncTask<String,Void,ResultSet> {
 
-        String user, passw;
+        String consultaLg;
         Connection conexLg;
         Statement sentenciaLg;
-        AlertDialog dialog;
+        android.app.AlertDialog dialog;
         ResultSet resultLg;
 
-        public ComprobarUsuario(String user, String passw,AlertDialog dialog){
-            this.user=user;
-            this.passw=passw;
+        public ComprobarUsuario(String consulta, android.app.AlertDialog dialog){
+            this.consultaLg=consulta;
             this.dialog=dialog;
         }
 
@@ -138,12 +141,10 @@ public class ActivityLogin extends AppCompatActivity {
                 resultLg = null;
                 publishProgress();
 
-                String consulta = "Select * from usuarios";
-                resultLg = sentenciaLg.executeQuery(consulta);
+                resultLg = sentenciaLg.executeQuery(consultaLg);
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            } catch (SQLException e) {               e.printStackTrace();            }
+
             return resultLg;
         }
 
@@ -151,21 +152,15 @@ public class ActivityLogin extends AppCompatActivity {
         protected void onPostExecute(ResultSet resultSet) {
             super.onPostExecute(resultSet);
 
-            try
-            {
-                while (resultSet.next())
-                {
-                        if(resultSet.getString("username").equals(user))
-                        {
-                            if(resultSet.getString("pass").equals(passw))
-                            {
-                                loginCorrecto=true;
-                                USER=new Usuario(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5));
-                                dialog.dismiss();
-                                lanzarActivity();
-                                Log.e("DATOS",""+resultSet.getString("username"));
-                            }
-                        }
+            try {
+                while (resultSet.next()) {
+                    if (consultaLg.contains("username")){
+                        loginCorrecto=true;
+                        USER=new Usuario(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5));
+                        dialog.dismiss();
+                        lanzarActivity();
+                        Log.e("DATOS",""+resultSet.getString("username"));
+                    }
                 }
 
                 if (!loginCorrecto)
@@ -176,11 +171,7 @@ public class ActivityLogin extends AppCompatActivity {
                 resultLg.close();
                 dialog.dismiss();
 
-            }
-            catch (Exception ex)
-            {
-                Log.d("Fallo de cojones","");
-            }
+            }catch (Exception ex) {     Log.d("Fallo de cojones","");   }
         }
     }//Fin AsynTack
 

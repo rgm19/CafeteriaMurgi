@@ -11,6 +11,8 @@ public class BDPruebas {
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
     public static ArrayList<Pedido> pedidos = new ArrayList<>();
 
+    public static ArrayList<String> nombresTipo = new ArrayList<>();
+
 
     public static void iniciarBBDD(){
         productos.add(new Producto("Espresso", 1.0f));
