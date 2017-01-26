@@ -151,6 +151,7 @@ public class ActivityCafe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fotoMenu.setVisibility(View.INVISIBLE);
+
             }
         });
 
@@ -160,9 +161,6 @@ public class ActivityCafe extends AppCompatActivity {
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Dialog_logout dialogo= new Dialog_logout();
-//                FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                dialogo.show(ft, "Salir");
                 onBackPressed();
             }
         });
