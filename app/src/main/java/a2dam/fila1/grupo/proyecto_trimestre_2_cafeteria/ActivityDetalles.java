@@ -36,7 +36,9 @@ public class ActivityDetalles extends AppCompatActivity {
         metodosListener();
 
     }
-
+    /**
+     * Infla todos los elementos del layout del activity
+     */
     private void inflar() {
         listaProcductos = (ListView)findViewById(R.id.lv_dt);
         precio = (TextView)findViewById(R.id.tv_dt_precio);
@@ -45,22 +47,36 @@ public class ActivityDetalles extends AppCompatActivity {
         reloj = (TimePicker)findViewById(R.id.timePicker2);
     }
 
+    /**
+     * lanzarAdapter, crea y lanza un adapter en el listView con una lista de los productos del pedido
+     */
     static void lanzarAdapter() {
         AdapterDetalles adapta = new AdapterDetalles(BDFinal.pedidosFinal);
         listaProcductos.setAdapter(adapta);
         precioTotal();
     }
 
+    /**
+     * precioTotal, calcula el precio total haciendo una suma de los precios de todos los productos
+     * del pedido y redondea para sólo 2 decimales máximo
+     */
     private static void precioTotal() {
         float pf = 0f;
         for (int i = 0; i < BDFinal.pedidosFinal.size(); i++){
             pf += BDFinal.pedidosFinal.get(i).getPrecio();
         }
-        precio.setText(""+pf);
+        double redondeo = Math.round(pf*100.0)/100.0;
+        precio.setText(""+redondeo);
 
     }
 
+    /**
+     * Métodos lístener de los botones
+     */
     private void metodosListener() {
+        /**
+         * Listener volver, carga la Activity anterior para seguir añadiendo cafés
+         */
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +88,12 @@ public class ActivityDetalles extends AppCompatActivity {
         //----------------------------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------//
 
+        /**
+         * Listener confirmar, comprueba que hay productos añadidos
+         * Realiza un insert en la BBDD con todos los productos de la lista
+         * Una vez realizado se borra el array de pedidos y se desabilita el botón para evitar
+         * realizar pedidos duplicados
+         */
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

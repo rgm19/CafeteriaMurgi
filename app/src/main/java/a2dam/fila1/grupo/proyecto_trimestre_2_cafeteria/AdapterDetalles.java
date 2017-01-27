@@ -55,10 +55,14 @@ public class AdapterDetalles extends BaseAdapter {
 
         ((TextView)vista.findViewById(R.id.tv_dt_list_nombre)).setText(pedidoActual.getProducto().getNombre());
         ((TextView)vista.findViewById(R.id.tv_dt_list_precio)).setText(""+pedidoActual.getPrecio()+" €");
-        ((TextView)vista.findViewById(R.id.tv_dt_list_cantidad)).setText(""+pedidoActual.getCantidad());
+        ((TextView)vista.findViewById(R.id.tv_dt_list_cantidad)).setText("x"+pedidoActual.getCantidad());
         ((TextView)vista.findViewById(R.id.tv_dt_list_comentarios)).setText(pedidoActual.getComentarios());
 
-        vista.findViewById(R.id.ib_dy_list_delete).setOnClickListener(new View.OnClickListener() {
+        if (!pedidoActual.getComentarios().contains("lactosa")){
+            ((ImageView)vista.findViewById(R.id.iv_dt_list_alert)).setVisibility(View.GONE);
+        }
+
+        vista.findViewById(R.id.ib_dt_list_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(parent.getContext())

@@ -27,7 +27,7 @@ import dmax.dialog.SpotsDialog;
 
 public class ActivityLogin extends AppCompatActivity {
 
-    AlertDialog dialogo;
+    AlertDialog dialogo1, dialogo2;
 
     public static Usuario USER = null;
     public static String ip = null;
@@ -82,7 +82,8 @@ public class ActivityLogin extends AppCompatActivity {
      * Infla todos los elementos del layout del activity
      */
     private void inflar() {
-        dialogo =new SpotsDialog(this,"Cargando...");
+        dialogo1 =new SpotsDialog(this,"Comprobando usuario...");
+        dialogo2 =new SpotsDialog(this,"Cargando BBDD...");
         usuario = (EditText) findViewById(R.id.et_lg_usuario);
         pass = (EditText) findViewById(R.id.et_lg_pass);
         entrar = (Button) findViewById(R.id.btn_lg_entrar);
@@ -106,11 +107,11 @@ public class ActivityLogin extends AppCompatActivity {
                 if (usuario.getText().toString().trim().equals("") || pass.getText().toString().trim().equals("")){
                     Toast.makeText(getApplicationContext(), "Debe rellenar todos los campos",Toast.LENGTH_SHORT).show();
                 }else{
-                    dialogo.show();
+                    dialogo1.show();
 //                    new ComprobarUsuario(usuario.getText().toString().trim(),pass.getText().toString().trim(),dialogo).execute("");
                     new ComprobarUsuario("Select * from usuarios where username='"+
                             usuario.getText().toString().trim()+"' and pass='"+
-                            pass.getText().toString().trim()+"'",dialogo).execute("");
+                            pass.getText().toString().trim()+"'",dialogo1).execute("");
                }
             }
         });
@@ -142,8 +143,8 @@ public class ActivityLogin extends AppCompatActivity {
      * crearBD, realiza consulta a BBDD para almacenar todos los datos de los productos en un ArrayList
      */
     private void crearBD() {
-        dialogo.show();
-        new ComprobarUsuario("Select * from productos", dialogo).execute("");
+        dialogo2.show();
+        new ComprobarUsuario("Select * from productos", dialogo2).execute("");
     }//Fin crearBD
 
     /**
@@ -202,19 +203,22 @@ public class ActivityLogin extends AppCompatActivity {
 
                         USER=new Usuario(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5));
                         dialog.dismiss();
-                        crearBD();
                     }
                 }
-
-                if (USER==null)
-                    Toast.makeText(getApplicationContext(), "Usuario o Contraseña incorrectos",Toast.LENGTH_SHORT).show();
-                if (loginCorrecto)
-                    lanzarActivity();
 
                 conexLg.close();
                 sentenciaLg.close();
                 resultLg.close();
                 dialog.dismiss();
+
+                if (USER==null)
+                    Toast.makeText(getApplicationContext(), "Usuario o Contraseña incorrectos",Toast.LENGTH_SHORT).show();
+                if (loginCorrecto)
+                    lanzarActivity();
+                else
+                    crearBD();
+
+
 
             }catch (Exception ex) {     Log.d("Fallo de cojones","");   }
         }

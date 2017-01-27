@@ -67,7 +67,7 @@ public class ActivityCafe extends AppCompatActivity {
      * Infla todos los elementos del layout del activity
      */
     private void inflar() {
-        dialogo =new SpotsDialog(this,"Cargando...");
+        dialogo =new SpotsDialog(this,"Calculando precios...");
         spTipo = (Spinner) findViewById(R.id.sp_cf_tipo);
         spLeche = (Spinner) findViewById(R.id.sp_cf_leche);
         spAzucar = (Spinner) findViewById(R.id.sp_cf_azucar);
@@ -291,6 +291,7 @@ public class ActivityCafe extends AppCompatActivity {
         String comentarios="";
         if (leche)
             comentarios=comentarios.concat(spLeche.getSelectedItem().toString().trim()+", ");
+
         comentarios.concat(spAzucar.getSelectedItem().toString().trim()+"");
         if (leche)
             if (lactosa.isChecked())
@@ -321,6 +322,7 @@ public class ActivityCafe extends AppCompatActivity {
 
     /**
      * setPrecio, calcula el precio del pedido según el producto y las opciones seleccionadas
+     * Redondea para que salga sólo con 2 decimales
      */
     private void setPrecio(){
         float pFinal = p;
@@ -335,17 +337,23 @@ public class ActivityCafe extends AppCompatActivity {
             pFinal += 0.5f;
 
         pFinal = pFinal * Integer.parseInt(cantidad.getText().toString().trim());
+        double redondeo = Math.round(pFinal*100.0)/100.0;
 
-        precio.setText(""+pFinal);
+        precio.setText(""+redondeo);
     }//Fin setPrecio
 
     /**
      * llevaLeche, habilita o deshabilita las opciones de leche según el producto
+     *
+     * El spAzucar está puesto porque si no luego no se puede coger el dato, no sé porqué, pero así funciona
      * @param b
      */
     private void llevaLeche(boolean b) {
         spLeche.setEnabled(b);
         lactosa.setEnabled(b);
+
+        spAzucar.setEnabled(false);
+        spAzucar.setEnabled(true);
     }//Fin llevaLeche
 
     /**
