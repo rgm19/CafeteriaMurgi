@@ -58,7 +58,7 @@ public class AdapterDetalles extends BaseAdapter {
         ((TextView)vista.findViewById(R.id.tv_dt_list_cantidad)).setText(""+pedidoActual.getCantidad());
         ((TextView)vista.findViewById(R.id.tv_dt_list_comentarios)).setText(pedidoActual.getComentarios());
 
-        ((ImageButton)vista.findViewById(R.id.ib_dy_list_delete)).setOnClickListener(new View.OnClickListener() {
+        vista.findViewById(R.id.ib_dy_list_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(parent.getContext())
