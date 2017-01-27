@@ -348,6 +348,11 @@ public class ActivityCafe extends AppCompatActivity {
         lactosa.setEnabled(b);
     }//Fin llevaLeche
 
+    /**
+     * metodosCheked, onClick de los checkBox implementado en el XML
+     * Llama a setPrecio cada vez que se cliquea un un checkBox
+     * @param view
+     */
     public void metodosCheked(View view) {
         setPrecio();
     }//Fin metodosCheked
