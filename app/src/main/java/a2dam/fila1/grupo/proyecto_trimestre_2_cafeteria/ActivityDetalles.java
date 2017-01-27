@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 
@@ -45,15 +46,15 @@ public class ActivityDetalles extends AppCompatActivity {
     }
 
     static void lanzarAdapter() {
-        AdapterDetalles adapta = new AdapterDetalles(BDPruebas.pedidos);
+        AdapterDetalles adapta = new AdapterDetalles(BDFinal.pedidosFinal);
         listaProcductos.setAdapter(adapta);
         precioTotal();
     }
 
     private static void precioTotal() {
         float pf = 0f;
-        for (int i = 0; i < BDPruebas.pedidos.size(); i++){
-            pf += BDPruebas.pedidos.get(i).getPrecio();
+        for (int i = 0; i < BDFinal.pedidosFinal.size(); i++){
+            pf += BDFinal.pedidosFinal.get(i).getPrecio();
         }
         precio.setText(""+pf);
 
@@ -74,14 +75,14 @@ public class ActivityDetalles extends AppCompatActivity {
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (BDPruebas.pedidos.size()==0)
+                if (BDFinal.pedidosFinal.size()==0)
                     Toast.makeText(getApplicationContext(),"No se han añadido productos.", Toast.LENGTH_SHORT).show();
                 else{
-                    for (Pedido p : BDPruebas.pedidos){
+                    for (Pedido p : BDFinal.pedidosFinal){
                         //Insert de pedidos en BBDD
                     }
                     confirmar.setEnabled(false);
-                    BDPruebas.pedidos.clear();
+                    BDFinal.pedidosFinal.clear();
                     Toast.makeText(getApplicationContext(),"Pedido realizado con exito.", Toast.LENGTH_LONG).show();
                 }
 

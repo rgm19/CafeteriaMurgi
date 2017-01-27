@@ -51,6 +51,9 @@ public class ActivityLogin extends AppCompatActivity {
         login();
     }//Fin onCreate
 
+    /**
+     * calcularIP, compruba los radioButton y establece una IP para la conexión con la BBDD
+     */
     private void calcularIP() {
         if (local.isChecked())
             ip = "10.10.4.150";
@@ -58,7 +61,13 @@ public class ActivityLogin extends AppCompatActivity {
             ip = "www.iesmurgi.org";
     }//Fin calcularIP
 
+    /**
+     * Métodos listener
+     */
     private void listener() {
+        /**
+         * Listener ayuda, muestra un AlertDialog personalizado con los usuarios y contraseñas
+         */
         ayuda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +78,9 @@ public class ActivityLogin extends AppCompatActivity {
         });
     }//Fin listener
 
+    /**
+     * Infla todos los elementos del layout del activity
+     */
     private void inflar() {
         dialogo =new SpotsDialog(this,"Cargando...");
         usuario = (EditText) findViewById(R.id.et_lg_usuario);
@@ -79,8 +91,15 @@ public class ActivityLogin extends AppCompatActivity {
         externa = (RadioButton) findViewById(R.id.rb_lg_externa);
     }//Fin inflar
 
-
+    /**
+     * Método listener del botón entrar
+     */
     private void login() {
+        /**
+         * Listener entrar, comprueba que el campo usuario y contraseña no esté vacío
+         * Hace una consulta a la BBDD con ese usuario y contraseña, si son correctos se establece
+         * un usuario USER, se carga los datos de los productos y se lanza el siguiente Activity
+         */
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +116,9 @@ public class ActivityLogin extends AppCompatActivity {
         });
     }//Fin login
 
+    /**
+     * LanzarActivity, lanza la siguiente Activity según la categoria del USER
+     */
     private void lanzarActivity() {
 
          switch (USER.getCategoria()){
@@ -116,11 +138,19 @@ public class ActivityLogin extends AppCompatActivity {
         }
     }//Fin lanzarActivity
 
+    /**
+     * crearBD, realiza consulta a BBDD para almacenar todos los datos de los productos en un ArrayList
+     */
     private void crearBD() {
         dialogo.show();
         new ComprobarUsuario("Select * from productos", dialogo).execute("");
-    }
+    }//Fin crearBD
 
+    /**
+     * radio, metodo onClick de los radio button implementado en el XML
+     * cambia la IP cada vez que se marca un radio button
+     * @param view
+     */
     public void radio(View view) {
         calcularIP();
     }//Fin radio
@@ -163,7 +193,8 @@ public class ActivityLogin extends AppCompatActivity {
             try {
                 while (resultSet.next()) {
                     if (consultaLg.contains("productos")){
-                       BDFinal.productosFinal.add(new Producto(resultSet.getString(2),resultSet.getFloat(3), resultSet.getBoolean(4)));
+                       BDFinal.productosFinal.add(new Producto(resultSet.getInt(1),resultSet.getString(2),
+                               resultSet.getFloat(3), resultSet.getBoolean(4)));
 
                        loginCorrecto=true;
                     }

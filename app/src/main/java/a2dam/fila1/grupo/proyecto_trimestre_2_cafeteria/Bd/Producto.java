@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 
 public class Producto {
+    private int numProducto;
     private String nombre;
     private float precio;
     private boolean leche;
@@ -17,16 +18,15 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Producto(String nombre, float precio, boolean leche) {
+    public Producto(int numProducto, String nombre, float precio, boolean leche) {
+        this.numProducto = numProducto;
         this.nombre = nombre;
         this.precio = precio;
         this.leche = leche;
     }
 
+    public int getNumProducto() {        return numProducto;    }
     public String getNombre() {        return nombre;    }
     public float getPrecio() {        return precio;    }
-
-    public boolean isLeche() {
-        return leche;
-    }
+    public boolean isLeche() {        return leche;    }
 }
