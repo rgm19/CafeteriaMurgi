@@ -288,20 +288,20 @@ public class ActivityCafe extends AppCompatActivity {
      * @return
      */
     private String generarComentarios() {
-        String comentarios="";
+        String comentarios = "";
         if (leche)
-            comentarios=comentarios.concat(spLeche.getSelectedItem().toString().trim()+", ");
+            comentarios = comentarios.concat(spLeche.getSelectedItem().toString().trim()+", ");
 
-        comentarios.concat(spAzucar.getSelectedItem().toString().trim()+"");
+        comentarios = comentarios.concat(spAzucar.getSelectedItem().toString().trim()+"");
         if (leche)
             if (lactosa.isChecked())
-                comentarios=comentarios.concat(", Sin lactosa");
+                comentarios = comentarios.concat(", Sin lactosa");
         if (crema.isChecked())
-            comentarios=comentarios.concat(", Crema");
+            comentarios = comentarios.concat(", Crema");
         if (chocolate.isChecked())
-            comentarios=comentarios.concat(", Chocolate");
+            comentarios = comentarios.concat(", Chocolate");
         if (hielo.isChecked())
-            comentarios=comentarios.concat(", Hielo");
+            comentarios = comentarios.concat(", Hielo");
 
         return comentarios;
     }//Fin generarComentarios
@@ -344,16 +344,11 @@ public class ActivityCafe extends AppCompatActivity {
 
     /**
      * llevaLeche, habilita o deshabilita las opciones de leche según el producto
-     *
-     * El spAzucar está puesto porque si no luego no se puede coger el dato, no sé porqué, pero así funciona
      * @param b
      */
     private void llevaLeche(boolean b) {
         spLeche.setEnabled(b);
         lactosa.setEnabled(b);
-
-        spAzucar.setEnabled(false);
-        spAzucar.setEnabled(true);
     }//Fin llevaLeche
 
     /**
