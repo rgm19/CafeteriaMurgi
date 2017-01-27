@@ -56,7 +56,7 @@ I-- NSERT into productos (nom_pro,precio,img,ingredientes) values ('cafe',1.3,'u
 -- INSERT into pedidos values (1,1,1,curdate(),1);
 
 
--- Consultas para el proyecto
+-- Consultas para el proyectod
 
 -- select max(num_pedido) from pedidos; para saber cual es el ultimo pedido
 
