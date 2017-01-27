@@ -1,6 +1,8 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -95,18 +97,24 @@ public class ActivityDetalles extends AppCompatActivity {
          * realizar pedidos duplicados
          */
         confirmar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (BDFinal.pedidosFinal.size()==0)
-                    Toast.makeText(getApplicationContext(),"No se han añadido productos.", Toast.LENGTH_SHORT).show();
-                else{
-                    for (Pedido p : BDFinal.pedidosFinal){
-                        //Insert de pedidos en BBDD
-                    }
-                    confirmar.setEnabled(false);
-                    BDFinal.pedidosFinal.clear();
-                    Toast.makeText(getApplicationContext(),"Pedido realizado con exito.", Toast.LENGTH_LONG).show();
-                }
+//                if (BDFinal.pedidosFinal.size()==0)
+//                    Toast.makeText(getApplicationContext(),"No se han añadido productos.", Toast.LENGTH_SHORT).show();
+//                else{
+//                    for (Pedido p : BDFinal.pedidosFinal){
+//                        //Insert de pedidos en BBDD
+//                    }
+//                    confirmar.setEnabled(false);
+//                    BDFinal.pedidosFinal.clear();
+//                    Toast.makeText(getApplicationContext(),"Pedido realizado con exito.", Toast.LENGTH_LONG).show();
+//                }
+//                int hora = (int)reloj.getHour();
+//                int minuto = reloj.getMinute();
+                int hour = reloj.getHour();
+                int minute = reloj.getMinute();
+                Toast.makeText(getApplicationContext(), String.format("" + hour + ":" + minute), Toast.LENGTH_SHORT).show();
 
             }
         });
