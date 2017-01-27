@@ -18,6 +18,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Usuario;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_pass;
 import dmax.dialog.SpotsDialog;
@@ -96,7 +99,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     private void lanzarActivity() {
 
-        switch (USER.getCategoria()){
+         switch (USER.getCategoria()){
             case 0: Intent i0 = new Intent(getApplicationContext(), ActivityPedidos.class);
                 startActivity(i0);
                 break;
@@ -112,6 +115,11 @@ public class ActivityLogin extends AppCompatActivity {
             default:
         }
     }//Fin lanzarActivity
+
+    private void crearBD() {
+        dialogo.show();
+        new ComprobarUsuario("Select * from productos", dialogo).execute("");
+    }
 
     public void radio(View view) {
         calcularIP();
@@ -154,17 +162,23 @@ public class ActivityLogin extends AppCompatActivity {
 
             try {
                 while (resultSet.next()) {
+                    if (consultaLg.contains("productos")){
+                       BDFinal.productosFinal.add(new Producto(resultSet.getString(2),resultSet.getFloat(3), resultSet.getBoolean(4)));
+
+                       loginCorrecto=true;
+                    }
                     if (consultaLg.contains("username")){
-                        loginCorrecto=true;
+
                         USER=new Usuario(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5));
                         dialog.dismiss();
-                        lanzarActivity();
-                        Log.e("DATOS",""+resultSet.getString("username"));
+                        crearBD();
                     }
                 }
 
-                if (!loginCorrecto)
+                if (USER==null)
                     Toast.makeText(getApplicationContext(), "Usuario o Contraseña incorrectos",Toast.LENGTH_SHORT).show();
+                if (loginCorrecto)
+                    lanzarActivity();
 
                 conexLg.close();
                 sentenciaLg.close();
@@ -174,5 +188,6 @@ public class ActivityLogin extends AppCompatActivity {
             }catch (Exception ex) {     Log.d("Fallo de cojones","");   }
         }
     }//Fin AsynTack
+
 
 }//Fin Acticity

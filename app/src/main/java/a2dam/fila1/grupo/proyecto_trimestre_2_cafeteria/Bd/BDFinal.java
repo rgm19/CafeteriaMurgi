@@ -8,4 +8,6 @@ import java.util.ArrayList;
 
 public class BDFinal {
     public static ArrayList<Usuario> usuarioFinal=new ArrayList<>();
+    public static ArrayList<Producto> productosFinal = new ArrayList<>();
+    public static ArrayList<Pedido> pedidosFinal = new ArrayList<>();
 }
