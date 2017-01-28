@@ -255,8 +255,8 @@ public class ActivityCafe extends AppCompatActivity {
     }//Fin Listener
 
     /**
-     * Limpiar, al realizar un pedido con FAB, desmarca los checkBox y coloca los spinner en
-     * posicion inicial
+     * Limpiar, al realizar un pedido con FAB, desmarca los checkBox y coloca los spinner  y la
+     * cantidad en posicion inicial
      */
     private void limpiar() {
         spTipo.setSelection(0);
@@ -296,7 +296,7 @@ public class ActivityCafe extends AppCompatActivity {
 
     /**
      * setCantidad, calcula y controla la cantidad de producto a pedir
-     * @param i Cantidad a sumar o restar a la cantidad
+     * @param i Cantidad a sumar o restar a la cantidad actual
      */
     private void setCantidad(int i) {
         int cant = Integer.parseInt(cantidad.getText().toString().trim());
