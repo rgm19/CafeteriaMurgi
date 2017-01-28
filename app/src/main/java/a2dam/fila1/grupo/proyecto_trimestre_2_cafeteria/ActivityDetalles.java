@@ -1,6 +1,5 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -15,8 +14,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 
 public class ActivityDetalles extends AppCompatActivity {
 
