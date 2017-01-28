@@ -27,12 +27,12 @@ import dmax.dialog.SpotsDialog;
 
 public class ActivityLogin extends AppCompatActivity {
 
-    AlertDialog dialogo1, dialogo2;
+    AlertDialog dialogo;
 
     public static Usuario USER = null;
     public static String ip = null;
 
-    static EditText usuario, pass;
+    EditText usuario, pass;
     Button entrar;
     ImageButton ayuda;
     RadioButton local, externa;
@@ -82,8 +82,7 @@ public class ActivityLogin extends AppCompatActivity {
      * Infla todos los elementos del layout del activity
      */
     private void inflar() {
-        dialogo1 =new SpotsDialog(this,"Comprobando usuario...");
-        dialogo2 =new SpotsDialog(this,"Cargando BBDD...");
+        dialogo =new SpotsDialog(this,"Comprobando usuario...");
         usuario = (EditText) findViewById(R.id.et_lg_usuario);
         pass = (EditText) findViewById(R.id.et_lg_pass);
         entrar = (Button) findViewById(R.id.btn_lg_entrar);
@@ -107,11 +106,10 @@ public class ActivityLogin extends AppCompatActivity {
                 if (usuario.getText().toString().trim().equals("") || pass.getText().toString().trim().equals("")){
                     Toast.makeText(getApplicationContext(), "Debe rellenar todos los campos",Toast.LENGTH_SHORT).show();
                 }else{
-                    dialogo1.show();
-//                    new ComprobarUsuario(usuario.getText().toString().trim(),pass.getText().toString().trim(),dialogo).execute("");
+                    dialogo.show();
                     new ComprobarUsuario("Select * from usuarios where username='"+
                             usuario.getText().toString().trim()+"' and pass='"+
-                            pass.getText().toString().trim()+"'",dialogo1).execute("");
+                            pass.getText().toString().trim()+"'",dialogo).execute("");
                }
             }
         });
@@ -138,14 +136,6 @@ public class ActivityLogin extends AppCompatActivity {
             default:
         }
     }//Fin lanzarActivity
-
-    /**
-     * crearBD, realiza consulta a BBDD para almacenar todos los datos de los productos en un ArrayList
-     */
-    private void crearBD() {
-        dialogo2.show();
-        new ComprobarUsuario("Select * from productos", dialogo2).execute("");
-    }//Fin crearBD
 
     /**
      * radio, metodo onClick de los radio button implementado en el XML
@@ -182,7 +172,7 @@ public class ActivityLogin extends AppCompatActivity {
 
                 resultLg = sentenciaLg.executeQuery(consultaLg);
 
-            } catch (SQLException e) {               e.printStackTrace();            }
+            } catch (SQLException e) { e.printStackTrace();}
 
             return resultLg;
         }
@@ -193,17 +183,9 @@ public class ActivityLogin extends AppCompatActivity {
 
             try {
                 while (resultSet.next()) {
-                    if (consultaLg.contains("productos")){
-                       BDFinal.productosFinal.add(new Producto(resultSet.getInt(1),resultSet.getString(2),
-                               resultSet.getFloat(3), resultSet.getBoolean(4)));
-
-                       loginCorrecto=true;
-                    }
-                    if (consultaLg.contains("username")){
-
-                        USER=new Usuario(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5));
-                        dialog.dismiss();
-                    }
+                    USER=new Usuario(resultSet.getInt(1),resultSet.getString(2),
+                            resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5));
+                    loginCorrecto=true;
                 }
 
                 conexLg.close();
@@ -213,16 +195,11 @@ public class ActivityLogin extends AppCompatActivity {
 
                 if (USER==null)
                     Toast.makeText(getApplicationContext(), "Usuario o Contraseña incorrectos",Toast.LENGTH_SHORT).show();
-                if (loginCorrecto)
-                    lanzarActivity();
                 else
-                    crearBD();
-
-
+                    lanzarActivity();
 
             }catch (Exception ex) {     Log.d("Fallo de cojones","");   }
         }
     }//Fin AsynTack
-
 
 }//Fin Acticity

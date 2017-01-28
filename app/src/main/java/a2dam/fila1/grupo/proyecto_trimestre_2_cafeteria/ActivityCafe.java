@@ -1,9 +1,11 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
 
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.BoolRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Usuario;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Dialog.Dialog_menu;
 import dmax.dialog.SpotsDialog;
 
 public class ActivityCafe extends AppCompatActivity {
@@ -43,11 +46,11 @@ public class ActivityCafe extends AppCompatActivity {
     ImageButton volver, menu;
     Button pedir, menos, mas;
     FloatingActionButton fab;
-    ImageView fotoMenu;
 
     static ArrayList<String> arrayTipo = new ArrayList<>();
-    static Boolean leche = false;
-    static Float p = 0f;
+    static boolean datos = false;
+    static boolean leche = false;
+    static float p = 0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,10 @@ public class ActivityCafe extends AppCompatActivity {
 
         inflar();
 
-        metodosSpinner();
+        dialogo =new SpotsDialog(this,"Cargando BBDD...");
+        dialogo.show();
+        new ConsultasCafe("Select * from productos", dialogo).execute("");
+
         metodosListener();
 
         llevaLeche(leche);
@@ -67,7 +73,6 @@ public class ActivityCafe extends AppCompatActivity {
      * Infla todos los elementos del layout del activity
      */
     private void inflar() {
-        dialogo =new SpotsDialog(this,"Calculando precios...");
         spTipo = (Spinner) findViewById(R.id.sp_cf_tipo);
         spLeche = (Spinner) findViewById(R.id.sp_cf_leche);
         spAzucar = (Spinner) findViewById(R.id.sp_cf_azucar);
@@ -83,7 +88,6 @@ public class ActivityCafe extends AppCompatActivity {
         menos = (Button) findViewById(R.id.btn_cnt_menos);
         mas = (Button) findViewById(R.id.btn_cnt_mas);
         fab = (FloatingActionButton) findViewById(R.id.fab_cf);
-        fotoMenu = (ImageView) findViewById(R.id.iv_cf_menu);
     }//Fin inflar
 
     /**
@@ -114,13 +118,13 @@ public class ActivityCafe extends AppCompatActivity {
     private void metodosSpinner() {
         /**
          * Spinner Tipo, muestra una lista de los nombres de los produdos para seleccionar uno
+         * SE DEBE LANZAR DESDE EL AsyncTask UNA VEZ REALIZADA LA CONSULTA Y CARGADOS LOS DATOS DE LA BBDD
          * Al seleccionar un tipo se consulta su precio y si lleva leche o no para modificar las opciones
          */
-        final String[] arrayT = new String[BDFinal.productosFinal.size()];
-        for (int i = 0; i < arrayT.length; i++){
-            arrayT[i] = BDFinal.productosFinal.get(i).getNombre();
-        }
-        spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayT));
+
+        dialogo = new SpotsDialog(this,"Calculando precios...");
+
+        spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayTipo));
         spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -163,27 +167,16 @@ public class ActivityCafe extends AppCompatActivity {
      */
     private void metodosListener() {
         /**
-         * Listener Menú, muestra la imagen de los cafés para seleccionar el menú
-         * Cambiar a AlertDialog
+         * Listener Menú, muestra el AlertDialog Menu con los cafés disponibles
+         * AlertDialog personalizado
          */
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fotoMenu.setVisibility(View.VISIBLE);
-            }
-        });
-
-        //----------------------------------------------------------------------------------------//
-        //----------------------------------------------------------------------------------------//
-        /**
-         * Listener FotoMenu, oculta la imagen del menú cuando se pincha encima
-         * Eliminar si se introduce AlertDialog, eliminar la ImagenView fotoMenu
-         */
-        fotoMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fotoMenu.setVisibility(View.INVISIBLE);
-
+                Dialog_menu dialogoMenu= new Dialog_menu();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                dialogoMenu.setCancelable(true);
+                dialogoMenu.show(ft, "Menú");
             }
         });
 
@@ -229,23 +222,18 @@ public class ActivityCafe extends AppCompatActivity {
         //----------------------------------------------------------------------------------------//
         /**
          * Listener fab, toma los datos de los spinner y los checkbox y añade un pedido al array
-         * Añade pedidos a un array auxiliar, no a la BBDD
+         * Añade pedidos a un array auxiliar ("carrito"), no a la BBDD
          */
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Producto producto = null;
+                Producto producto = BDFinal.productosFinal.get(spTipo.getSelectedItemPosition());
                 String comentarios = generarComentarios();
-
-                producto = BDFinal.productosFinal.get(spTipo.getSelectedItemPosition());
-//                for (int i = 0; i < BDPruebas.productos.size(); i++){
-//                    if (spTipo.getSelectedItem().toString().trim().equals(BDPruebas.productos.get(i).getNombre()))
-//                        producto = BDPruebas.productos.get(i);
-//                }
 
                 BDFinal.pedidosFinal.add(new Pedido(ActivityLogin.USER, producto,
                         Integer.parseInt(cantidad.getText().toString().trim()),
                         Float.parseFloat(precio.getText().toString().trim()),comentarios));
+
                 Toast.makeText(getApplicationContext(),"Café "+producto.getNombre()+" añadido a tus pedidos",Toast.LENGTH_SHORT).show();
                 limpiar();
             }
@@ -322,7 +310,7 @@ public class ActivityCafe extends AppCompatActivity {
 
     /**
      * setPrecio, calcula el precio del pedido según el producto y las opciones seleccionadas
-     * Redondea para que salga sólo con 2 decimales
+     * Redondea para que salga sólo con 2 decimales máximo
      */
     private void setPrecio(){
         float pFinal = p;
@@ -399,12 +387,23 @@ public class ActivityCafe extends AppCompatActivity {
 
             try{
                 while (resultSet.next()) {
+                    if (!datos){
+                        BDFinal.productosFinal.add(new Producto(resultSet.getInt(1),resultSet.getString(2),
+                               resultSet.getFloat(3), resultSet.getBoolean(4)));
+                        arrayTipo.add(resultSet.getString(2));
+                    }
+
                     if (consultaCf.contains("precio")){
                         p=resultSet.getFloat(1);
                         leche=resultSet.getBoolean(2);
                         llevaLeche(leche);
                         setPrecio();
                     }
+                }
+
+                if (!datos){
+                    metodosSpinner();
+                    datos = true;
                 }
 
                 conexCf.close();

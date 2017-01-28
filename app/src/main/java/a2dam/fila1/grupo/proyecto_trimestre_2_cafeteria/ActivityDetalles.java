@@ -1,5 +1,6 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -92,7 +93,7 @@ public class ActivityDetalles extends AppCompatActivity {
 
         /**
          * Listener confirmar, comprueba que hay productos añadidos
-         * Realiza un insert en la BBDD con todos los productos de la lista
+         * Realiza un insert en la BBDD con todos los productos de la lista, el usuario y la hora
          * Una vez realizado se borra el array de pedidos y se desabilita el botón para evitar
          * realizar pedidos duplicados
          */
@@ -100,6 +101,23 @@ public class ActivityDetalles extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
+                int hour = 0;
+                int minute = 0;
+                /**
+                 * Los métodos getHour() y getMinute() no funcionan en API inferior a 23, hay que
+                 * usar metodos deprecated.
+                 */
+                if (Build.VERSION.SDK_INT >= 23 ){
+                    hour = reloj.getHour();
+                    minute = reloj.getMinute();
+                }else{
+                    hour = reloj.getCurrentHour();
+                    minute = reloj.getCurrentMinute();
+                }
+
+                Toast.makeText(getApplicationContext(), "" + hour + ":" + minute, Toast.LENGTH_SHORT).show();
+
+
 //                if (BDFinal.pedidosFinal.size()==0)
 //                    Toast.makeText(getApplicationContext(),"No se han añadido productos.", Toast.LENGTH_SHORT).show();
 //                else{
@@ -112,11 +130,9 @@ public class ActivityDetalles extends AppCompatActivity {
 //                }
 //                int hora = (int)reloj.getHour();
 //                int minuto = reloj.getMinute();
-                int hour = reloj.getHour();
-                int minute = reloj.getMinute();
-                Toast.makeText(getApplicationContext(), String.format("" + hour + ":" + minute), Toast.LENGTH_SHORT).show();
 
             }
         });
-    }
-}
+    }//Fin Listener
+
+}//Fin Activity

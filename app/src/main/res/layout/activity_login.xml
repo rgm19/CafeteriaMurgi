@@ -8,9 +8,9 @@
     tools:context="a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.ActivityLogin">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:srcCompat="@drawable/ic_hot_drink"
         android:id="@+id/iv_lg_icono"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <EditText
         android:layout_width="wrap_content"
