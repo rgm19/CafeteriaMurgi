@@ -36,6 +36,8 @@ public class BDPruebas {
         pedido2.add(productos.get(1));cantidad2.add(10);
         pedido2.add(productos.get(3));cantidad2.add(1);
 
+        pedidos.add(new Pedido(usuarios.get(0), productos.get(2), 2, 12.2f, "", "12:45"));
+
 //        pedidos.add(new Pedido(1, usuarios.get(0),pedido1,cantidad1));
 //        pedidos.add(new Pedido(1, usuarios.get(1),pedido2,cantidad2));
 
