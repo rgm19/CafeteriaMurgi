@@ -100,7 +100,7 @@ public class ActivityCafe extends AppCompatActivity {
                 .setTitle("Cerrar Sesión")
                 .setMessage("Si sale se cerrará la sesión y se perderán los pedidos no realizados\n¿Continuar?")
                 .setNegativeButton("Cancelar", null)
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         //ActivityLogin.USER=null;
@@ -232,7 +232,7 @@ public class ActivityCafe extends AppCompatActivity {
 
                 BDFinal.pedidosFinal.add(new Pedido(ActivityLogin.USER, producto,
                         Integer.parseInt(cantidad.getText().toString().trim()),
-                        Float.parseFloat(precio.getText().toString().trim()),comentarios));
+                        Float.parseFloat(precio.getText().toString().trim()),comentarios, "14:45"));
 
                 Toast.makeText(getApplicationContext(),"Café "+producto.getNombre()+" añadido a tus pedidos",Toast.LENGTH_SHORT).show();
                 limpiar();
