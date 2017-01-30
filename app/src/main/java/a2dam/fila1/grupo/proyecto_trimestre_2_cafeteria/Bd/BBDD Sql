@@ -49,7 +49,7 @@ INSERT into usuarios (username, pass, telefono, categoria) values ('admin','admi
 
 -- Inserciones de ejemplo
 
-I-- NSERT into productos (nom_pro,precio,img,ingredientes) values ('cafe',1.3,'url','cafe y leche');
+-- NSERT into productos (nom_pro,precio,img,ingredientes) values ('cafe',1.3,'url','cafe y leche');
 -- INSERT into productos (nom_pro,precio,img,ingredientes) values ('cafe con leche',1.3,'url','cafe y leche');
 -- INSERT into productos (nom_pro,precio,img,ingredientes) values ('tostada mantequilla',1.3,'url','cafe y leche');
 -- INSERT into clientes (nom_cli) values ('juan');
