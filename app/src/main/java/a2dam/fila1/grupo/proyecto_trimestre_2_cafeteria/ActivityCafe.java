@@ -140,7 +140,7 @@ public class ActivityCafe extends AppCompatActivity {
 
         dialogo = new SpotsDialog(this,"Calculando precios...");
 
-        spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayTipo));
+        spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayTipo));
         spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override

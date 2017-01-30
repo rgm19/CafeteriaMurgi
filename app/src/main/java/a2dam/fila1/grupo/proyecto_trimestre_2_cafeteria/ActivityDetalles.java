@@ -37,7 +37,6 @@ public class ActivityDetalles extends AppCompatActivity {
     Button confirmar;
     TimePicker reloj;
 
-    boolean insertado=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +94,7 @@ public class ActivityDetalles extends AppCompatActivity {
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ActivityCafe.class);
-                startActivity(i);
+                onBackPressed();
             }
         });
 
@@ -126,8 +124,7 @@ public class ActivityDetalles extends AppCompatActivity {
                     hour = reloj.getCurrentHour();
                     minute = reloj.getCurrentMinute();
                 }
-
-                Toast.makeText(getApplicationContext(), "" + hour + ":" + minute, Toast.LENGTH_SHORT).show();
+                int hora = hour * 10000 + minute * 100;
 
 
                 if (BDFinal.pedidosFinal.size()==0)
@@ -135,10 +132,12 @@ public class ActivityDetalles extends AppCompatActivity {
                 else{
                     for (Pedido p : BDFinal.pedidosFinal){
                         dialogo.show();
-                        String insert = "insert into pedidos (idProducto, idCliente, complementos,"+
-                                "hora, cantidad) values ("+p.getProducto().getNumProducto()+","+
-                                ActivityLogin.USER.getId()+", '"+p.getComentarios()+"',"+
-                                hour+minute+00+"',"+p.getCantidad()+")";
+
+                        String insert = "insert into pedidos (idProducto, idCliente, complementos,hora, cantidad) "
+                                + "values (" + p.getProducto().getNumProducto() + ","
+                                + ActivityLogin.USER.getId() + ", '" + p.getComentarios() + "','"
+                                + hora + "'," + p.getCantidad() + ")";
+
                         new Insertar(insert, dialogo).execute("");
                     }
                     confirmar.setEnabled(false);
@@ -152,13 +151,12 @@ public class ActivityDetalles extends AppCompatActivity {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public class Insertar extends AsyncTask<String,Void,Void> {
+    public class Insertar extends AsyncTask<String,Void,Statement> {
 
         String consultaDt;
         Connection conexDt;
         Statement sentenciaDt;
         android.app.AlertDialog dialog;
-        ResultSet resultDt;
 
         public Insertar(String consulta, android.app.AlertDialog dialog){
             this.consultaDt=consulta;
@@ -166,59 +164,36 @@ public class ActivityDetalles extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(String... params) {
+        protected Statement doInBackground(String... params) {
 
             try {
                 conexDt = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");
                 sentenciaDt = conexDt.createStatement();
-//                resultDt = null;
                 publishProgress();
-
-                sentenciaDt.executeUpdate(consultaDt);
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-//            return resultDt;
-            return null;
+            return sentenciaDt;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(Statement statement) {
+            super.onPostExecute(statement);
+            Log.e("ERRORRRRR","Entra en onPostExecute");
             try {
+                sentenciaDt.executeUpdate(consultaDt);
+
                 conexDt.close();
                 sentenciaDt.close();
-//                resultDt.close();
-                dialog.dismiss();
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
+            dialog.dismiss();
+
         }
-
-//        @Override
-//        protected void onPostExecute(Void... param) {
-////            super.onPostExecute(resultSet);
-//
-//            try{
-////                while (resultSet.next()) {
-////
-////                }
-//
-//
-//                conexDt.close();
-//                sentenciaDt.close();
-//                resultDt.close();
-//                dialog.dismiss();
-//
-//            }
-//            catch (Exception ex)
-//            {
-//                Log.d("Fallo de cojones","");
-//            }
-//        }
     }//Fin AsynTack
-
 
 }//Fin Activity
