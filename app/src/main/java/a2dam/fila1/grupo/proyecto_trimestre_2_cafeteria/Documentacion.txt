@@ -3,7 +3,7 @@ Gand: Para la parte gráfica yo sólo explicaría el contenido de los Activitys
     Cliente:
         -ListView con adapter para mostar el menú de la cafetería **(Deprecated)**
         -Vista detalles hora de recogida del pedido (Añadido)
-        -Vista resumen con adapter para confirmar pedido con precio
+        -Vista resumen con adapter para confirmar pedido con precio(añadido)
     Camarero:
         -ListView con adapter para mostar lista de pedidos
         -Vista detalles con adapter para los productos de cada pedido
