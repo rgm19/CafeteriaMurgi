@@ -80,7 +80,7 @@ public class ActivityDetalles extends AppCompatActivity {
             pf += BDFinal.pedidosFinal.get(i).getPrecio();
         }
         double redondeo = Math.round(pf*100.0)/100.0;
-        precio.setText(""+redondeo);
+        precio.setText("" + redondeo);
 
     }
 
@@ -133,10 +133,11 @@ public class ActivityDetalles extends AppCompatActivity {
                     for (Pedido p : BDFinal.pedidosFinal){
                         dialogo.show();
 
-                        String insert = "insert into pedidos (idProducto, idCliente, complementos,hora, cantidad) "
+                        String insert = "insert into pedidos (idProducto, idCliente, complementos, hora, cantidad, precio, estado) "
                                 + "values (" + p.getProducto().getNumProducto() + ","
                                 + ActivityLogin.USER.getId() + ", '" + p.getComentarios() + "','"
-                                + hora + "'," + p.getCantidad() + ")";
+                                + hora + "'," + p.getCantidad() + ", "
+                                + Float.parseFloat(precio.getText().toString().trim()) + ", " + 0 + ")";
 
                         new Insertar(insert, dialogo).execute("");
                     }

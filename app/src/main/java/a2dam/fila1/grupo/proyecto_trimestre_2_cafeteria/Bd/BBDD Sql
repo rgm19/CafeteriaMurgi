@@ -23,8 +23,10 @@ create table pedidos(
 	idProducto int(2) NOT NULL,
     idCliente int(2) NOT NULL,
 	complementos varchar(50),
-	hora time,
-    cantidad int(2),
+	hora time NOT NULL,
+    cantidad int(2) NOT NULL,
+    precio float(6,2) NOT NULL,
+    estado int(1) NOT NULL,
     constraint pk_producto_cliente_fecha primary key (num_pedido),
     constraint fk_pedido_producto foreign key (idProducto) references productos(id_pro),
     constraint fk_pedido_cliente foreign key (idCliente) references usuarios(id_cli)
