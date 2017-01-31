@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.VistaPedido;
 
 /**
  * Created by Raquel.
@@ -25,12 +26,12 @@ import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 
 public class AdapterPedidos extends BaseAdapter {
 //    public static ArrayList<Pedido> pedidos = BDPruebas.pedidos;
-    public static ArrayList<Pedido> pedidos;
+    public static ArrayList<VistaPedido> pedidos;
 
     private View listItemView;
     private TextView tvNombre, tvHora, tvPrecio;
 
-    public AdapterPedidos(ArrayList<Pedido> pedidos) {
+    public AdapterPedidos(ArrayList<VistaPedido> pedidos) {
         this.pedidos = pedidos;
     }
     public AdapterPedidos(){}
@@ -41,7 +42,7 @@ public class AdapterPedidos extends BaseAdapter {
     }
 
     @Override
-    public Pedido getItem(int i) {
+    public VistaPedido getItem(int i) {
         return pedidos.get(i);
     }
 
@@ -58,22 +59,25 @@ public class AdapterPedidos extends BaseAdapter {
 
         inflar();
 
-        tvNombre.setText(getItem(i).getUsuario().getNombre());
-        tvPrecio.setText(getItem(i).getPrecio() + "€");
+        tvNombre.setText(getItem(i).getNombre());
+        tvPrecio.setText(getItem(i).getPrecioTotal() + "€");
         tvHora.setText(getItem(i).getHora());
 
 
-        // Si se pulsa la vista iremos a detalles del pedido.
-        // En el proceso envía el id del cliente
-        listItemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Context context = view.getContext();
-                Intent intent = new Intent(context, ActivityPedidosDetalles.class);
-                intent.putExtra("id", pedidos.get(i).getUsuario().getId());
-                context.startActivity(intent);
-            }
-        });
+        /**
+         * Esto es mejor ponerlo con un onIntemClickListener en el Activity
+         */
+//        // Si se pulsa la vista iremos a detalles del pedido.
+//        // En el proceso envía el id del cliente
+//        listItemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final Context context = view.getContext();
+//                Intent intent = new Intent(context, ActivityPedidosDetalles.class);
+//                intent.putExtra("id", pedidos.get(i).getUsuario().getId());
+//                context.startActivity(intent);
+//            }
+//        });
 
         return listItemView;
     }
