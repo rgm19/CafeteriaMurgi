@@ -419,6 +419,7 @@ public class ActivityCafe extends AppCompatActivity {
 
                 if (!datos){
                     metodosSpinner();
+                    limpiar();
                     datos = true;
                 }
 
