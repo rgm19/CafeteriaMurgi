@@ -21,10 +21,10 @@ public class BDPruebas {
         productos.add(new Producto("Cappuchino", 1.6f));
         productos.add(new Producto("Bombón", 1.8f));
 
-        usuarios.add(new Usuario(1,"usuario1","pass1",666111111,2));
-        usuarios.add(new Usuario(2,"usuario1","pass2",666222222,3));
-        usuarios.add(new Usuario(3,"camarero","camarero",666333333,1));
-        usuarios.add(new Usuario(4,"admin","admin",666444444,0));
+//        usuarios.add(new Usuario(1,"usuario1","pass1",666111111,2));
+//        usuarios.add(new Usuario(2,"usuario1","pass2",666222222,3));
+//        usuarios.add(new Usuario(3,"camarero","camarero",666333333,1));
+//        usuarios.add(new Usuario(4,"admin","admin",666444444,0));
 
         ArrayList<Producto> pedido1=new ArrayList<>();
         ArrayList<Integer> cantidad1=new ArrayList<>();
@@ -35,13 +35,13 @@ public class BDPruebas {
         pedido1.add(productos.get(4));cantidad1.add(2);
         pedido2.add(productos.get(1));cantidad2.add(10);
         pedido2.add(productos.get(3));cantidad2.add(1);
-
-        pedidos.add(new Pedido(usuarios.get(0), productos.get(2), 4, 12.2f, "", "12:45"));
-        pedidos.add(new Pedido(usuarios.get(0), productos.get(1), 4, 12.2f, "", "12:45"));
-        pedidos.add(new Pedido(usuarios.get(0), productos.get(0), 4, 12.2f, "", "12:45"));
-
-
-        pedidos.add(new Pedido(usuarios.get(1), productos.get(3), 1, 1.2f, "", "11:15"));
+//
+//        pedidos.add(new Pedido(usuarios.get(0), productos.get(2), 4, 12.2f, "", "12:45"));
+//        pedidos.add(new Pedido(usuarios.get(0), productos.get(1), 4, 12.2f, "", "12:45"));
+//        pedidos.add(new Pedido(usuarios.get(0), productos.get(0), 4, 12.2f, "", "12:45"));
+//
+//
+//        pedidos.add(new Pedido(usuarios.get(1), productos.get(3), 1, 1.2f, "", "11:15"));
 
 //        pedidos.add(new Pedido(1, usuarios.get(0),pedido1,cantidad1));
 //        pedidos.add(new Pedido(1, usuarios.get(1),pedido2,cantidad2));

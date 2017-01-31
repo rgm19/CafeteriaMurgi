@@ -183,8 +183,8 @@ public class ActivityLogin extends AppCompatActivity {
 
             try {
                 while (resultSet.next()) {
-                    USER=new Usuario(resultSet.getInt(1),resultSet.getString(2),
-                            resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5));
+                    USER=new Usuario(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),
+                            resultSet.getInt(4),resultSet.getString(5),resultSet.getInt(6));
                     loginCorrecto=true;
                 }
 

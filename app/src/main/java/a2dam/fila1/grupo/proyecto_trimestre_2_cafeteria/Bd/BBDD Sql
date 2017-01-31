@@ -12,6 +12,7 @@ create table usuarios (
     username varchar(15) NOT NULL,
     pass varchar(8) NOT NULL,
     telefono int(9),
+    email varchar(20) NOT NULL,
     categoria int(1) NOT NULL
     -- 0admin, 1 camarero, 2 profesores,3 alumnos
 );
@@ -43,10 +44,11 @@ INSERT into productos (nom_pro,precio,leche) values ('Cappuchino',1.4,true);
 INSERT into productos (nom_pro,precio,leche) values ('Descafeinado',1.1,true);
 INSERT into productos (nom_pro,precio,leche) values ('Bombón',1.7,false);
 
-INSERT into usuarios (username, pass, telefono, categoria) values ('usuario1','pass1',666611111,2);
-INSERT into usuarios (username, pass, telefono, categoria) values ('usuario2','pass2',666622222,3);
-INSERT into usuarios (username, pass, telefono, categoria) values ('camarero','camarero',666633333,1);
-INSERT into usuarios (username, pass, telefono, categoria) values ('admin','admin',666644444,0);
+INSERT into usuarios (username, pass, telefono, email, categoria) values ('usuario1', 'pass1', 666611111, 'mdam2015mdam@gmail.com', 2);
+INSERT into usuarios (username, pass, telefono, email, categoria) values ('usuario2', 'pass2', 666622222, 'gmruben1995@gmail.com', 3);
+INSERT into usuarios (username, pass, telefono, email, categoria) values ('camarero', 'camarero', 666633333, 'raquelgutierrezg.97@gmail.com', 1);
+INSERT into usuarios (username, pass, telefono, email, categoria) values ('admin', 'admin', 666644444, 'zaken85@gmail.com', 0);
+
 
 
 -- Inserciones de ejemplo
