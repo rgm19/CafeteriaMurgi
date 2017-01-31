@@ -24,11 +24,16 @@ import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
  */
 
 public class AdapterPedidos extends BaseAdapter {
-    public static ArrayList<Pedido> pedidos = BDPruebas.pedidos;
+//    public static ArrayList<Pedido> pedidos = BDPruebas.pedidos;
+    public static ArrayList<Pedido> pedidos;
 
     private View listItemView;
     private TextView tvNombre, tvHora, tvPrecio;
 
+    public AdapterPedidos(ArrayList<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+    public AdapterPedidos(){}
 
     @Override
     public int getCount() {
