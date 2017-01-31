@@ -135,9 +135,9 @@ public class ActivityDetalles extends AppCompatActivity {
 
                         String insert = "insert into pedidos (idProducto, idCliente, complementos, hora, cantidad, precio, estado) "
                                 + "values (" + p.getProducto().getNumProducto() + ","
-                                + ActivityLogin.USER.getId() + ", '" + p.getComentarios() + "','"
-                                + hora + "'," + p.getCantidad() + ", "
-                                + Float.parseFloat(precio.getText().toString().trim()) + ", " + 0 + ")";
+                                + ActivityLogin.USER.getId() + ", '" + p.getComentarios() + "', "
+                                + "'" + hora + "', " + p.getCantidad() + ", "
+                                + Float.parseFloat(precio.getText().toString().trim()) + ", " + 0 + ");";
 
                         new Insertar(insert, dialogo).execute("");
                     }
