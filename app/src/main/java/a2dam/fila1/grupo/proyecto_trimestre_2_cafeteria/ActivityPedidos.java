@@ -32,7 +32,8 @@ public class ActivityPedidos extends AppCompatActivity {
 //        dialogo = new SpotsDialog(this, "Cargando pedidos...");
 //        dialogo.show();
 //
-//        String consulta = "select username, hora, sum(precio) as total ";
+//        String consulta = "select username, hora, sum(precio) as total from pedidos, usuarios"
+//                + "where id_cli=idCliente group by idCliente, hora order by hora;";
 //        new ConsultasPedidos(consulta, dialogo);
 
         lanzarAdapter();
@@ -83,7 +84,8 @@ public class ActivityPedidos extends AppCompatActivity {
         protected ResultSet doInBackground(String... params) {
 
             try {
-                conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");
+                conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171",
+                        "ubase20171", "pbase20171");
                 sentenciaPd = conexPd.createStatement();
                 resultPd = null;
                 publishProgress();
