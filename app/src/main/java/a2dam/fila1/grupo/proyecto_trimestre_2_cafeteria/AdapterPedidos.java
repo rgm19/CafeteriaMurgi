@@ -27,7 +27,6 @@ public class AdapterPedidos extends BaseAdapter {
     public static ArrayList<Pedido> pedidos = BDPruebas.pedidos;
 
     private View listItemView;
-    private ImageButton ibDelete;
     private TextView tvNombre, tvHora, tvPrecio;
 
 
@@ -58,24 +57,6 @@ public class AdapterPedidos extends BaseAdapter {
         tvPrecio.setText(getItem(i).getPrecio() + "€");
         tvHora.setText(getItem(i).getHora());
 
-        ibDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                final Context context = view.getContext();
-
-                new AlertDialog.Builder(context)
-                        .setTitle("Eliminar pedido")
-                        .setMessage("¿Desea eliminar el pedido?")
-                        .setNegativeButton("Cancelar", null)
-                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                BDPruebas.pedidos.remove(i);
-                                notifyDataSetChanged();
-                            }
-                        }).create().show();
-            }
-        });
 
         // Si se pulsa la vista iremos a detalles del pedido.
         // En el proceso envía el id del cliente
@@ -93,7 +74,6 @@ public class AdapterPedidos extends BaseAdapter {
     }
 
     private void inflar() {
-        ibDelete = (ImageButton) listItemView.findViewById(R.id.ibListPedidosDelete);
         tvNombre = (TextView) listItemView.findViewById(R.id.tvListPedidosNombre);
         tvHora = (TextView) listItemView.findViewById(R.id.tvListPedidosHora);
         tvPrecio = (TextView) listItemView.findViewById(R.id.tvListPedidosPrecio);
