@@ -1,5 +1,6 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,17 @@ import java.util.ArrayList;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Email.SendMail;
 
 public class ActivityPedidosDetalles extends AppCompatActivity {
     public static int id;
     private ListView listView;
     private TextView tvNombre, tvHora;
     private FloatingActionButton fab;
+    private String email="mdam2015mdam@gmail.com";//Destino
+    private String message="holamundo";//Mensaje
+    private String subject="hola mundo";//Asunto
+    private Context contexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +33,22 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         setContentView(R.layout.activity_pedidos_detalles);
 
         inflar();
+        listeners();//Todos los listener
 
-        id = getIntent().getIntExtra("id", 0);
 
-        tvNombre.setText(BDPruebas.pedidos.get(id).getUsuario().getNombre());
-        tvHora.setText(BDPruebas.pedidos.get(id).getHora());
 
+
+
+    }
+
+    private void listeners() {
         listView.setAdapter(new AdapterPedidosDetalles());
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Implementar
+                SendMail sendEmail = new SendMail(contexto, email, subject, message);
+                sendEmail.execute();//ejecuta el AsynTask
             }
         });
     }
@@ -48,6 +58,10 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         tvNombre = (TextView) findViewById(R.id.tvAPedidosDNomCli);
         tvHora = (TextView) findViewById(R.id.tvAPedidosDHora);
         fab = (FloatingActionButton) findViewById(R.id.fab_done);
+        contexto = this;
+        tvNombre.setText(BDPruebas.pedidos.get(id).getUsuario().getNombre());
+        tvHora.setText(BDPruebas.pedidos.get(id).getHora());
+        id = getIntent().getIntExtra("id", 0);
     }
 
     /**

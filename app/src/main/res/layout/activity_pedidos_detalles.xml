@@ -51,7 +51,7 @@
         android:id="@+id/lvAPedidosD"
         android:elevation="3dp"
         android:background="#fff"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"

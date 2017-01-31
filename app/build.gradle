@@ -31,4 +31,7 @@ dependencies {
     compile 'com.android.support:design:25.1.0'
     compile files('mysql-connector-java-3.0.17-ga-bin.jar')
     compile 'com.github.d-max:spots-dialog:0.7@aar'
+    compile files('activation.jar')
+    compile files('additionnal.jar')
+    compile files('mail.jar')
 }
