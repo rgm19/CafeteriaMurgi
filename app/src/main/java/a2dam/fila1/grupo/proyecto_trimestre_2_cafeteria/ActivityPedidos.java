@@ -29,13 +29,13 @@ public class ActivityPedidos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos);
 
-        dialogo = new SpotsDialog(this, "Cargando pedidos...");
-        dialogo.show();
+//        dialogo = new SpotsDialog(this, "Cargando pedidos...");
+//        dialogo.show();
+//
+//        String consulta = "select username, hora, sum(precio) as total ";
+//        new ConsultasPedidos(consulta, dialogo);
 
-        String consulta = "select username, hora, sum(precio) as total ";
-        new ConsultasPedidos(consulta, dialogo);
-
-//        lanzarAdapter();
+        lanzarAdapter();
 
 
     }
@@ -88,7 +88,7 @@ public class ActivityPedidos extends AppCompatActivity {
                 resultPd = null;
                 publishProgress();
 
-                resultPd = sentenciaPd.executeQuery(consultaPd);
+//                resultPd = sentenciaPd.executeQuery(consultaPd);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -101,10 +101,11 @@ public class ActivityPedidos extends AppCompatActivity {
             super.onPostExecute(resultSet);
 
             try{
-                while (resultSet.next()) {
-                    lanzarAdapter();
-
-                }
+//                while (resultSet.next()) {
+//
+//
+//                }
+                lanzarAdapter();
 
                 conexPd.close();
                 sentenciaPd.close();
