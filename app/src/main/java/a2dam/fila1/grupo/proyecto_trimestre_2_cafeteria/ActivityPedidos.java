@@ -41,7 +41,7 @@ public class ActivityPedidos extends AppCompatActivity {
 
         String consulta = "select username, hora, sum(precio) as total from pedidos, usuarios " +
                 "where id_cli = idCliente group by idCliente, hora order by hora, num_pedido, idCliente";
-        new ConsultasPedidos(consulta, dialogo).execute("");
+        new ConsultasPedidos(consulta, dialogo).execute();
 
     }//Fin onCreate
 
@@ -81,7 +81,7 @@ public class ActivityPedidos extends AppCompatActivity {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public class ConsultasPedidos extends AsyncTask<String,Void,ResultSet> {
+    public class ConsultasPedidos extends AsyncTask<Void,Void,ResultSet> {
 
         android.app.AlertDialog dialog;
         String consultaPd;
@@ -95,7 +95,7 @@ public class ActivityPedidos extends AppCompatActivity {
         }
 
         @Override
-        protected ResultSet doInBackground(String... params) {
+        protected ResultSet doInBackground(Void... params) {
 
             try {
                 conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171",
@@ -132,6 +132,65 @@ public class ActivityPedidos extends AppCompatActivity {
                 dialog.dismiss();
 
             }catch (Exception ex) { Log.d("Fallo de cojones",""); }
+
+        }
+    }//Fin AsynTack
+
+
+
+    public class ActualizacionPedidos extends AsyncTask<String,ResultSet,Void> {
+
+
+        String consultaPd;
+        Connection conexPd;
+        Statement sentenciaPd;
+        ResultSet resultPd;
+
+        public ActualizacionPedidos(String consulta){
+            this.consultaPd=consulta;
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171",
+                        "ubase20171", "pbase20171");
+                sentenciaPd = conexPd.createStatement();
+                resultPd = null;
+
+
+                resultPd = sentenciaPd.executeQuery(consultaPd);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            publishProgress(resultPd);
+        }
+
+        @Override
+        protected void onProgressUpdate(ResultSet... resultSet) {
+            super.onProgressUpdate(resultSet);
+            try{
+                while (resultSet[0].next()) {
+                    vistaPedidos.add(new VistaPedido(resultSet.getString("username"),
+                            resultSet.getTime("hora").toString(), resultSet.getFloat("total")));
+                }
+                lanzarAdapter();
+                conexPd.close();
+                sentenciaPd.close();
+                resultPd.close();
+
+
+            }catch (Exception ex) { Log.d("Fallo de cojones",""); }
+        }
+
+        @Override
+        protected void onPostExecute(Void voids)
+        {
+            super.onPostExecute(voids);
+
+
 
         }
     }//Fin AsynTack
