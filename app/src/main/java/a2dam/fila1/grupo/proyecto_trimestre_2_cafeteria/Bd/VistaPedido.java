@@ -29,5 +29,7 @@ public class VistaPedido {
         return precioTotal;
     }
 
-    public int getEstado() {        return estado;    }
+    public int getEstado() {
+        return estado;
+    }
 }

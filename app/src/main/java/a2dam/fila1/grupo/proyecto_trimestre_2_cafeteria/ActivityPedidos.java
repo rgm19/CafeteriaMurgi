@@ -39,8 +39,8 @@ public class ActivityPedidos extends AppCompatActivity {
         dialogo = new SpotsDialog(this, "Cargando pedidos...");
         dialogo.show();
 
-        String consulta = "select username, hora, sum(precio) as total from pedidos, usuarios " +
-                "where id_cli = idCliente group by idCliente, hora order by hora, num_pedido, idCliente";
+        String consulta = "select username, hora, sum(precio) as total, estado from pedidos, usuarios " +
+                "where id_cli = idCliente group by username, hora order by hora, num_pedido, username, estado, total";
         new ConsultasPedidos(consulta, dialogo).execute();
 
     }//Fin onCreate
@@ -55,7 +55,15 @@ public class ActivityPedidos extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String consulta = "Select ";
+                String usuario = vistaPedidos.get(position).getNombre();
+                String hora = vistaPedidos.get(position).getHora();
+                String consulta = "select nom_pro, complementos, cantidad, pedidos.precio, username, hora from" +
+                        "usuarios, pedidos, productos where usuarios.id_cli = pedidos.idCliente " +
+                        "AND productos.id_pro AND pedidos.idProducto AND " +
+                        "username = '" + usuario + "' AND hora = '" + hora + "'" +
+                        "group by username, hora, num_pedido;";
+
+                new ConsultasPedidos(consulta, dialogo).execute();
             }
         });
     }
@@ -81,7 +89,7 @@ public class ActivityPedidos extends AppCompatActivity {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public class ConsultasPedidos extends AsyncTask<Void,Void,ResultSet> {
+    public class ConsultasPedidos extends AsyncTask<Void,Void,Statement> {
 
         android.app.AlertDialog dialog;
         String consultaPd;
@@ -95,7 +103,7 @@ public class ActivityPedidos extends AppCompatActivity {
         }
 
         @Override
-        protected ResultSet doInBackground(Void... params) {
+        protected Statement doInBackground(Void... params) {
 
             try {
                 conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171",
@@ -104,27 +112,31 @@ public class ActivityPedidos extends AppCompatActivity {
                 resultPd = null;
                 publishProgress();
 
-                resultPd = sentenciaPd.executeQuery(consultaPd);
+                if (consultaPd.startsWith("select"))
+                    resultPd = sentenciaPd.executeQuery(consultaPd);
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            return resultPd;
+            return sentenciaPd;
         }
 
         @Override
-        protected void onPostExecute(ResultSet resultSet) {
-            super.onPostExecute(resultSet);
+        protected void onPostExecute(Statement sentencia) {
+            super.onPostExecute(sentencia);
+//            ResultSet resultPd = null;
 
             try{
                 if (consultaPd.contains("sum(precio)")){
-                while (resultSet.next()) {
-                    vistaPedidos.add(new VistaPedido(resultSet.getString("username"),
-                            resultSet.getTime("hora").toString(), resultSet.getFloat("total"),
-                            0));
+                    while (resultPd.next()){
+                        vistaPedidos.add(new VistaPedido(resultPd.getString("username"),
+                                resultPd.getTime("hora").toString(), resultPd.getFloat("total"),
+                                resultPd.getInt("estado")));
+                    }
+                    lanzarAdapter();
                 }
-                lanzarAdapter();}
-                if (consultaPd.contains(""))
+
+                if (consultaPd.contains("")){}
 
                 conexPd.close();
                 sentenciaPd.close();

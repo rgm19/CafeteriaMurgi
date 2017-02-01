@@ -78,7 +78,7 @@ public class ActivityCafe extends AppCompatActivity {
     private void init(){
         dialogo =new SpotsDialog(this,"Cargando BBDD...");
         dialogo.show();
-        new ConsultasCafe("Select * from productos", dialogo).execute("");
+        new ConsultasCafe("Select * from productos", dialogo).execute();
 
         metodosListener();
 
@@ -146,7 +146,7 @@ public class ActivityCafe extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 dialogo.show();
-                new ConsultasCafe("Select precio, leche from productos where nom_pro = '"+parent.getSelectedItem().toString().trim()+"'",dialogo).execute("");
+                new ConsultasCafe("Select precio, leche from productos where nom_pro = '"+parent.getSelectedItem().toString().trim()+"'",dialogo).execute();
             }
 
             @Override
@@ -367,7 +367,7 @@ public class ActivityCafe extends AppCompatActivity {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public class ConsultasCafe extends AsyncTask<String,Void,ResultSet> {
+    public class ConsultasCafe extends AsyncTask<Void,Void,ResultSet> {
 
         String consultaCf;
         Connection conexCf;
@@ -381,7 +381,7 @@ public class ActivityCafe extends AppCompatActivity {
         }
 
         @Override
-        protected ResultSet doInBackground(String... params) {
+        protected ResultSet doInBackground(Void... params) {
 
             try {
                 conexCf = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");
