@@ -151,21 +151,24 @@ public class ActivityPedidos extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(String... params) {
+        protected Void doInBackground(String... params)
+        {
 
-            try {
-                conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171",
-                        "ubase20171", "pbase20171");
-                sentenciaPd = conexPd.createStatement();
-                resultPd = null;
+                try {
+                    conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171",
+                            "ubase20171", "pbase20171");
+                    sentenciaPd = conexPd.createStatement();
+                    resultPd = null;
 
 
-                resultPd = sentenciaPd.executeQuery(consultaPd);
+                    resultPd = sentenciaPd.executeQuery(consultaPd);
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            publishProgress(resultPd);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                publishProgress(resultPd);
+                return null;
+
         }
 
         @Override
@@ -173,8 +176,8 @@ public class ActivityPedidos extends AppCompatActivity {
             super.onProgressUpdate(resultSet);
             try{
                 while (resultSet[0].next()) {
-                    vistaPedidos.add(new VistaPedido(resultSet.getString("username"),
-                            resultSet.getTime("hora").toString(), resultSet.getFloat("total")));
+                    vistaPedidos.add(new VistaPedido(resultSet[0].getString("username"),
+                            resultSet[0].getTime("hora").toString(), resultSet[0].getFloat("total"),0));
                 }
                 lanzarAdapter();
                 conexPd.close();
