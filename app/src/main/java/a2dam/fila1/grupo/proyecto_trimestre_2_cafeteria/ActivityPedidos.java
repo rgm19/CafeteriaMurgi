@@ -61,6 +61,7 @@ public class ActivityPedidos extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lvAPedidos);
         listView.setAdapter(new AdapterPedidos(vistaPedidos));
         itemListener();
+        Log.e("ERROR", "Lanza adapter y listener");
     }//Fin lanzarAdapter
 
     private void itemListener(){
@@ -76,7 +77,7 @@ public class ActivityPedidos extends AppCompatActivity {
                         "AND productos.id_pro AND pedidos.idProducto AND " +
                         "username = '" + vistaPedidos.get(position).getNombre() + "' AND " +
                         "hora = '" + vistaPedidos.get(position).getHora() + "'" +
-                        "group by username, hora, num_pedido;";
+                        "group by idCliente, hora, num_pedido;";
 
                 new ConsultasPedidos(consulta, dialogo).execute();
             }
@@ -167,20 +168,25 @@ public class ActivityPedidos extends AppCompatActivity {
                     int idCli = 0;
                     String usuario = null;
                     String hora = null;
+
+                    Log.e("ERROR", "onPostExe, if complementos");
+
                     while (resultPd.next()){
+                        Log.e("ERROR", "reuslt next");
                         idCli = resultPd.getInt("idCliente");
                         usuario = resultPd.getString("username");
                         hora = resultPd.getString("hora");
-
+                        Log.e("ERROR", "Comenzar bd");
                          BDFinal.pedidosFinal.add(new Pedido(new Usuario(resultPd.getInt("idCliente"),
                                  resultPd.getString("username")), new Producto(resultPd.getString("nom_pro")),
                                  resultPd.getInt("cantidad"), resultPd.getFloat("precio"),
                                  resultPd.getString("complementos"), resultPd.getString("hora")));
+                        Log.e("ERROR", "Fin BD");
                     }
 
                     String update = "update pedidos set estado = 1 where idCliente = "+ idCli
                             + " and hora = '" + hora + "'";
-
+                    Log.e("ERROR", "Update");
                     sentencia.executeUpdate(update);
                     lanzarDetalles(usuario, hora);
                 }
