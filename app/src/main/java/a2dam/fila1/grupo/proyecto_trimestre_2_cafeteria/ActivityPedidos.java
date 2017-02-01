@@ -38,7 +38,6 @@ public class ActivityPedidos extends AppCompatActivity {
         setContentView(R.layout.activity_pedidos);
 
         updateBBDD();
-
     }//Fin onCreate
 
     /**
@@ -61,12 +60,16 @@ public class ActivityPedidos extends AppCompatActivity {
     private void lanzarAdapter() {
         listView = (ListView) findViewById(R.id.lvAPedidos);
         listView.setAdapter(new AdapterPedidos(vistaPedidos));
+        itemListener();
     }//Fin lanzarAdapter
 
     private void itemListener(){
+        Log.e("ERROR", "ItemListener");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("ERROR", "Click Listener");
+                dialogo.show();
                 String consulta = "select nom_pro, complementos, cantidad, pedidos.precio, idCliente, " +
                         "username, hora from usuarios, pedidos, productos " +
                         "where usuarios.id_cli = pedidos.idCliente " +
