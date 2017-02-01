@@ -37,16 +37,27 @@ public class ActivityPedidos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos);
 
+        updateBBDD();
+
+    }//Fin onCreate
+
+    /**
+     * Actualiza la base de datos y lanza el adapter
+     */
+    private void updateBBDD() {
         dialogo = new SpotsDialog(this, "Cargando pedidos...");
         dialogo.show();
+
+        vistaPedidos.clear();
 
         String consulta = "select username, hora, sum(precio) as total, estado from pedidos, usuarios " +
                 "where id_cli = idCliente group by username, hora order by hora, num_pedido, username, estado, total";
         new ConsultasPedidos(consulta, dialogo).execute();
+    }//Fin updateBBDD
 
-    }//Fin onCreate
-
-
+    /**
+     * Lanza el Adapter del listView con todos los pedidos actuales
+     */
     private void lanzarAdapter() {
         listView = (ListView) findViewById(R.id.lvAPedidos);
         listView.setAdapter(new AdapterPedidos(vistaPedidos));
@@ -71,14 +82,15 @@ public class ActivityPedidos extends AppCompatActivity {
 
     /**
      * Lanza ActivityDetalles con todos los productos del pedido
-     * @param idCli
+     * @param usuario
      * @param hora
      */
-    private void cambiarEstado(int idCli, String hora) {
-        String consulta = "update pedidos set estado = 1 where idCliente = "+ idCli
-                + " and hora = '" + hora + "'";
-        new ConsultasPedidos(consulta, dialogo).execute();
-    }//Fin cambiarEstado
+    private void lanzarDetalles(String usuario, String hora) {
+        Intent intent = new Intent(getApplicationContext(), ActivityPedidosDetalles.class);
+        intent.putExtra("USUARIO", usuario);
+        intent.putExtra("HORA", hora);
+        startActivity(intent);
+    }//Fin lanzarDetalles
 
     /**
      * Captura la acción de pulsar el botón atrás y vuelve a la pantalla de login
@@ -147,11 +159,14 @@ public class ActivityPedidos extends AppCompatActivity {
                     }
                     lanzarAdapter();
                 }
-                int idCli = 0;
-                String hora = null;
+
                 if (consultaPd.contains("complementos")){
+                    int idCli = 0;
+                    String usuario = null;
+                    String hora = null;
                     while (resultPd.next()){
                         idCli = resultPd.getInt("idCliente");
+                        usuario = resultPd.getString("username");
                         hora = resultPd.getString("hora");
 
                          BDFinal.pedidosFinal.add(new Pedido(new Usuario(resultPd.getInt("idCliente"),
@@ -159,12 +174,12 @@ public class ActivityPedidos extends AppCompatActivity {
                                  resultPd.getInt("cantidad"), resultPd.getFloat("precio"),
                                  resultPd.getString("complementos"), resultPd.getString("hora")));
                     }
-                    cambiarEstado(idCli, hora);
-                }
 
-                if (consultaPd.contains("update")){
-                    sentencia.executeUpdate(consultaPd);
-                    lanzarDetalles();
+                    String update = "update pedidos set estado = 1 where idCliente = "+ idCli
+                            + " and hora = '" + hora + "'";
+
+                    sentencia.executeUpdate(update);
+                    lanzarDetalles(usuario, hora);
                 }
 
                 conexPd.close();
@@ -173,13 +188,12 @@ public class ActivityPedidos extends AppCompatActivity {
                 dialog.dismiss();
 
             }catch (Exception ex) { Log.d("Fallo de cojones",""); }
-
         }
     }//Fin AsynTack
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /**
-     *  //////////////////////////////////////////////////////////////////////////////////////////
+     *  ///////////////////////////////////////////////////////////////////////////////////////////
      */
     ///////////////////////////////////////////////////////////////////////////////////////////////
 

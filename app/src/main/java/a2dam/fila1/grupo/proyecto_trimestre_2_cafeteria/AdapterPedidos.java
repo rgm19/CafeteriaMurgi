@@ -66,8 +66,6 @@ public class AdapterPedidos extends BaseAdapter {
         tvHora.setText(getItem(i).getHora());
 
         switch (getItem(i).getEstado()){
-            case 0: fondo.setBackgroundColor(0xFFFFFFFF);
-                break;
             case 1: fondo.setBackgroundColor(0xFFACADF9);
                 break;
             case 2: fondo.setBackgroundColor(0xFFAFFFD7);

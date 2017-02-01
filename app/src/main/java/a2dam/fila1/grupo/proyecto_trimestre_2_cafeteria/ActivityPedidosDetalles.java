@@ -37,7 +37,7 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
     }
 
     private void listeners() {
-        listView.setAdapter(new AdapterPedidosDetalles());
+        listView.setAdapter(new AdapterPedidosDetalles(BDFinal.pedidosFinal));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,21 +58,21 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         id = getIntent().getIntExtra("id", 0);
     }
 
-    /**
-     * Este método sirve para coger todos los productos pedidos
-     * (que estarán en diferentes posiciones del arrayList de pedidos)
-     * en un mismo arrayList de pedidos.
-     *
-     * @return devuelve un arrayList con todos los productos pedidos por un usuario.
-     * */
-    public static ArrayList<Pedido> productosPedidos() {
-        ArrayList<Pedido> pedido = new ArrayList<>();
-        for (int i = 0; i < BDPruebas.pedidos.size(); i++) {
-            if (BDPruebas.pedidos.get(i).getUsuario().getId() == id)
-                pedido.add(BDPruebas.pedidos.get(i));
-        }
-        return pedido;
-    }
+//    /**
+//     * Este método sirve para coger todos los productos pedidos
+//     * (que estarán en diferentes posiciones del arrayList de pedidos)
+//     * en un mismo arrayList de pedidos.
+//     *
+//     * @return devuelve un arrayList con todos los productos pedidos por un usuario.
+//     * */
+//    public static ArrayList<Pedido> productosPedidos() {
+//        ArrayList<Pedido> pedido = new ArrayList<>();
+//        for (int i = 0; i < BDPruebas.pedidos.size(); i++) {
+//            if (BDPruebas.pedidos.get(i).getUsuario().getId() == id)
+//                pedido.add(BDPruebas.pedidos.get(i));
+//        }
+//        return pedido;
+//    }
 
 
 }

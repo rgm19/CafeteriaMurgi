@@ -15,9 +15,12 @@ import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
  */
 
 public class AdapterPedidosDetalles extends BaseAdapter {
-    ArrayList<Pedido> pedido = ActivityPedidosDetalles.productosPedidos();
+    ArrayList<Pedido> pedido ;
     View listItemView;
 
+    public AdapterPedidosDetalles(ArrayList<Pedido> pedido) {
+        this.pedido = pedido;
+    }
 
     @Override
     public int getCount() {
