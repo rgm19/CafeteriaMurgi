@@ -25,7 +25,6 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
     private String email="mdam2015mdam@gmail.com";//Destino
     private String message="holamundo";//Mensaje
     private String subject="hola mundo";//Asunto
-    private Context contexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +34,6 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         inflar();
         listeners();//Todos los listener
 
-
-
-
-
     }
 
     private void listeners() {
@@ -47,7 +42,7 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendMail sendEmail = new SendMail(contexto, email, subject, message);
+                SendMail sendEmail = new SendMail(getApplicationContext(), email, subject, message);
                 sendEmail.execute();//ejecuta el AsynTask
             }
         });
@@ -58,7 +53,6 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         tvNombre = (TextView) findViewById(R.id.tvAPedidosDNomCli);
         tvHora = (TextView) findViewById(R.id.tvAPedidosDHora);
         fab = (FloatingActionButton) findViewById(R.id.fab_done);
-        contexto = this;
         tvNombre.setText(BDPruebas.pedidos.get(id).getUsuario().getNombre());
         tvHora.setText(BDPruebas.pedidos.get(id).getHora());
         id = getIntent().getIntExtra("id", 0);

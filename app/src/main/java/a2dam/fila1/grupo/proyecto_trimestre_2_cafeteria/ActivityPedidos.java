@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.sql.Connection;
@@ -25,6 +27,8 @@ import dmax.dialog.SpotsDialog;
 public class ActivityPedidos extends AppCompatActivity {
 
     AlertDialog dialogo;
+    ListView listView;
+
     ArrayList<VistaPedido> vistaPedidos = new ArrayList<>();
 
     @Override
@@ -39,13 +43,22 @@ public class ActivityPedidos extends AppCompatActivity {
                 "where id_cli = idCliente group by idCliente, hora order by hora, num_pedido, idCliente";
         new ConsultasPedidos(consulta, dialogo).execute("");
 
-    }
+    }//Fin onCreate
+
 
     private void lanzarAdapter() {
-        ListView listView = (ListView) findViewById(R.id.lvAPedidos);
+        listView = (ListView) findViewById(R.id.lvAPedidos);
         listView.setAdapter(new AdapterPedidos(vistaPedidos));
-        dialogo.dismiss();
     }//Fin lanzarAdapter
+
+    private void itemListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String consulta = "Select "
+            }
+        });
+    }
 
     /**
      * Captura la acción de pulsar el botón atrás y vuelve a la pantalla de login
@@ -104,11 +117,14 @@ public class ActivityPedidos extends AppCompatActivity {
             super.onPostExecute(resultSet);
 
             try{
+                if (consultaPd.contains("sum(precio)")){
                 while (resultSet.next()) {
                     vistaPedidos.add(new VistaPedido(resultSet.getString("username"),
-                            resultSet.getTime("hora").toString(), resultSet.getFloat("total")));
+                            resultSet.getTime("hora").toString(), resultSet.getFloat("total"),
+                            0));
                 }
-                lanzarAdapter();
+                lanzarAdapter();}
+                if (consultaPd.contains(""))
 
                 conexPd.close();
                 sentenciaPd.close();
