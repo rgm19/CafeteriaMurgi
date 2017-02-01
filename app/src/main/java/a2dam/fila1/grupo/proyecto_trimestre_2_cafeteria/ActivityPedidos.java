@@ -19,8 +19,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Usuario;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.VistaPedido;
 import dmax.dialog.SpotsDialog;
 
@@ -55,18 +56,29 @@ public class ActivityPedidos extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String usuario = vistaPedidos.get(position).getNombre();
-                String hora = vistaPedidos.get(position).getHora();
-                String consulta = "select nom_pro, complementos, cantidad, pedidos.precio, username, hora from" +
-                        "usuarios, pedidos, productos where usuarios.id_cli = pedidos.idCliente " +
+                String consulta = "select nom_pro, complementos, cantidad, pedidos.precio, idCliente, " +
+                        "username, hora from usuarios, pedidos, productos " +
+                        "where usuarios.id_cli = pedidos.idCliente " +
                         "AND productos.id_pro AND pedidos.idProducto AND " +
-                        "username = '" + usuario + "' AND hora = '" + hora + "'" +
+                        "username = '" + vistaPedidos.get(position).getNombre() + "' AND " +
+                        "hora = '" + vistaPedidos.get(position).getHora() + "'" +
                         "group by username, hora, num_pedido;";
 
                 new ConsultasPedidos(consulta, dialogo).execute();
             }
         });
-    }
+    }//Fin itemlistener
+
+    /**
+     * Lanza ActivityDetalles con todos los productos del pedido
+     * @param idCli
+     * @param hora
+     */
+    private void cambiarEstado(int idCli, String hora) {
+        String consulta = "update pedidos set estado = 1 where idCliente = "+ idCli
+                + " and hora = '" + hora + "'";
+        new ConsultasPedidos(consulta, dialogo).execute();
+    }//Fin cambiarEstado
 
     /**
      * Captura la acción de pulsar el botón atrás y vuelve a la pantalla de login
@@ -135,8 +147,25 @@ public class ActivityPedidos extends AppCompatActivity {
                     }
                     lanzarAdapter();
                 }
+                int idCli = 0;
+                String hora = null;
+                if (consultaPd.contains("complementos")){
+                    while (resultPd.next()){
+                        idCli = resultPd.getInt("idCliente");
+                        hora = resultPd.getString("hora");
 
-                if (consultaPd.contains("")){}
+                         BDFinal.pedidosFinal.add(new Pedido(new Usuario(resultPd.getInt("idCliente"),
+                                 resultPd.getString("username")), new Producto(resultPd.getString("nom_pro")),
+                                 resultPd.getInt("cantidad"), resultPd.getFloat("precio"),
+                                 resultPd.getString("complementos"), resultPd.getString("hora")));
+                    }
+                    cambiarEstado(idCli, hora);
+                }
+
+                if (consultaPd.contains("update")){
+                    sentencia.executeUpdate(consultaPd);
+                    lanzarDetalles();
+                }
 
                 conexPd.close();
                 sentenciaPd.close();
@@ -148,7 +177,11 @@ public class ActivityPedidos extends AppCompatActivity {
         }
     }//Fin AsynTack
 
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     *  //////////////////////////////////////////////////////////////////////////////////////////
+     */
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     public class ActualizacionPedidos extends AsyncTask<String,ResultSet,Void> {
 
