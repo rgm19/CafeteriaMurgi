@@ -55,7 +55,7 @@ public class ActivityPedidos extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String consulta = "Select "
+                String consulta = "Select ";
             }
         });
     }
