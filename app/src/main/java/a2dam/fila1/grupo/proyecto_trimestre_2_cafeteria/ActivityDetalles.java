@@ -1,10 +1,13 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -13,9 +16,20 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
+import dmax.dialog.SpotsDialog;
 
 public class ActivityDetalles extends AppCompatActivity {
+
+    AlertDialog dialogo;
 
     static ListView listaProcductos;
     static TextView precio;
@@ -23,7 +37,6 @@ public class ActivityDetalles extends AppCompatActivity {
     Button confirmar;
     TimePicker reloj;
 
-    boolean insertado=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +53,7 @@ public class ActivityDetalles extends AppCompatActivity {
      * Infla todos los elementos del layout del activity
      */
     private void inflar() {
+        dialogo = new SpotsDialog(this,"Enviado Pedidos...");
         listaProcductos = (ListView)findViewById(R.id.lv_dt);
         precio = (TextView)findViewById(R.id.tv_dt_precio);
         volver = (ImageButton)findViewById(R.id.ib_dt_volver);
@@ -66,7 +80,7 @@ public class ActivityDetalles extends AppCompatActivity {
             pf += BDFinal.pedidosFinal.get(i).getPrecio();
         }
         double redondeo = Math.round(pf*100.0)/100.0;
-        precio.setText(""+redondeo);
+        precio.setText("" + redondeo);
 
     }
 
@@ -80,8 +94,7 @@ public class ActivityDetalles extends AppCompatActivity {
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ActivityCafe.class);
-                startActivity(i);
+                onBackPressed();
             }
         });
 
@@ -111,25 +124,77 @@ public class ActivityDetalles extends AppCompatActivity {
                     hour = reloj.getCurrentHour();
                     minute = reloj.getCurrentMinute();
                 }
+                int hora = hour * 10000 + minute * 100;
 
-                Toast.makeText(getApplicationContext(), "" + hour + ":" + minute, Toast.LENGTH_SHORT).show();
 
+                if (BDFinal.pedidosFinal.size()==0)
+                    Toast.makeText(getApplicationContext(),"No se han añadido productos.", Toast.LENGTH_SHORT).show();
+                else{
+                    for (Pedido p : BDFinal.pedidosFinal){
+                        dialogo.show();
 
-//                if (BDFinal.pedidosFinal.size()==0)
-//                    Toast.makeText(getApplicationContext(),"No se han añadido productos.", Toast.LENGTH_SHORT).show();
-//                else{
-//                    for (Pedido p : BDFinal.pedidosFinal){
-//                        //Insert de pedidos en BBDD
-//                    }
-//                    confirmar.setEnabled(false);
-//                    BDFinal.pedidosFinal.clear();
-//                    Toast.makeText(getApplicationContext(),"Pedido realizado con exito.", Toast.LENGTH_LONG).show();
-//                }
-//                int hora = (int)reloj.getHour();
-//                int minuto = reloj.getMinute();
+                        String insert = "insert into pedidos (idProducto, idCliente, complementos, hora, cantidad, precio, estado) "
+                                + "values (" + p.getProducto().getNumProducto() + ","
+                                + ActivityLogin.USER.getId() + ", '" + p.getComentarios() + "', "
+                                + "'" + hora + "', " + p.getCantidad() + ", "
+                                + Float.parseFloat(precio.getText().toString().trim()) + ", " + 0 + ");";
+
+                        new Insertar(insert, dialogo).execute("");
+                    }
+                    confirmar.setEnabled(false);
+                    BDFinal.pedidosFinal.clear();
+                    Toast.makeText(getApplicationContext(),"Pedido realizado con exito.", Toast.LENGTH_LONG).show();
+                }
 
             }
         });
     }//Fin Listener
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class Insertar extends AsyncTask<String,Void,Statement> {
+
+        String consultaDt;
+        Connection conexDt;
+        Statement sentenciaDt;
+        android.app.AlertDialog dialog;
+
+        public Insertar(String consulta, android.app.AlertDialog dialog){
+            this.consultaDt=consulta;
+            this.dialog=dialog;
+        }
+
+        @Override
+        protected Statement doInBackground(String... params) {
+
+            try {
+                conexDt = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");
+                sentenciaDt = conexDt.createStatement();
+                publishProgress();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return sentenciaDt;
+        }
+
+        @Override
+        protected void onPostExecute(Statement statement) {
+            super.onPostExecute(statement);
+            Log.e("ERRORRRRR","Entra en onPostExecute");
+            try {
+                sentenciaDt.executeUpdate(consultaDt);
+
+                conexDt.close();
+                sentenciaDt.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            dialog.dismiss();
+
+        }
+    }//Fin AsynTack
 
 }//Fin Activity

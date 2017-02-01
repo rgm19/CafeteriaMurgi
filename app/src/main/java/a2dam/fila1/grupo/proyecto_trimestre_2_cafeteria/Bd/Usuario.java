@@ -8,14 +8,15 @@ public class Usuario {
     private int id, categoria;
     //Categoria 0=Admin, 1=Camarero, 2=Profesores, 3=Alumnos
 
-    private String nombre, pass;
+    private String nombre, pass, mail;
     private int telefono;
 
-    public Usuario(int id, String nombre, String pass, int telefono, int categoria) {
+    public Usuario(int id, String nombre, String pass, int telefono, String mail, int categoria) {
         this.id = id;
         this.nombre = nombre;
         this.pass = pass;
         this.telefono = telefono;
+        this.mail = mail;
         this.categoria = categoria;
     }
 
@@ -30,4 +31,5 @@ public class Usuario {
     }
     public int getCategoria() {return categoria;}
     public int getTelefono() {return telefono;}
+    public String getMail() {        return mail;    }
 }

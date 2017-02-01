@@ -163,7 +163,7 @@ public class HiloConexionBBDD {
 //                                Log.e("DATOS",""+resultSet.getString("username"));
 //                            }
 //                        }
-                        BDFinal.usuarioFinal.add(new Usuario(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5)));
+//                        BDFinal.usuarioFinal.add(new Usuario(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getInt(4),resultSet.getInt(5)));
                     }
 
                     conexion.close();

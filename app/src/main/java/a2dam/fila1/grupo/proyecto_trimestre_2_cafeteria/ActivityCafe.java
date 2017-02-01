@@ -58,7 +58,24 @@ public class ActivityCafe extends AppCompatActivity {
         setContentView(R.layout.activity_cafe);
 
         inflar();
+        init();
 
+    }//Fin onCreate
+
+    /**
+     * Cargamos la BBDD desde el onStart para que te la carge cada vez que se muestre la Activity
+     * Necesario para que carge los datos al volver desde la pantalla de detalles
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
+    }
+
+    /**
+     * Llama a loa metodos para cargar la bbdd e inicializa los datos
+     */
+    private void init(){
         dialogo =new SpotsDialog(this,"Cargando BBDD...");
         dialogo.show();
         new ConsultasCafe("Select * from productos", dialogo).execute("");
@@ -66,8 +83,7 @@ public class ActivityCafe extends AppCompatActivity {
         metodosListener();
 
         llevaLeche(leche);
-
-    }//Fin onCreate
+    }
 
     /**
      * Infla todos los elementos del layout del activity
@@ -124,7 +140,7 @@ public class ActivityCafe extends AppCompatActivity {
 
         dialogo = new SpotsDialog(this,"Calculando precios...");
 
-        spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayTipo));
+        spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayTipo));
         spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -403,6 +419,7 @@ public class ActivityCafe extends AppCompatActivity {
 
                 if (!datos){
                     metodosSpinner();
+                    limpiar();
                     datos = true;
                 }
 
