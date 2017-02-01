@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Usuario;
@@ -173,9 +174,7 @@ public class ActivityPedidos extends AppCompatActivity {
 
                     while (resultPd.next()){
                         Log.e("ERROR", "reuslt next");
-                        idCli = resultPd.getInt("idCliente");
-                        usuario = resultPd.getString("username");
-                        hora = resultPd.getString("hora");
+
                         Log.e("ERROR", "Comenzar bd");
                          BDFinal.pedidosFinal.add(new Pedido(new Usuario(resultPd.getInt("idCliente"),
                                  resultPd.getString("username")), new Producto(resultPd.getString("nom_pro")),
@@ -183,6 +182,10 @@ public class ActivityPedidos extends AppCompatActivity {
                                  resultPd.getString("complementos"), resultPd.getString("hora")));
                         Log.e("ERROR", "Fin BD");
                     }
+                    idCli = BDFinal.pedidosFinal.get(0).getUsuario().getId();
+                    usuario = BDFinal.pedidosFinal.get(0).getUsuario().getNombre();
+                    hora = BDFinal.pedidosFinal.get(0).getHora();
+
 
                     String update = "update pedidos set estado = 1 where idCliente = "+ idCli
                             + " and hora = '" + hora + "'";
