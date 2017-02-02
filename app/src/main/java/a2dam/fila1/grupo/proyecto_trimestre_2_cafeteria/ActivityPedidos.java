@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -32,6 +33,7 @@ public class ActivityPedidos extends AppCompatActivity {
 
     AlertDialog dialogo;
     ListView listView;
+    Button actualizar;
 
     ArrayList<VistaPedido> vistaPedidos = new ArrayList<>();
 
@@ -41,6 +43,15 @@ public class ActivityPedidos extends AppCompatActivity {
         setContentView(R.layout.activity_pedidos);
 
         updateBBDD();
+
+        actualizar = (Button)findViewById(R.id.btnAPedidos);
+        actualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateBBDD();
+            }
+        });
+
     }//Fin onCreate
 
     /**
@@ -74,7 +85,7 @@ public class ActivityPedidos extends AppCompatActivity {
                 String consulta = "select nom_pro, complementos, cantidad, pedidos.precio, idCliente, " +
                         "username, hora from usuarios, pedidos, productos " +
                         "where usuarios.id_cli = pedidos.idCliente " +
-                        "AND productos.id_pro AND pedidos.idProducto AND " +
+                        "AND productos.id_pro = pedidos.idProducto AND " +
                         "username = '" + vistaPedidos.get(position).getNombre() + "' AND " +
                         "hora = '" + vistaPedidos.get(position).getHora() + "'" +
                         "group by idCliente, hora, num_pedido;";
