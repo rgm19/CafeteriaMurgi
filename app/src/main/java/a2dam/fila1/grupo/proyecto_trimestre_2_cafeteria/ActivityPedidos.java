@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.mysql.jdbc.PreparedStatement;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -62,15 +64,12 @@ public class ActivityPedidos extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lvAPedidos);
         listView.setAdapter(new AdapterPedidos(vistaPedidos));
         itemListener();
-        Log.e("ERROR", "Lanza adapter y listener");
     }//Fin lanzarAdapter
 
     private void itemListener(){
-        Log.e("ERROR", "ItemListener");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("ERROR", "Click Listener");
                 dialogo.show();
                 String consulta = "select nom_pro, complementos, cantidad, pedidos.precio, idCliente, " +
                         "username, hora from usuarios, pedidos, productos " +
@@ -92,8 +91,8 @@ public class ActivityPedidos extends AppCompatActivity {
      */
     private void lanzarDetalles(String usuario, String hora) {
         Intent intent = new Intent(getApplicationContext(), ActivityPedidosDetalles.class);
-        intent.putExtra("USUARIO", usuario);
-        intent.putExtra("HORA", hora);
+//        intent.putExtra("USUARIO", usuario);
+//        intent.putExtra("HORA", hora);
         startActivity(intent);
     }//Fin lanzarDetalles
 
@@ -170,27 +169,26 @@ public class ActivityPedidos extends AppCompatActivity {
                     String usuario = null;
                     String hora = null;
 
-                    Log.e("ERROR", "onPostExe, if complementos");
-
                     while (resultPd.next()){
-                        Log.e("ERROR", "reuslt next");
-
-                        Log.e("ERROR", "Comenzar bd");
                          BDFinal.pedidosFinal.add(new Pedido(new Usuario(resultPd.getInt("idCliente"),
                                  resultPd.getString("username")), new Producto(resultPd.getString("nom_pro")),
                                  resultPd.getInt("cantidad"), resultPd.getFloat("precio"),
                                  resultPd.getString("complementos"), resultPd.getString("hora")));
-                        Log.e("ERROR", "Fin BD");
                     }
                     idCli = BDFinal.pedidosFinal.get(0).getUsuario().getId();
                     usuario = BDFinal.pedidosFinal.get(0).getUsuario().getNombre();
-                    hora = BDFinal.pedidosFinal.get(0).getHora();
+                    hora = BDFinal.pedidosFinal.get(0).getHora().trim();
 
+                    String update = "update pedidos set estado = 1 where idCliente = " + idCli +
+                            " and hora = '" + hora+ "'";
+//                    PreparedStatement preparedStmt = (PreparedStatement) conexPd.prepareStatement(update);
+//                    preparedStmt.setInt(1, idCli);
+//                    preparedStmt.setString(2, hora);
+//                    preparedStmt.executeUpdate();
 
-                    String update = "update pedidos set estado = 1 where idCliente = "+ idCli
-                            + " and hora = '" + hora + "'";
-                    Log.e("ERROR", "Update");
-                    sentencia.executeUpdate(update);
+                    Log.e("ERROR", "Hora: "+hora);
+
+//                    sentenciaPd.executeUpdate(update);
                     lanzarDetalles(usuario, hora);
                 }
 

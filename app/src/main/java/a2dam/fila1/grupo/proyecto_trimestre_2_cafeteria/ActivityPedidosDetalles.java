@@ -36,6 +36,12 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        BDFinal.pedidosFinal.clear();
+    }
+
     private void listeners() {
         listView.setAdapter(new AdapterPedidosDetalles(BDFinal.pedidosFinal));
 
