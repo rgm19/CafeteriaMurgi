@@ -120,8 +120,9 @@ public class ActivityPedidos extends AppCompatActivity {
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         ActivityLogin.loginCorrecto = false;
-                        Intent i = new Intent(getApplicationContext(), ActivityLogin.class);
-                        startActivity(i);
+                        finish();
+//                        Intent i = new Intent(getApplicationContext(), ActivityLogin.class);
+//                        startActivity(i);
                     }
                 }).create().show();
     }//Fin onBackPressed
