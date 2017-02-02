@@ -44,7 +44,7 @@ public class ActivityPedidos extends AppCompatActivity {
     }//Fin onCreate
 
     /**
-     * Actualiza la base de datos y lanza el adapter
+     * Actualiza la base de datos y lanza el adapter5
      */
     private void updateBBDD() {
         dialogo = new SpotsDialog(this, "Cargando pedidos...");
@@ -181,10 +181,6 @@ public class ActivityPedidos extends AppCompatActivity {
 
                     String update = "update pedidos set estado = 1 where idCliente = " + idCli +
                             " and hora = '" + hora+ "'";
-//                    PreparedStatement preparedStmt = (PreparedStatement) conexPd.prepareStatement(update);
-//                    preparedStmt.setInt(1, idCli);
-//                    preparedStmt.setString(2, hora);
-//                    preparedStmt.executeUpdate();
 
                     Log.e("ERROR", "Hora: "+hora);
 
