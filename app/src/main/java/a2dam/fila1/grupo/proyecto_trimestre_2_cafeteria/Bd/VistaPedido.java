@@ -8,11 +8,13 @@ public class VistaPedido {
     private String nombre;
     private String hora;
     private float precioTotal;
+    private int estado;
 
-    public VistaPedido(String nombre, String hora, float precioTotal) {
+    public VistaPedido(String nombre, String hora, float precioTotal, int estado) {
         this.nombre = nombre;
         this.hora = hora;
         this.precioTotal = precioTotal;
+        this.estado = estado;
     }
 
     public String getNombre() {
@@ -25,5 +27,9 @@ public class VistaPedido {
 
     public float getPrecioTotal() {
         return precioTotal;
+    }
+
+    public int getEstado() {
+        return estado;
     }
 }

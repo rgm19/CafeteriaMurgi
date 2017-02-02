@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.sql.Connection;
@@ -18,13 +20,17 @@ import java.util.ArrayList;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Usuario;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.VistaPedido;
 import dmax.dialog.SpotsDialog;
 
 public class ActivityPedidos extends AppCompatActivity {
 
     AlertDialog dialogo;
+    ListView listView;
+
     ArrayList<VistaPedido> vistaPedidos = new ArrayList<>();
 
     @Override
@@ -32,20 +38,64 @@ public class ActivityPedidos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos);
 
+        updateBBDD();
+    }//Fin onCreate
+
+    /**
+     * Actualiza la base de datos y lanza el adapter
+     */
+    private void updateBBDD() {
         dialogo = new SpotsDialog(this, "Cargando pedidos...");
         dialogo.show();
 
-        String consulta = "select username, hora, sum(precio) as total from pedidos, usuarios " +
-                "where id_cli = idCliente group by idCliente, hora order by hora, num_pedido, idCliente";
-        new ConsultasPedidos(consulta, dialogo).execute("");
+        vistaPedidos.clear();
 
-    }
+        String consulta = "select username, hora, sum(precio) as total, estado from pedidos, usuarios " +
+                "where id_cli = idCliente group by username, hora order by hora, num_pedido, username, estado, total";
+        new ConsultasPedidos(consulta, dialogo).execute();
+    }//Fin updateBBDD
 
+    /**
+     * Lanza el Adapter del listView con todos los pedidos actuales
+     */
     private void lanzarAdapter() {
-        ListView listView = (ListView) findViewById(R.id.lvAPedidos);
+        listView = (ListView) findViewById(R.id.lvAPedidos);
         listView.setAdapter(new AdapterPedidos(vistaPedidos));
-        dialogo.dismiss();
+        itemListener();
+        Log.e("ERROR", "Lanza adapter y listener");
     }//Fin lanzarAdapter
+
+    private void itemListener(){
+        Log.e("ERROR", "ItemListener");
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("ERROR", "Click Listener");
+                dialogo.show();
+                String consulta = "select nom_pro, complementos, cantidad, pedidos.precio, idCliente, " +
+                        "username, hora from usuarios, pedidos, productos " +
+                        "where usuarios.id_cli = pedidos.idCliente " +
+                        "AND productos.id_pro AND pedidos.idProducto AND " +
+                        "username = '" + vistaPedidos.get(position).getNombre() + "' AND " +
+                        "hora = '" + vistaPedidos.get(position).getHora() + "'" +
+                        "group by idCliente, hora, num_pedido;";
+
+                new ConsultasPedidos(consulta, dialogo).execute();
+            }
+        });
+    }//Fin itemlistener
+
+    /**
+     * Lanza ActivityDetalles con todos los productos del pedido
+     * @param usuario
+     * @param hora
+     */
+    private void lanzarDetalles(String usuario, String hora) {
+        Intent intent = new Intent(getApplicationContext(), ActivityPedidosDetalles.class);
+        intent.putExtra("USUARIO", usuario);
+        intent.putExtra("HORA", hora);
+        startActivity(intent);
+    }//Fin lanzarDetalles
 
     /**
      * Captura la acción de pulsar el botón atrás y vuelve a la pantalla de login
@@ -68,7 +118,7 @@ public class ActivityPedidos extends AppCompatActivity {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public class ConsultasPedidos extends AsyncTask<String,Void,ResultSet> {
+    public class ConsultasPedidos extends AsyncTask<Void,Void,Statement> {
 
         android.app.AlertDialog dialog;
         String consultaPd;
@@ -82,7 +132,7 @@ public class ActivityPedidos extends AppCompatActivity {
         }
 
         @Override
-        protected ResultSet doInBackground(String... params) {
+        protected Statement doInBackground(Void... params) {
 
             try {
                 conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171",
@@ -91,24 +141,58 @@ public class ActivityPedidos extends AppCompatActivity {
                 resultPd = null;
                 publishProgress();
 
-                resultPd = sentenciaPd.executeQuery(consultaPd);
+                if (consultaPd.startsWith("select"))
+                    resultPd = sentenciaPd.executeQuery(consultaPd);
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            return resultPd;
+            return sentenciaPd;
         }
 
         @Override
-        protected void onPostExecute(ResultSet resultSet) {
-            super.onPostExecute(resultSet);
+        protected void onPostExecute(Statement sentencia) {
+            super.onPostExecute(sentencia);
+//            ResultSet resultPd = null;
 
             try{
-                while (resultSet.next()) {
-                    vistaPedidos.add(new VistaPedido(resultSet.getString("username"),
-                            resultSet.getTime("hora").toString(), resultSet.getFloat("total")));
+                if (consultaPd.contains("sum(precio)")){
+                    while (resultPd.next()){
+                        vistaPedidos.add(new VistaPedido(resultPd.getString("username"),
+                                resultPd.getTime("hora").toString(), resultPd.getFloat("total"),
+                                resultPd.getInt("estado")));
+                    }
+                    lanzarAdapter();
                 }
-                lanzarAdapter();
+
+                if (consultaPd.contains("complementos")){
+                    int idCli = 0;
+                    String usuario = null;
+                    String hora = null;
+
+                    Log.e("ERROR", "onPostExe, if complementos");
+
+                    while (resultPd.next()){
+                        Log.e("ERROR", "reuslt next");
+
+                        Log.e("ERROR", "Comenzar bd");
+                         BDFinal.pedidosFinal.add(new Pedido(new Usuario(resultPd.getInt("idCliente"),
+                                 resultPd.getString("username")), new Producto(resultPd.getString("nom_pro")),
+                                 resultPd.getInt("cantidad"), resultPd.getFloat("precio"),
+                                 resultPd.getString("complementos"), resultPd.getString("hora")));
+                        Log.e("ERROR", "Fin BD");
+                    }
+                    idCli = BDFinal.pedidosFinal.get(0).getUsuario().getId();
+                    usuario = BDFinal.pedidosFinal.get(0).getUsuario().getNombre();
+                    hora = BDFinal.pedidosFinal.get(0).getHora();
+
+
+                    String update = "update pedidos set estado = 1 where idCliente = "+ idCli
+                            + " and hora = '" + hora + "'";
+                    Log.e("ERROR", "Update");
+                    sentencia.executeUpdate(update);
+                    lanzarDetalles(usuario, hora);
+                }
 
                 conexPd.close();
                 sentenciaPd.close();
@@ -116,6 +200,71 @@ public class ActivityPedidos extends AppCompatActivity {
                 dialog.dismiss();
 
             }catch (Exception ex) { Log.d("Fallo de cojones",""); }
+        }
+    }//Fin AsynTack
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     *  ///////////////////////////////////////////////////////////////////////////////////////////
+     */
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class ActualizacionPedidos extends AsyncTask<String,ResultSet,Void> {
+
+
+        String consultaPd;
+        Connection conexPd;
+        Statement sentenciaPd;
+        ResultSet resultPd;
+
+        public ActualizacionPedidos(String consulta){
+            this.consultaPd=consulta;
+        }
+
+        @Override
+        protected Void doInBackground(String... params)
+        {
+
+                try {
+                    conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171",
+                            "ubase20171", "pbase20171");
+                    sentenciaPd = conexPd.createStatement();
+                    resultPd = null;
+
+
+                    resultPd = sentenciaPd.executeQuery(consultaPd);
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                publishProgress(resultPd);
+                return null;
+
+        }
+
+        @Override
+        protected void onProgressUpdate(ResultSet... resultSet) {
+            super.onProgressUpdate(resultSet);
+            try{
+                while (resultSet[0].next()) {
+                    vistaPedidos.add(new VistaPedido(resultSet[0].getString("username"),
+                            resultSet[0].getTime("hora").toString(), resultSet[0].getFloat("total"),0));
+                }
+                lanzarAdapter();
+                conexPd.close();
+                sentenciaPd.close();
+                resultPd.close();
+
+
+            }catch (Exception ex) { Log.d("Fallo de cojones",""); }
+        }
+
+        @Override
+        protected void onPostExecute(Void voids)
+        {
+            super.onPostExecute(voids);
+
+
 
         }
     }//Fin AsynTack

@@ -25,7 +25,6 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
     private String email="mdam2015mdam@gmail.com";//Destino
     private String message="holamundo";//Mensaje
     private String subject="hola mundo";//Asunto
-    private Context contexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +34,15 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         inflar();
         listeners();//Todos los listener
 
-
-
-
-
     }
 
     private void listeners() {
-        listView.setAdapter(new AdapterPedidosDetalles());
+        listView.setAdapter(new AdapterPedidosDetalles(BDFinal.pedidosFinal));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendMail sendEmail = new SendMail(contexto, email, subject, message);
+                SendMail sendEmail = new SendMail(getApplicationContext(), email, subject, message);
                 sendEmail.execute();//ejecuta el AsynTask
             }
         });
@@ -58,27 +53,26 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         tvNombre = (TextView) findViewById(R.id.tvAPedidosDNomCli);
         tvHora = (TextView) findViewById(R.id.tvAPedidosDHora);
         fab = (FloatingActionButton) findViewById(R.id.fab_done);
-        contexto = this;
         tvNombre.setText(BDPruebas.pedidos.get(id).getUsuario().getNombre());
         tvHora.setText(BDPruebas.pedidos.get(id).getHora());
         id = getIntent().getIntExtra("id", 0);
     }
 
-    /**
-     * Este método sirve para coger todos los productos pedidos
-     * (que estarán en diferentes posiciones del arrayList de pedidos)
-     * en un mismo arrayList de pedidos.
-     *
-     * @return devuelve un arrayList con todos los productos pedidos por un usuario.
-     * */
-    public static ArrayList<Pedido> productosPedidos() {
-        ArrayList<Pedido> pedido = new ArrayList<>();
-        for (int i = 0; i < BDPruebas.pedidos.size(); i++) {
-            if (BDPruebas.pedidos.get(i).getUsuario().getId() == id)
-                pedido.add(BDPruebas.pedidos.get(i));
-        }
-        return pedido;
-    }
+//    /**
+//     * Este método sirve para coger todos los productos pedidos
+//     * (que estarán en diferentes posiciones del arrayList de pedidos)
+//     * en un mismo arrayList de pedidos.
+//     *
+//     * @return devuelve un arrayList con todos los productos pedidos por un usuario.
+//     * */
+//    public static ArrayList<Pedido> productosPedidos() {
+//        ArrayList<Pedido> pedido = new ArrayList<>();
+//        for (int i = 0; i < BDPruebas.pedidos.size(); i++) {
+//            if (BDPruebas.pedidos.get(i).getUsuario().getId() == id)
+//                pedido.add(BDPruebas.pedidos.get(i));
+//        }
+//        return pedido;
+//    }
 
 
 }

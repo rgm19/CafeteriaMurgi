@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class AdapterPedidos extends BaseAdapter {
 
     private View listItemView;
     private TextView tvNombre, tvHora, tvPrecio;
+    private ConstraintLayout fondo;
 
     public AdapterPedidos(ArrayList<VistaPedido> pedidos) {
         this.pedidos = pedidos;
@@ -63,6 +65,16 @@ public class AdapterPedidos extends BaseAdapter {
         tvPrecio.setText(getItem(i).getPrecioTotal() + "€");
         tvHora.setText(getItem(i).getHora());
 
+        switch (getItem(i).getEstado()){
+            case 1: fondo.setBackgroundColor(0xFFACADF9);
+                break;
+            case 2: fondo.setBackgroundColor(0xFFAFFFD7);
+                break;
+            default:
+        }
+
+
+
 
         /**
          * Esto es mejor ponerlo con un onIntemClickListener en el Activity
@@ -86,5 +98,6 @@ public class AdapterPedidos extends BaseAdapter {
         tvNombre = (TextView) listItemView.findViewById(R.id.tvListPedidosNombre);
         tvHora = (TextView) listItemView.findViewById(R.id.tvListPedidosHora);
         tvPrecio = (TextView) listItemView.findViewById(R.id.tvListPedidosPrecio);
+        fondo = (ConstraintLayout) listItemView.findViewById(R.id.layout);
     }
 }

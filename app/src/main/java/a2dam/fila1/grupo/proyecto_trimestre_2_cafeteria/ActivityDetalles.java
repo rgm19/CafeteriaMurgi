@@ -137,9 +137,9 @@ public class ActivityDetalles extends AppCompatActivity {
                                 + "values (" + p.getProducto().getNumProducto() + ","
                                 + ActivityLogin.USER.getId() + ", '" + p.getComentarios() + "', "
                                 + "'" + hora + "', " + p.getCantidad() + ", "
-                                + Float.parseFloat(precio.getText().toString().trim()) + ", " + 0 + ");";
+                                + p.getPrecio() + ", " + 0 + ");";
 
-                        new Insertar(insert, dialogo).execute("");
+                        new Insertar(insert, dialogo).execute();
                     }
                     confirmar.setEnabled(false);
                     BDFinal.pedidosFinal.clear();
@@ -152,7 +152,7 @@ public class ActivityDetalles extends AppCompatActivity {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public class Insertar extends AsyncTask<String,Void,Statement> {
+    public class Insertar extends AsyncTask<Void,Void,Statement> {
 
         String consultaDt;
         Connection conexDt;
@@ -165,7 +165,7 @@ public class ActivityDetalles extends AppCompatActivity {
         }
 
         @Override
-        protected Statement doInBackground(String... params) {
+        protected Statement doInBackground(Void... params) {
 
             try {
                 conexDt = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");

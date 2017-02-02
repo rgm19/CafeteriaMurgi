@@ -18,6 +18,10 @@ public class Producto {
         this.precio = precio;
     }
 
+    public Producto(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Producto(int numProducto, String nombre, float precio, boolean leche) {
         this.numProducto = numProducto;
         this.nombre = nombre;
