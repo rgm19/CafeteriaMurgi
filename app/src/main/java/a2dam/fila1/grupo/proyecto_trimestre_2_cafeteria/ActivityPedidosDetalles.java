@@ -1,7 +1,9 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,13 +20,13 @@ import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Email.SendMail;
 
 public class ActivityPedidosDetalles extends AppCompatActivity {
-    public static int id;
+    private static boolean mail = false;
     private ListView listView;
-    private TextView tvNombre, tvHora;
+    private TextView tvNombre, tvHora, precioT;
     private FloatingActionButton fab;
-    private String email="mdam2015mdam@gmail.com";//Destino
-    private String message="holamundo";//Mensaje
-    private String subject="hola mundo";//Asunto
+//    private String email="mdam2015mdam@gmail.com";//Destino
+//    private String message="holamundo";//Mensaje
+//    private String subject="hola mundo";//Asunto
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,9 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         BDFinal.pedidosFinal.clear();
+        finish();
     }
 
     private void listeners() {
@@ -48,8 +51,21 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendMail sendEmail = new SendMail(getApplicationContext(), email, subject, message);
-                sendEmail.execute();//ejecuta el AsynTask
+                if (!mail){
+                    String message = "Pedido preparado para las " + BDFinal.pedidosFinal.get(0).getHora()
+                            + " con un precio total de " + precioT.getText();
+                    SendMail sendEmail = new SendMail(ActivityPedidosDetalles.this,
+                             "zaken85@gmail.com",
+                            "Pedido C@fetería", message);
+                    sendEmail.execute();//ejecuta el AsynTask
+                    fab.setImageResource(R.drawable.ic_done);
+                    mail = true;
+                    /*BDFinal.pedidosFinal.get(0).getUsuario().getMail()*/
+                }else{
+                    mail = false;
+                    onBackPressed();
+                }
+
             }
         });
     }
@@ -58,10 +74,20 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lvAPedidosD);
         tvNombre = (TextView) findViewById(R.id.tvAPedidosDNomCli);
         tvHora = (TextView) findViewById(R.id.tvAPedidosDHora);
+        precioT = (TextView) findViewById(R.id.tvAPedidosDPrecioT);
         fab = (FloatingActionButton) findViewById(R.id.fab_done);
-        tvNombre.setText(BDPruebas.pedidos.get(id).getUsuario().getNombre());
-        tvHora.setText(BDPruebas.pedidos.get(id).getHora());
-        id = getIntent().getIntExtra("id", 0);
+        tvNombre.setText(BDFinal.pedidosFinal.get(0).getUsuario().getNombre());
+        tvHora.setText(BDFinal.pedidosFinal.get(0).getHora());
+
+        precioT.setText(calcularPrecio() + " €");
+    }
+
+    private float calcularPrecio() {
+        float p = 0;
+        for (Pedido pd : BDFinal.pedidosFinal){
+            p += pd.getPrecio();
+        }
+        return p;
     }
 
 //    /**

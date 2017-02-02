@@ -20,9 +20,10 @@ public class Usuario {
         this.categoria = categoria;
     }
 
-    public Usuario(int id, String nombre) {
+    public Usuario(int id, String nombre, String mail) {
         this.id = id;
         this.nombre = nombre;
+        this.mail = mail;
     }
 
     public int getId() {

@@ -83,7 +83,7 @@ public class ActivityPedidos extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialogo.show();
                 String consulta = "select nom_pro, complementos, cantidad, pedidos.precio, idCliente, " +
-                        "username, hora from usuarios, pedidos, productos " +
+                        "username, hora, email from usuarios, pedidos, productos " +
                         "where usuarios.id_cli = pedidos.idCliente " +
                         "AND productos.id_pro = pedidos.idProducto AND " +
                         "username = '" + vistaPedidos.get(position).getNombre() + "' AND " +
@@ -183,7 +183,8 @@ public class ActivityPedidos extends AppCompatActivity {
 
                     while (resultPd.next()){
                          BDFinal.pedidosFinal.add(new Pedido(new Usuario(resultPd.getInt("idCliente"),
-                                 resultPd.getString("username")), new Producto(resultPd.getString("nom_pro")),
+                                 resultPd.getString("username"), resultPd.getString("email")),
+                                 new Producto(resultPd.getString("nom_pro")),
                                  resultPd.getInt("cantidad"), resultPd.getFloat("precio"),
                                  resultPd.getString("complementos"), resultPd.getString("hora")));
                     }
