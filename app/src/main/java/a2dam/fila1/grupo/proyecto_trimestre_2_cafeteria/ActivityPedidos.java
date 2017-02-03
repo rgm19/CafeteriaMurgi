@@ -43,31 +43,34 @@ public class ActivityPedidos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos);
 
-        updateBBDD();
+//        updateBBDD();
 
         actualizar = (Button)findViewById(R.id.btnAPedidos);
         actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateBBDD();
+                onStart();
             }
         });
 
     }//Fin onCreate
 
-    /**
-     * Actualiza la base de datos y lanza el adapter5
-     */
-    private void updateBBDD() {
-        dialogo = new SpotsDialog(this,  "Cargando pedidos...");
-        dialogo.show();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        /**
+         * Actualiza la base de datos y lanza el adapter5
+         */
+            dialogo = new SpotsDialog(this,  "Cargando pedidos...");
+            dialogo.show();
 
-        vistaPedidos.clear();
+            vistaPedidos.clear();
 
-        String consulta = "select username, hora, sum(precio) as total, estado from pedidos, usuarios " +
-                "where id_cli = idCliente group by username, hora order by hora, num_pedido, username, estado, total";
-        new ConsultasPedidos(consulta, dialogo).execute();
-    }//Fin updateBBDD
+            String consulta = "select username, hora, sum(precio) as total, estado from pedidos, usuarios " +
+                    "where id_cli = idCliente group by username, hora order by hora, num_pedido, username, estado, total";
+            new ConsultasPedidos(consulta, dialogo).execute();
+
+    }
 
     /**
      * Lanza el Adapter del listView con todos los pedidos actuales

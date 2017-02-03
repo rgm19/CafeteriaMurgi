@@ -1,6 +1,7 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,8 +24,10 @@ import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Email.SendMail;
+import dmax.dialog.SpotsDialog;
 
 public class ActivityPedidosDetalles extends AppCompatActivity {
+    AlertDialog dialogo;
     private static boolean mail = false;
     private ListView listView;
     private TextView tvNombre, tvHora, precioT;
@@ -60,12 +63,17 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
                     String message = "Pedido preparado para las " + BDFinal.pedidosFinal.get(0).getHora()
                             + " con un precio total de " + precioT.getText();
                     SendMail sendEmail = new SendMail(ActivityPedidosDetalles.this,
-                             "zaken85@gmail.com",
+                            BDFinal.pedidosFinal.get(0).getUsuario().getMail(),
                             "Pedido C@fetería", message);
-                    sendEmail.execute();//ejecuta el AsynTask
+//                    sendEmail.execute();//ejecuta el AsynTask  //Descomentar esta liena para mail
                     fab.setImageResource(R.drawable.ic_done);
                     mail = true;
-                    /*BDFinal.pedidosFinal.get(0).getUsuario().getMail()*/
+
+                    dialogo.show();
+                    String update = "update pedidos set estado = 2 where idCliente = " +
+                            BDFinal.pedidosFinal.get(0).getUsuario().getId() +
+                            " and hora = '" + BDFinal.pedidosFinal.get(0).getHora() + "'";
+                    new UpdatePedido(update, dialogo).execute();
                 }else{
                     mail = false;
                     onBackPressed();
@@ -76,6 +84,7 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
     }
 
     private void inflar() {
+        dialogo = new SpotsDialog(this,  "Termiando pedidos...");
         listView = (ListView) findViewById(R.id.lvAPedidosD);
         tvNombre = (TextView) findViewById(R.id.tvAPedidosDNomCli);
         tvHora = (TextView) findViewById(R.id.tvAPedidosDHora);
@@ -95,15 +104,15 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         return p;
     }
 
-    public class Insertar extends AsyncTask<Void,Void,Statement> {
+    public class UpdatePedido extends AsyncTask<Void,Void,Statement> {
 
-        String consultaDt;
-        Connection conexDt;
-        Statement sentenciaDt;
+        String consultaPDt;
+        Connection conexPDt;
+        Statement sentenciaPDt;
         android.app.AlertDialog dialog;
 
-        public Insertar(String consulta, android.app.AlertDialog dialog){
-            this.consultaDt=consulta;
+        public UpdatePedido(String consulta, android.app.AlertDialog dialog){
+            this.consultaPDt=consulta;
             this.dialog=dialog;
         }
 
@@ -111,25 +120,24 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         protected Statement doInBackground(Void... params) {
 
             try {
-                conexDt = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");
-                sentenciaDt = conexDt.createStatement();
+                conexPDt = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");
+                sentenciaPDt = conexPDt.createStatement();
                 publishProgress();
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            return sentenciaDt;
+            return sentenciaPDt;
         }
 
         @Override
         protected void onPostExecute(Statement statement) {
             super.onPostExecute(statement);
-            Log.e("ERRORRRRR","Entra en onPostExecute");
             try {
-                sentenciaDt.executeUpdate(consultaDt);
+                sentenciaPDt.executeUpdate(consultaPDt);
 
-                conexDt.close();
-                sentenciaDt.close();
+                conexPDt.close();
+                sentenciaPDt.close();
 
             } catch (SQLException e) {
                 e.printStackTrace();
