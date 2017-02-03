@@ -1,6 +1,7 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -58,7 +59,7 @@ public class ActivityPedidos extends AppCompatActivity {
      * Actualiza la base de datos y lanza el adapter5
      */
     private void updateBBDD() {
-        dialogo = new SpotsDialog(this, "Cargando pedidos...");
+        dialogo = new SpotsDialog(this,  "Cargando pedidos...");
         dialogo.show();
 
         vistaPedidos.clear();
@@ -105,15 +106,9 @@ public class ActivityPedidos extends AppCompatActivity {
         String update = "update pedidos set estado = 1 where idCliente = " + idCli +
                             " and hora = '" + hora+ "'";
         new ConsultasPedidos(update, dialogo).execute();
-    }//Fin lanzarDetalles
-
-    private void lanzarDetalles2() {
         Intent intent = new Intent(getApplicationContext(), ActivityPedidosDetalles.class);
-//        intent.putExtra("USUARIO", usuario);
-//        intent.putExtra("HORA", hora);
         startActivity(intent);
-    }//Fin lanzarDetalles2
-
+    }//Fin lanzarDetalles
 
     /**
      * Captura la acción de pulsar el botón atrás y vuelve a la pantalla de login
@@ -172,7 +167,6 @@ public class ActivityPedidos extends AppCompatActivity {
         @Override
         protected void onPostExecute(Statement sentencia) {
             super.onPostExecute(sentencia);
-//            ResultSet resultPd = null;
 
             try{
                 if (consultaPd.contains("sum(precio)")){
@@ -200,22 +194,11 @@ public class ActivityPedidos extends AppCompatActivity {
                     usuario = BDFinal.pedidosFinal.get(0).getUsuario().getNombre();
                     hora = BDFinal.pedidosFinal.get(0).getHora().trim();
 
-//                    String update = "update pedidos set estado = 1 where idCliente = " + idCli +
-//                            " and hora = '" + hora+ "'";
-//                    Log.e("Error", update);
-//
-//                    Log.e("ERROR", "Hora: "+hora);
-//
-//                    sentenciaPd.executeUpdate(update);
                     lanzarDetalles(usuario, idCli, hora);
                 }
 
                 if (consultaPd.contains("update")){
-                    Log.e("Error", "update1");
                     sentenciaPd.executeUpdate(consultaPd);
-                    Log.e("Error", "update2");
-                    lanzarDetalles2();
-                    Log.e("Error", "update3");
                 }
 
                 conexPd.close();
@@ -226,6 +209,7 @@ public class ActivityPedidos extends AppCompatActivity {
             }catch (Exception ex) { Log.d("Fallo de cojones",""); }
         }
     }//Fin AsynTack
+
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /**

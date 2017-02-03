@@ -7,11 +7,16 @@ import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
@@ -90,21 +95,48 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         return p;
     }
 
-//    /**
-//     * Este método sirve para coger todos los productos pedidos
-//     * (que estarán en diferentes posiciones del arrayList de pedidos)
-//     * en un mismo arrayList de pedidos.
-//     *
-//     * @return devuelve un arrayList con todos los productos pedidos por un usuario.
-//     * */
-//    public static ArrayList<Pedido> productosPedidos() {
-//        ArrayList<Pedido> pedido = new ArrayList<>();
-//        for (int i = 0; i < BDPruebas.pedidos.size(); i++) {
-//            if (BDPruebas.pedidos.get(i).getUsuario().getId() == id)
-//                pedido.add(BDPruebas.pedidos.get(i));
-//        }
-//        return pedido;
-//    }
+    public class Insertar extends AsyncTask<Void,Void,Statement> {
 
+        String consultaDt;
+        Connection conexDt;
+        Statement sentenciaDt;
+        android.app.AlertDialog dialog;
+
+        public Insertar(String consulta, android.app.AlertDialog dialog){
+            this.consultaDt=consulta;
+            this.dialog=dialog;
+        }
+
+        @Override
+        protected Statement doInBackground(Void... params) {
+
+            try {
+                conexDt = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");
+                sentenciaDt = conexDt.createStatement();
+                publishProgress();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return sentenciaDt;
+        }
+
+        @Override
+        protected void onPostExecute(Statement statement) {
+            super.onPostExecute(statement);
+            Log.e("ERRORRRRR","Entra en onPostExecute");
+            try {
+                sentenciaDt.executeUpdate(consultaDt);
+
+                conexDt.close();
+                sentenciaDt.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            dialog.dismiss();
+        }
+}//Fin AsynTack
 
 }
