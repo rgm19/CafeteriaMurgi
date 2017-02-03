@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
 //        if (BDPruebas.productos.size()==0)
             BDPruebas.iniciarBBDD();
-        Intent i = new Intent(getApplicationContext(),ActivityLogin.class);
-        startActivity(i);
 
 
 
@@ -34,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent i = new Intent(getApplicationContext(),ActivityLogin.class);
+        startActivity(i);
+    }
 
     private void cargarDriverJDBC(){//No modificar
         try
