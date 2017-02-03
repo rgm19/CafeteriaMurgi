@@ -69,6 +69,8 @@ public class ActivityPedidos extends AppCompatActivity {
             String consulta = "select username, hora, sum(precio) as total, estado from pedidos, usuarios " +
                     "where id_cli = idCliente group by username, hora order by hora, num_pedido, username, estado, total";
             new ConsultasPedidos(consulta, dialogo).execute();
+            new ActualizacionPedidos().execute();
+
 
     }
 
@@ -220,63 +222,36 @@ public class ActivityPedidos extends AppCompatActivity {
      */
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
-    public class ActualizacionPedidos extends AsyncTask<String,ResultSet,Void> {
+    public class ActualizacionPedidos extends AsyncTask<Void,Void,Void> {
 
+        public ActualizacionPedidos()
+        {
 
-        String consultaPd;
-        Connection conexPd;
-        Statement sentenciaPd;
-        ResultSet resultPd;
-
-        public ActualizacionPedidos(String consulta){
-            this.consultaPd=consulta;
         }
 
         @Override
-        protected Void doInBackground(String... params)
+        protected Void doInBackground(Void... voids)
         {
-
-                try {
-                    conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171",
-                            "ubase20171", "pbase20171");
-                    sentenciaPd = conexPd.createStatement();
-                    resultPd = null;
-
-
-                    resultPd = sentenciaPd.executeQuery(consultaPd);
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                publishProgress(resultPd);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            publishProgress();
                 return null;
 
+
+
         }
 
         @Override
-        protected void onProgressUpdate(ResultSet... resultSet) {
-            super.onProgressUpdate(resultSet);
-            try{
-                while (resultSet[0].next()) {
-                    vistaPedidos.add(new VistaPedido(resultSet[0].getString("username"),
-                            resultSet[0].getTime("hora").toString(), resultSet[0].getFloat("total"),0));
-                }
-                lanzarAdapter();
-                conexPd.close();
-                sentenciaPd.close();
-                resultPd.close();
-
-
-            }catch (Exception ex) { Log.d("Fallo de cojones",""); }
-        }
-
-        @Override
-        protected void onPostExecute(Void voids)
+        protected void onProgressUpdate(Void... voids)
         {
-            super.onPostExecute(voids);
-
-
-
+            super.onProgressUpdate();
+            onStart();
+            dialogo.dismiss();
         }
     }//Fin AsynTack
+
+
 }//Fin Activity
