@@ -100,12 +100,20 @@ public class ActivityPedidos extends AppCompatActivity {
      * @param usuario
      * @param hora
      */
-    private void lanzarDetalles(String usuario, String hora) {
+    private void lanzarDetalles(String usuario, int idCli, String hora) {
+        dialogo.show();
+        String update = "update pedidos set estado = 1 where idCliente = " + idCli +
+                            " and hora = '" + hora+ "'";
+        new ConsultasPedidos(update, dialogo).execute();
+    }//Fin lanzarDetalles
+
+    private void lanzarDetalles2() {
         Intent intent = new Intent(getApplicationContext(), ActivityPedidosDetalles.class);
 //        intent.putExtra("USUARIO", usuario);
 //        intent.putExtra("HORA", hora);
         startActivity(intent);
-    }//Fin lanzarDetalles
+    }//Fin lanzarDetalles2
+
 
     /**
      * Captura la acción de pulsar el botón atrás y vuelve a la pantalla de login
@@ -192,13 +200,22 @@ public class ActivityPedidos extends AppCompatActivity {
                     usuario = BDFinal.pedidosFinal.get(0).getUsuario().getNombre();
                     hora = BDFinal.pedidosFinal.get(0).getHora().trim();
 
-                    String update = "update pedidos set estado = 1 where idCliente = " + idCli +
-                            " and hora = '" + hora+ "'";
-
-                    Log.e("ERROR", "Hora: "+hora);
-
+//                    String update = "update pedidos set estado = 1 where idCliente = " + idCli +
+//                            " and hora = '" + hora+ "'";
+//                    Log.e("Error", update);
+//
+//                    Log.e("ERROR", "Hora: "+hora);
+//
 //                    sentenciaPd.executeUpdate(update);
-                    lanzarDetalles(usuario, hora);
+                    lanzarDetalles(usuario, idCli, hora);
+                }
+
+                if (consultaPd.contains("update")){
+                    Log.e("Error", "update1");
+                    sentenciaPd.executeUpdate(consultaPd);
+                    Log.e("Error", "update2");
+                    lanzarDetalles2();
+                    Log.e("Error", "update3");
                 }
 
                 conexPd.close();
