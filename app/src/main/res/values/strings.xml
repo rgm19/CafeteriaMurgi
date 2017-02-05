@@ -14,4 +14,19 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="ac_pedir">Pedir</string>
+    <string name="ac_tipo">Tipo:</string>
+    <string name="ac_leche">Leche:</string>
+    <string name="ac_sin_lactosa">Sin Lactosa</string>
+    <string name="ac_crema">Crema</string>
+    <string name="ac_chocolate">Chocolate</string>
+    <string name="ac_hielo">Hielo</string>
+    <string name="ac_precio">Precio:</string>
+    <string name="ad_resumen">Resumen:</string>
+    <string name="ad_hora_de_recogida">Hora de recogida:</string>
+    <string name="ad_total">Total:</string>
+    <string name="ad_confirmar_pedido">Confirmar Pedido</string>
+    <string name="al_usuario">Usuario:</string>
+    <string name="al_contraseña">Contraseña:</string>
+    <string name="al_usuari">Usuario</string>
 </resources>

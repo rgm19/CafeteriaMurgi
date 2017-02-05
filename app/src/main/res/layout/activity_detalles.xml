@@ -30,7 +30,7 @@
         android:layout_marginStart="16dp" />
 
     <TextView
-        android:text="Resumen:"
+        android:text="@string/ad_resumen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_dt_resumen"
@@ -64,7 +64,7 @@
         android:layout_marginBottom="8dp" />
 
     <Button
-        android:text="Confirmar pedido"
+        android:text="@string/ad_confirmar_pedido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/btn_dt_confirmar"
@@ -74,10 +74,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintHorizontal_bias="0.25" />
+        app:layout_constraintHorizontal_bias="0.54" />
 
     <TextView
-        android:text="Total:"
+        android:text="@string/ad_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_dt_total"
@@ -118,13 +118,11 @@
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_dt_total"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:timePickerMode="spinner"/>
 
     <TextView
-        android:text="Hora de recogida:"
+        android:text="@string/ad_hora_de_recogida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView5"
