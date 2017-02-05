@@ -33,4 +33,10 @@
     <string name="al_entrar">Entrar</string>
     <string name="al_red_local">Red Local</string>
     <string name="al_red_externa">Red Externa</string>
+    <string name="ap_actualizar_pedidos">Actualizar Pedidos</string>
+    <string name="apd_nombre_cliente">Nombre Cliente</string>
+    <string name="dp_contraseñas">Contraseñas:</string>
+    <string name="dp_aceptar">Aceptar</string>
+    <string name="lp_nombre_del_cliente">Nombre del Cliente</string>
+    <string name="lpp_nombre_del_cafe">Nombre del Café</string>
 </resources>

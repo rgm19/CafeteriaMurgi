@@ -21,7 +21,7 @@
         android:layout_marginBottom="8dp" />
 
     <TextView
-        android:text="Nombre del café"
+        android:text="@string/lpp_nombre_del_cafe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_dt_list_nombre"

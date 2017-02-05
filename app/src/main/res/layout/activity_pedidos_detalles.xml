@@ -8,7 +8,7 @@
     tools:context="a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.ActivityPedidosDetalles">
 
     <TextView
-        android:text="Nombre cliente"
+        android:text="@string/apd_nombre_cliente"
         android:textColor="#000"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
@@ -18,7 +18,7 @@
         android:textSize="19sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintRight_toLeftOf="@+id/tvAPedidosDPrecioT" />
 
     <TextView
