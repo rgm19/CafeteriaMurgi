@@ -215,3 +215,29 @@ Conexion Base datos: base20171
             return null;
         }
     }
+
+    --------------------------------------------------------------------
+
+    --------AÑADIR IDIOMAS; MANOLO-------------------------------------
+
+    Hay 2 formas;
+        1- Con el proyecto en modo "Proyect" ir a la carpeta app/main/res/ y añadir una carpeta con
+            el nombre values-xx, por ejemplo, values-en para ingles ó values-es para español para
+            saber el codigo del pais lo buscamos con por la norma: ISO 639-1 CODE de paises
+
+            En caso de que el idioma tenga varios dialectos se especificara en una carpeta con el nombre:
+            values-xx-rXX por ejemplo values-es-rAR para el español hablado en argentina ó values-en-rGB
+            para el ingles de Reino Unido
+
+         2- Con el proyecto en modo "android" ir a la carpeta app/res/values/strings y sobre esta ultima
+         pulsamos con el boton derecho-> new -> Value Resource File. Aqui hacemos click sobre "Locate" y pulsamos
+         ">>" donde podremos elegir idioma y dialecto. Por ultimo escribimos el nombre del fichero (stirngs) y automaticamente
+         se creara el fichero donde escribiremos los string
+
+         NOTA: los string, por ejemplo:  <string name="prompt_email">Email</string> deberan tener el mismo "name"
+         en todos los idiomas para la misma frase variando unicamente el valor del elemento xml
+
+         //Ruben, saca foto de como se pone el idioma en la forma 2 que es interesante
+//---------------------------------------------------------------------------------------------------------------
+
+conversion conectores-mysql https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-versions.html
