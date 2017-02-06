@@ -40,9 +40,9 @@ public class ActivityCafe extends AppCompatActivity {
 
     AlertDialog dialogo;
 
-    Spinner spTipo;//tipo de cafe
-    Spinner spLeche;//temperatura leche
-    Spinner spAzucar;//tipo de azucar
+    Spinner spTipo;     //Tipo de cafe
+    Spinner spLeche;    //Temperatura leche
+    Spinner spAzucar;   //Tipo de azucar
 
     CheckBox lactosa;
     CheckBox crema;
@@ -68,12 +68,12 @@ public class ActivityCafe extends AppCompatActivity {
     static float p = 0f;//Precio cafe
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cafe);
 
         inflar();
-        init();
+        //init();//Redundante si ya esta en onStart()
 
     }//Fin onCreate
 
@@ -105,23 +105,27 @@ public class ActivityCafe extends AppCompatActivity {
         spTipo       = (Spinner)     findViewById(R.id.sp_cf_tipo);
         spLeche      = (Spinner)     findViewById(R.id.sp_cf_leche);
         spAzucar     = (Spinner)     findViewById(R.id.sp_cf_azucar);
+
         lactosa      = (CheckBox)    findViewById(R.id.cb_cf_lactosa);
         crema        = (CheckBox)    findViewById(R.id.cb_cf_crema);
         chocolate    = (CheckBox)    findViewById(R.id.cb_cf_choco);
         hielo        = (CheckBox)    findViewById(R.id.cb_cf_hielo);
+
         precio       = (TextView)    findViewById(R.id.tv_cf_precioNum);
         cantidad     = (TextView)    findViewById(R.id.tv_cnt_cantidad);
+
         volver       = (ImageButton) findViewById(R.id.ib_cf_volver);
         menu         = (ImageButton) findViewById(R.id.ib_cf_menu);
+
         pedir        = (Button)      findViewById(R.id.btn_cf_pedir);
         menos        = (Button)      findViewById(R.id.btn_cnt_menos);
         mas          = (Button)      findViewById(R.id.btn_cnt_mas);
+
         fab          = (FloatingActionButton) findViewById(R.id.fab_cf);
     }//Fin inflar
 
     /**
-     * Captura la acción de pulsar el botón atrás y vuelve a la pantalla de login, borrando los
-     * pedidos guardados
+     * Captura la acción de pulsar el botón atrás y vuelve a la pantalla de login, borrando los pedidos guardados
      */
     @Override
     public void onBackPressed() {
@@ -147,31 +151,23 @@ public class ActivityCafe extends AppCompatActivity {
      * Métodos de los spinner
      */
     private void metodosSpinner() {
-        /**
-         * Spinner Tipo, muestra una lista de los nombres de los cefes para seleccionar uno
-         * SE DEBE LANZAR DESDE EL AsyncTask UNA VEZ REALIZADA LA CONSULTA Y CARGADOS LOS DATOS DE LA BBDD
-         * Al seleccionar un tipo se consulta su precio y si lleva leche o no para modificar las opciones
-         */
-
         dialogo = new SpotsDialog(this,"Calculando precios...");
-
         spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayTipo));
-        spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+        //Al seleccionar un tipo de cafe accedemos a la bbdd para consultar su precio y la posibilidad de acompañar con leche
+        spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 dialogo.show();
                 new ConsultasCafe("Select precio, leche from productos where nom_pro = '"+parent.getSelectedItem().toString().trim()+"'",dialogo).execute();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 //No se usa pero no se puede borrar
             }
         });//Fin Spinner Tipo
 
-        //----------------------------------------------------------------------------------------//
-        //----------------------------------------------------------------------------------------//
+
         /**
          * Spinner Leche, muestra las opciones de temperatura de la leche que se recogeran luego
          * para los detalles del pedido
