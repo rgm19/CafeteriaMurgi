@@ -40,17 +40,32 @@ public class ActivityCafe extends AppCompatActivity {
 
     AlertDialog dialogo;
 
-    Spinner spTipo, spLeche, spAzucar;
-    CheckBox lactosa, crema, chocolate, hielo;
-    TextView precio, cantidad;
-    ImageButton volver, menu;
-    Button pedir, menos, mas;
+    Spinner spTipo;//tipo de cafe
+    Spinner spLeche;//temperatura leche
+    Spinner spAzucar;//tipo de azucar
+
+    CheckBox lactosa;
+    CheckBox crema;
+    CheckBox chocolate;
+    CheckBox hielo;
+
+    TextView precio;
+    TextView cantidad;
+
+    ImageButton volver;
+    ImageButton menu;
+
+    Button pedir;
+    Button menos;
+    Button mas;
+
     FloatingActionButton fab;
+
 
     static ArrayList<String> arrayTipo = new ArrayList<>();
     static boolean datos = false;
     static boolean leche = false;
-    static float p = 0f;
+    static float p = 0f;//Precio cafe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +78,7 @@ public class ActivityCafe extends AppCompatActivity {
     }//Fin onCreate
 
     /**
-     * Cargamos la BBDD desde el onStart para que te la carge cada vez que se muestre la Activity
-     * Necesario para que carge los datos al volver desde la pantalla de detalles
+     * Carga la BBDD desde cada vez que se cargue la Activity
      */
     @Override
     protected void onStart() {
@@ -73,15 +87,14 @@ public class ActivityCafe extends AppCompatActivity {
     }
 
     /**
-     * Llama a loa metodos para cargar la bbdd e inicializa los datos
+     * Llama a los metodos para cargar la bbdd e inicializa los datos
      */
     private void init(){
-        dialogo =new SpotsDialog(this,"Cargando BBDD...");
+        dialogo = new SpotsDialog(this,"Cargando BBDD...");
         dialogo.show();
         new ConsultasCafe("Select * from productos", dialogo).execute();
 
         metodosListener();
-
         llevaLeche(leche);
     }
 
@@ -135,7 +148,7 @@ public class ActivityCafe extends AppCompatActivity {
      */
     private void metodosSpinner() {
         /**
-         * Spinner Tipo, muestra una lista de los nombres de los produdos para seleccionar uno
+         * Spinner Tipo, muestra una lista de los nombres de los cefes para seleccionar uno
          * SE DEBE LANZAR DESDE EL AsyncTask UNA VEZ REALIZADA LA CONSULTA Y CARGADOS LOS DATOS DE LA BBDD
          * Al seleccionar un tipo se consulta su precio y si lleva leche o no para modificar las opciones
          */
@@ -290,14 +303,13 @@ public class ActivityCafe extends AppCompatActivity {
     }//Fin limpiar
 
     /**
-     * generarComentarios, devuelve un String con las opciones selecionadas en los checkBox y spinner
-     * @return
+     * Comprueba los checkbox y spinner seleccionados
+     * @return String: Cadena con las opciones seleccionadas en spinner y checkbox
      */
     private String generarComentarios() {
         String comentarios = "";
         if (leche)
             comentarios = comentarios.concat(spLeche.getSelectedItem().toString().trim()+", ");
-
         comentarios = comentarios.concat(spAzucar.getSelectedItem().toString().trim()+"");
         if (leche)
             if (lactosa.isChecked())
