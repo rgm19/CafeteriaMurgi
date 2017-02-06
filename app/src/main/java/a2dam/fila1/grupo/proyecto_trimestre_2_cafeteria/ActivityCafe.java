@@ -89,21 +89,21 @@ public class ActivityCafe extends AppCompatActivity {
      * Infla todos los elementos del layout del activity
      */
     private void inflar() {
-        spTipo = (Spinner) findViewById(R.id.sp_cf_tipo);
-        spLeche = (Spinner) findViewById(R.id.sp_cf_leche);
-        spAzucar = (Spinner) findViewById(R.id.sp_cf_azucar);
-        lactosa = (CheckBox) findViewById(R.id.cb_cf_lactosa);
-        crema = (CheckBox) findViewById(R.id.cb_cf_crema);
-        chocolate = (CheckBox) findViewById(R.id.cb_cf_choco);
-        hielo = (CheckBox) findViewById(R.id.cb_cf_hielo);
-        precio = (TextView) findViewById(R.id.tv_cf_precioNum);
-        cantidad = (TextView) findViewById(R.id.tv_cnt_cantidad);
-        volver = (ImageButton) findViewById(R.id.ib_cf_volver);
-        menu = (ImageButton) findViewById(R.id.ib_cf_menu);
-        pedir = (Button) findViewById(R.id.btn_cf_pedir);
-        menos = (Button) findViewById(R.id.btn_cnt_menos);
-        mas = (Button) findViewById(R.id.btn_cnt_mas);
-        fab = (FloatingActionButton) findViewById(R.id.fab_cf);
+        spTipo       = (Spinner)     findViewById(R.id.sp_cf_tipo);
+        spLeche      = (Spinner)     findViewById(R.id.sp_cf_leche);
+        spAzucar     = (Spinner)     findViewById(R.id.sp_cf_azucar);
+        lactosa      = (CheckBox)    findViewById(R.id.cb_cf_lactosa);
+        crema        = (CheckBox)    findViewById(R.id.cb_cf_crema);
+        chocolate    = (CheckBox)    findViewById(R.id.cb_cf_choco);
+        hielo        = (CheckBox)    findViewById(R.id.cb_cf_hielo);
+        precio       = (TextView)    findViewById(R.id.tv_cf_precioNum);
+        cantidad     = (TextView)    findViewById(R.id.tv_cnt_cantidad);
+        volver       = (ImageButton) findViewById(R.id.ib_cf_volver);
+        menu         = (ImageButton) findViewById(R.id.ib_cf_menu);
+        pedir        = (Button)      findViewById(R.id.btn_cf_pedir);
+        menos        = (Button)      findViewById(R.id.btn_cnt_menos);
+        mas          = (Button)      findViewById(R.id.btn_cnt_mas);
+        fab          = (FloatingActionButton) findViewById(R.id.fab_cf);
     }//Fin inflar
 
     /**
@@ -277,14 +277,14 @@ public class ActivityCafe extends AppCompatActivity {
      * cantidad en posicion inicial
      */
     private void limpiar() {
-        spTipo.setSelection(0);
-        spLeche.setSelection(0);
-        spAzucar.setSelection(0);
-        lactosa.setChecked(false);
-        crema.setChecked(false);
-        chocolate.setChecked(false);
-        hielo.setChecked(false);
-        cantidad.setText(""+1);
+        spTipo      .setSelection(0);
+        spLeche     .setSelection(0);
+        spAzucar    .setSelection(0);
+        lactosa     .setChecked(false);
+        crema       .setChecked(false);
+        chocolate   .setChecked(false);
+        hielo       .setChecked(false);
+        cantidad    .setText(""+1);
 
         setPrecio();
     }//Fin limpiar
@@ -386,12 +386,11 @@ public class ActivityCafe extends AppCompatActivity {
         protected ResultSet doInBackground(Void... params) {
 
             try {
-                conexCf = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");
+                conexCf     = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171", "ubase20171", "pbase20171");
                 sentenciaCf = conexCf.createStatement();
-                resultCf = null;
+                resultCf    = null;
                 publishProgress();
-
-                resultCf = sentenciaCf.executeQuery(consultaCf);
+                resultCf    = sentenciaCf.executeQuery(consultaCf);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -425,10 +424,10 @@ public class ActivityCafe extends AppCompatActivity {
                     datos = true;
                 }
 
-                conexCf.close();
-                sentenciaCf.close();
-                resultCf.close();
-                dialog.dismiss();
+                conexCf     .close();
+                sentenciaCf .close();
+                resultCf    .close();
+                dialog      .dismiss();
 
             }
             catch (Exception ex)
@@ -437,5 +436,4 @@ public class ActivityCafe extends AppCompatActivity {
             }
         }
     }//Fin AsynTack
-
 }//Fin Acticity

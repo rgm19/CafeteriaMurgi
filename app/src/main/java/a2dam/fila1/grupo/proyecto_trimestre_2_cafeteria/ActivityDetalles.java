@@ -53,12 +53,12 @@ public class ActivityDetalles extends AppCompatActivity {
      * Infla todos los elementos del layout del activity
      */
     private void inflar() {
-        dialogo = new SpotsDialog(this,"Enviado Pedidos...");
-        listaProcductos = (ListView)findViewById(R.id.lv_dt);
-        precio = (TextView)findViewById(R.id.tv_dt_precio);
-        volver = (ImageButton)findViewById(R.id.ib_dt_volver);
-        confirmar = (Button)findViewById(R.id.btn_dt_confirmar);
-        reloj = (TimePicker)findViewById(R.id.timePicker2);
+        dialogo          = new SpotsDialog(this,"Enviado Pedidos...");
+        listaProcductos  = (ListView)findViewById(R.id.lv_dt);
+        precio           = (TextView)findViewById(R.id.tv_dt_precio);
+        volver           = (ImageButton)findViewById(R.id.ib_dt_volver);
+        confirmar        = (Button)findViewById(R.id.btn_dt_confirmar);
+        reloj            = (TimePicker)findViewById(R.id.timePicker2);
     }
 
     /**

@@ -82,13 +82,13 @@ public class ActivityLogin extends AppCompatActivity {
      * Infla todos los elementos del layout del activity
      */
     private void inflar() {
-        dialogo =new SpotsDialog(this,"Comprobando usuario...");
-        usuario = (EditText) findViewById(R.id.et_lg_usuario);
-        pass = (EditText) findViewById(R.id.et_lg_pass);
-        entrar = (Button) findViewById(R.id.btn_lg_entrar);
-        ayuda = (ImageButton) findViewById(R.id.ibtn_lg_ayuda);
-        local = (RadioButton) findViewById(R.id.rb_lg_local);
-        externa = (RadioButton) findViewById(R.id.rb_lg_externa);
+        dialogo  = new SpotsDialog(this,"Comprobando usuario...");
+        usuario  = (EditText) findViewById(R.id.et_lg_usuario);
+        pass     = (EditText) findViewById(R.id.et_lg_pass);
+        entrar   = (Button) findViewById(R.id.btn_lg_entrar);
+        ayuda    = (ImageButton) findViewById(R.id.ibtn_lg_ayuda);
+        local    = (RadioButton) findViewById(R.id.rb_lg_local);
+        externa  = (RadioButton) findViewById(R.id.rb_lg_externa);
     }//Fin inflar
 
     /**
@@ -201,5 +201,4 @@ public class ActivityLogin extends AppCompatActivity {
             }catch (Exception ex) {     Log.d("Fallo de cojones","");   }
         }
     }//Fin AsynTack
-
 }//Fin Acticity
