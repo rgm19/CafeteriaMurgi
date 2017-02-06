@@ -73,10 +73,7 @@ public class ActivityCafe extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cafe);
-
         inflar();
-        //init();//Redundante si ya esta en onStart()
-
     }//Fin onCreate
 
     /**
@@ -93,9 +90,7 @@ public class ActivityCafe extends AppCompatActivity {
      */
     private void init(){
         lanzarDialogo("Cargando BBDD...");
-
         new ConsultasCafe("Select * from productos", dialogo).execute();
-
         listenerBotones();
         llevaLeche(leche);
     }
@@ -186,7 +181,7 @@ public class ActivityCafe extends AppCompatActivity {
                 //No se usa pero no se puede borrar
             }
         });//Fin Spinner Tipo
-    }//Fin Spinner
+    }
 
     /**
      * Métodos lístener de todos los botones del layout
@@ -250,7 +245,7 @@ public class ActivityCafe extends AppCompatActivity {
             }
         });
 
-    }//Fin Listener
+    }//Fin ListenerBotones
 
     /**
      * Limpiar, al realizar un pedido con FAB, desmarca los checkBox y coloca los spinner  y la
