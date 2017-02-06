@@ -1,13 +1,11 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -18,13 +16,11 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
 import dmax.dialog.SpotsDialog;
 
 public class ActivityDetalles extends AppCompatActivity {
@@ -46,7 +42,7 @@ public class ActivityDetalles extends AppCompatActivity {
         inflar();
 
         lanzarAdapter();
-        metodosListener();
+        listenerBotones();
 
     }
     /**
@@ -75,31 +71,24 @@ public class ActivityDetalles extends AppCompatActivity {
      * del pedido y redondea para sólo 2 decimales máximo
      */
     private static void precioTotal() {
-        float pf = 0f;
+        float precioFinal = 0f;
         for (int i = 0; i < BDFinal.pedidosFinal.size(); i++){
-            pf += BDFinal.pedidosFinal.get(i).getPrecio();
+            precioFinal += BDFinal.pedidosFinal.get(i).getPrecio();
         }
-        double redondeo = Math.round(pf*100.0)/100.0;
+        double redondeo = Math.round(precioFinal*100.0)/100.0;
         precio.setText("" + redondeo);
-
     }
 
     /**
-     * Métodos lístener de los botones
+     * Listener de los botones de la activity
      */
-    private void metodosListener() {
-        /**
-         * Listener volver, carga la Activity anterior para seguir añadiendo cafés
-         */
-        volver.setOnClickListener(new View.OnClickListener() {
+    private void listenerBotones() {
+        volver.setOnClickListener(new View.OnClickListener() {//Boton volver
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
-        //----------------------------------------------------------------------------------------//
-        //----------------------------------------------------------------------------------------//
 
         /**
          * Listener confirmar, comprueba que hay productos añadidos
@@ -113,10 +102,8 @@ public class ActivityDetalles extends AppCompatActivity {
             public void onClick(View v) {
                 int hour = 0;
                 int minute = 0;
-                /**
-                 * Los métodos getHour() y getMinute() no funcionan en API inferior a 23, hay que
-                 * usar metodos deprecated.
-                 */
+
+                //Detecta la API que se esta ejecutando, si es menor que 23 se usan metodos deprecated para obtener la hora actual
                 if (Build.VERSION.SDK_INT >= 23 ){
                     hour = reloj.getHour();
                     minute = reloj.getMinute();
@@ -198,5 +185,4 @@ public class ActivityDetalles extends AppCompatActivity {
 
         }
     }//Fin AsynTack
-
 }//Fin Activity
