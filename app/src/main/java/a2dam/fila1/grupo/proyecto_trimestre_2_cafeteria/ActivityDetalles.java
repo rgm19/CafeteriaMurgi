@@ -181,14 +181,16 @@ public class ActivityDetalles extends AppCompatActivity {
         @Override
         protected void onPostExecute(Statement statement) {
             super.onPostExecute(statement);
-            Log.e("ERRORRRRR","Entra en onPostExecute");
+
             try {
                 sentenciaDt.executeUpdate(consultaDt);
 
                 conexDt.close();
                 sentenciaDt.close();
 
-            } catch (SQLException e) {
+            }
+            catch (SQLException e)
+            {
                 e.printStackTrace();
             }
 

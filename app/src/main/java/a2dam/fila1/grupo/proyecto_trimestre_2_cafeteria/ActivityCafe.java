@@ -59,7 +59,7 @@ public class ActivityCafe extends AppCompatActivity {
 
     ArrayAdapter<CharSequence> adapterLeche;    //Adapter para el spinner de la temperatura de la leche
     ArrayAdapter<CharSequence> adapterAzucar;   //Adapter para el spinner del tipo de azucar
-    ArrayAdapter<String> adapterTipo; //Adapter para el spinner de tipos de cafe
+    ArrayAdapter<String> adapterTipo;           //Adapter para el spinner de tipos de cafe
 
 
     static ArrayList<String> arrayTipo = new ArrayList<>();
