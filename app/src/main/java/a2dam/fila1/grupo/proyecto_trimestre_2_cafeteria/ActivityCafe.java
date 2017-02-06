@@ -90,12 +90,17 @@ public class ActivityCafe extends AppCompatActivity {
      * Llama a los metodos para cargar la bbdd e inicializa los datos
      */
     private void init(){
-        dialogo = new SpotsDialog(this,"Cargando BBDD...");
-        dialogo.show();
+        lanzarDialogo("Cargando BBDD...");
+
         new ConsultasCafe("Select * from productos", dialogo).execute();
 
         metodosListener();
         llevaLeche(leche);
+    }
+
+    private void lanzarDialogo(String texto) {
+        dialogo = new SpotsDialog(this,""+texto);
+        dialogo.show();
     }
 
     /**
@@ -151,7 +156,8 @@ public class ActivityCafe extends AppCompatActivity {
      * Métodos de los spinner
      */
     private void metodosSpinner() {
-        dialogo = new SpotsDialog(this,"Calculando precios...");
+        lanzarDialogo("Calculando precios...");
+//        dialogo = new SpotsDialog(this,"Calculando precios...");
         spTipo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayTipo));
 
         //Al seleccionar un tipo de cafe accedemos a la bbdd para consultar su precio y la posibilidad de acompañar con leche
