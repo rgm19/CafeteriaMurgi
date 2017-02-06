@@ -42,18 +42,30 @@ public class ActivityCafe extends AppCompatActivity {
 
     Spinner spTipo;//tipo de cafe
     Spinner spLeche;//temperatura leche
-    Spinner spAzucar;
-    CheckBox lactosa, crema, chocolate, hielo;
-    TextView precio, cantidad;
-    ImageButton volver, menu;
-    Button pedir, menos, mas;
+    Spinner spAzucar;//tipo de azucar
+
+    CheckBox lactosa;
+    CheckBox crema;
+    CheckBox chocolate;
+    CheckBox hielo;
+
+    TextView precio;
+    TextView cantidad;
+
+    ImageButton volver;
+    ImageButton menu;
+
+    Button pedir;
+    Button menos;
+    Button mas;
+
     FloatingActionButton fab;
 
 
     static ArrayList<String> arrayTipo = new ArrayList<>();
     static boolean datos = false;
     static boolean leche = false;
-    static float p = 0f;
+    static float p = 0f;//Precio cafe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
