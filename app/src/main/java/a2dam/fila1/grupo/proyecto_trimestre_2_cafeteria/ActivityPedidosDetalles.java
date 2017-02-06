@@ -1,27 +1,18 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
 import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Email.SendMail;
 import dmax.dialog.SpotsDialog;
@@ -47,16 +38,19 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
     }
 
     private void inflar() {
-        dialogo = new SpotsDialog(this,  "Termiando pedidos...");
-        listView = (ListView) findViewById(R.id.lvAPedidosD);
-        tvNombre = (TextView) findViewById(R.id.tvAPedidosDNomCli);
-        tvHora = (TextView) findViewById(R.id.tvAPedidosDHora);
-        precioT = (TextView) findViewById(R.id.tvAPedidosDPrecioT);
-        fab = (FloatingActionButton) findViewById(R.id.fab_done);
-        tvNombre.setText(BDFinal.pedidosFinal.get(0).getUsuario().getNombre());
-        tvHora.setText(BDFinal.pedidosFinal.get(0).getHora());
+        dialogo     = new SpotsDialog(this,  "Termiando pedidos...");
 
-        precioT.setText(calcularPrecio() + " €");
+        listView    = (ListView) findViewById(R.id.lvAPedidosD);
+
+        tvNombre    = (TextView) findViewById(R.id.tvAPedidosDNomCli);
+        tvHora      = (TextView) findViewById(R.id.tvAPedidosDHora);
+        precioT     = (TextView) findViewById(R.id.tvAPedidosDPrecioT);
+
+        fab         = (FloatingActionButton) findViewById(R.id.fab_done);
+
+        tvNombre    .setText(BDFinal.pedidosFinal.get(0).getUsuario().getNombre());
+        tvHora      .setText(BDFinal.pedidosFinal.get(0).getHora());
+        precioT     .setText(calcularPrecio() + " €");
     }
 
     @Override
@@ -149,16 +143,13 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
             super.onPostExecute(statement);
             try {
                 sentenciaPDt.executeUpdate(consultaPDt);
-
                 conexPDt.close();
                 sentenciaPDt.close();
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
             dialog.dismiss();
         }
     }//Fin AsynTack
-
 }//Fin Activity
