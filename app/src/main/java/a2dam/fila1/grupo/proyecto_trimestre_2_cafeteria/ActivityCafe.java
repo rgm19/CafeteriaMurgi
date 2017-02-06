@@ -39,7 +39,10 @@ import dmax.dialog.SpotsDialog;
 public class ActivityCafe extends AppCompatActivity {
 
     AlertDialog dialogo;
-    Spinner spTipo, spLeche, spAzucar;
+
+    Spinner spTipo;//tipo de cafe
+    Spinner spLeche;//temperatura leche
+    Spinner spAzucar;
     CheckBox lactosa, crema, chocolate, hielo;
     TextView precio, cantidad;
     ImageButton volver, menu;
@@ -133,7 +136,7 @@ public class ActivityCafe extends AppCompatActivity {
      */
     private void metodosSpinner() {
         /**
-         * Spinner Tipo, muestra una lista de los nombres de los produdos para seleccionar uno
+         * Spinner Tipo, muestra una lista de los nombres de los cefes para seleccionar uno
          * SE DEBE LANZAR DESDE EL AsyncTask UNA VEZ REALIZADA LA CONSULTA Y CARGADOS LOS DATOS DE LA BBDD
          * Al seleccionar un tipo se consulta su precio y si lleva leche o no para modificar las opciones
          */
