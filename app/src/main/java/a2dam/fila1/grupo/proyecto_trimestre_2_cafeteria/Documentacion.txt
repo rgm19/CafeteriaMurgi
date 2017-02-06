@@ -241,3 +241,34 @@ Conexion Base datos: base20171
 //---------------------------------------------------------------------------------------------------------------
 
 conversion conectores-mysql https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-versions.html
+
+
+//-------------------------SMS SMS SMSS SMS SMS SMS -----------------------------------------------------
+
+
+Para enviar un SMS necesitamos el permiso:
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+   + Para enviar un sms automatico solo necesitamos 2 setencias:
+
+        //Crea una instancia predeterminada de SmsManager
+        SmsManager smsManager = SmsManager.getDefault();
+
+        //Manda el mensaje, necesita los parametros:
+
+            //String: codigo del pais + numero de telefono
+            //String: direccion del centro de mensajes o dejar como null para usar el predeterminado
+            //String: texto del mensaje
+            //PendingIntent: si no es NULL, este PendingIntent se transmite cuando el mensaje se envía correctamente o falla. El código de resultado será Activity.RESULT_OK para el éxito, o uno de estos errores: RESULT_ERROR_GENERIC_FAILURE RESULT_ERROR_RADIO_OFF RESULT_ERROR_NULL_PDU. El control de SMS basado en la aplicación controla sentIntent. Si sentIntent es NULL, la persona que llama se verificará contra todas las aplicaciones desconocidas, lo que hará que se envíe un número menor de SMS en el período de comprobación.
+            //PendingIntent: si no es NULL este PendingIntent se transmite cuando el mensaje se entrega al destinatario. El raw pdu del informe de estado está en los datos extendidos ('pdu').
+
+
+        smsManager.sendTextMessage("+34612345678", null, "funciona", null, null);
+
+   + Para enviar un sms abriendo la apk predeterminada para envio de sms
+
+            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+            sendIntent.putExtra("sms_body", "default content");
+            sendIntent.setType("vnd.android-dir/mms-sms");
+            startActivity(sendIntent);
