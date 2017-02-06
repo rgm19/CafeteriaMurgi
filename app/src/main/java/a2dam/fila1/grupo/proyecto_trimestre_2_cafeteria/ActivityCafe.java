@@ -122,8 +122,10 @@ public class ActivityCafe extends AppCompatActivity {
                         //ActivityLogin.USER=null;
                         ActivityLogin.loginCorrecto=false;
                         BDFinal.pedidosFinal.clear();
-                        Intent i = new Intent(getApplicationContext(), ActivityLogin.class);
-                        startActivity(i);
+                        finish();
+//                        Intent i = new Intent(getApplicationContext(), ActivityLogin.class);
+//                        startActivity(i);
+
                     }
                 }).create().show();
     }

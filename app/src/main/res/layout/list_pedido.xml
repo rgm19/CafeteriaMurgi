@@ -19,7 +19,7 @@
         android:layout_marginBottom="8dp" />
 
     <TextView
-        android:text="Nombre del cliente"
+        android:text="@string/lp_nombre_del_cliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvListPedidosNombre"

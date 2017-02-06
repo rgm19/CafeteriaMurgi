@@ -4,6 +4,7 @@ package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Email;
  * Created by Manuel on 30/01/2017.
  */
 
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -18,6 +19,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.AdapterPedidos;
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.AdapterPedidosDetalles;
 
 
 //Necesitamos un hilo para usar conexion a internet
@@ -57,7 +61,8 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
         //Cierra el dialogo cuando el email a acabado (Cuando el doInBackGround a terminado)
         progressDialog.dismiss();
         //Mensaje de confirmacion
-        Toast.makeText(context,"Message Sent",Toast.LENGTH_LONG).show();
+        Toast.makeText(context,"Mensaje enviado a " + email,Toast.LENGTH_LONG).show();
+
     }
 
     @Override
