@@ -323,7 +323,7 @@ public class ActivityCafe extends AppCompatActivity {
     }//Fin setPrecio
 
     /**
-     * llevaLeche, habilita o deshabilita las opciones de leche según el producto
+     * Habilita o deshabilita las opciones de leche según el producto
      * @param leche
      */
     private void llevaLeche(boolean leche) {
@@ -332,8 +332,7 @@ public class ActivityCafe extends AppCompatActivity {
     }//Fin llevaLeche
 
     /**
-     * metodosCheked, onClick de los checkBox implementado en el XML
-     * Llama a setPrecio cada vez que se cliquea un un checkBox
+     * Actualiza precio al detectar eventos de los checkbox (implementados en XML)
      * @param view
      */
     public void metodosCheked(View view) {
