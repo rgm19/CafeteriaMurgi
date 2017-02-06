@@ -39,13 +39,13 @@ import dmax.dialog.SpotsDialog;
 public class ActivityCafe extends AppCompatActivity {
 
     AlertDialog dialogo;
-
     Spinner spTipo, spLeche, spAzucar;
     CheckBox lactosa, crema, chocolate, hielo;
     TextView precio, cantidad;
     ImageButton volver, menu;
     Button pedir, menos, mas;
     FloatingActionButton fab;
+
 
     static ArrayList<String> arrayTipo = new ArrayList<>();
     static boolean datos = false;
@@ -63,8 +63,7 @@ public class ActivityCafe extends AppCompatActivity {
     }//Fin onCreate
 
     /**
-     * Cargamos la BBDD desde el onStart para que te la carge cada vez que se muestre la Activity
-     * Necesario para que carge los datos al volver desde la pantalla de detalles
+     * Carga la BBDD desde cada vez que se cargue la Activity
      */
     @Override
     protected void onStart() {
@@ -73,15 +72,14 @@ public class ActivityCafe extends AppCompatActivity {
     }
 
     /**
-     * Llama a loa metodos para cargar la bbdd e inicializa los datos
+     * Llama a los metodos para cargar la bbdd e inicializa los datos
      */
     private void init(){
-        dialogo =new SpotsDialog(this,"Cargando BBDD...");
+        dialogo = new SpotsDialog(this,"Cargando BBDD...");
         dialogo.show();
         new ConsultasCafe("Select * from productos", dialogo).execute();
 
         metodosListener();
-
         llevaLeche(leche);
     }
 
@@ -290,14 +288,13 @@ public class ActivityCafe extends AppCompatActivity {
     }//Fin limpiar
 
     /**
-     * generarComentarios, devuelve un String con las opciones selecionadas en los checkBox y spinner
-     * @return
+     * Comprueba los checkbox y spinner seleccionados
+     * @return String: Cadena con las opciones seleccionadas en spinner y checkbox
      */
     private String generarComentarios() {
         String comentarios = "";
         if (leche)
             comentarios = comentarios.concat(spLeche.getSelectedItem().toString().trim()+", ");
-
         comentarios = comentarios.concat(spAzucar.getSelectedItem().toString().trim()+"");
         if (leche)
             if (lactosa.isChecked())
