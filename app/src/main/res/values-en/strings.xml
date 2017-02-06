@@ -14,7 +14,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="ac_pedir">Ask</string>
+    <string name="ac_pedir">Order</string>
     <string name="ac_tipo">Type:</string>
     <string name="ac_leche">Milk:</string>
     <string name="ac_sin_lactosa">Without Lactose</string>
