@@ -26,8 +26,8 @@
     <string name="ad_hora_de_recogida">Sammlung Zeit:</string>
     <string name="ad_total">Betrag:</string>
     <string name="ad_confirmar_pedido">Bestellung bestätigen</string>
-    <string name="al_usuario">Benutzer:</string>
-    <string name="al_contraseña">Kennwort:</string>
+    <string name="al_usuario">Benutzer</string>
+    <string name="al_contraseña">Kennwort</string>
     <string name="al_usuari">Benutzer</string>
     <string name="al_contrase">Kennwort</string>
     <string name="al_entrar">Eingeben</string>

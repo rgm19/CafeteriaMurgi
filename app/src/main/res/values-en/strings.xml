@@ -26,8 +26,8 @@
     <string name="ad_hora_de_recogida">Pick up time:</string>
     <string name="ad_total">Total:</string>
     <string name="ad_confirmar_pedido">To confirm order</string>
-    <string name="al_usuario">User:</string>
-    <string name="al_contraseña">Pass:</string>
+    <string name="al_usuario">User</string>
+    <string name="al_contraseña">Pass</string>
     <string name="al_usuari">User</string>
     <string name="al_contrase">Pass</string>
     <string name="al_entrar">Enter</string>

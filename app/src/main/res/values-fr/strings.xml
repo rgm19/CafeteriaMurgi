@@ -26,8 +26,8 @@
     <string name="ad_hora_de_recogida">Prenez le temps:</string>
     <string name="ad_total">Total:</string>
     <string name="ad_confirmar_pedido">Confirmer Commande</string>
-    <string name="al_usuario">Utilisateur:</string>
-    <string name="al_contraseña">Mot de passe:</string>
+    <string name="al_usuario">Utilisateur</string>
+    <string name="al_contraseña">Mot de passe</string>
     <string name="al_usuari">Utilisateur</string>
     <string name="al_contrase">Mot de passe</string>
     <string name="al_entrar">Entrer</string>
