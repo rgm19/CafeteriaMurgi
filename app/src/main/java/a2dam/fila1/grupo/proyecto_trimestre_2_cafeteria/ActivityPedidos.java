@@ -35,7 +35,7 @@ public class ActivityPedidos extends AppCompatActivity {
     AlertDialog dialogo;
     ListView listView;
 
-    ActualizacionPedidos actualizacionPedidos = new ActualizacionPedidos();
+    ActualizacionPedidos actualizacionPedidos;
 
 
     ArrayList<VistaPedido> vistaPedidos = new ArrayList<>();
@@ -56,6 +56,7 @@ public class ActivityPedidos extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+//        actualizacionPedidos.cancel(true);
         /**
          * Actualiza la base de datos y lanza el adapter5
          */
@@ -67,9 +68,8 @@ public class ActivityPedidos extends AppCompatActivity {
             String consulta = "select username, hora, sum(precio) as total, estado from pedidos, usuarios " +
                     "where id_cli = idCliente group by username, hora order by hora, num_pedido, username, estado, total";
             new ConsultasPedidos(consulta, dialogo).execute();
+            actualizacionPedidos = new ActualizacionPedidos();
             actualizacionPedidos.execute();
-
-
     }
 
     /**
@@ -109,6 +109,7 @@ public class ActivityPedidos extends AppCompatActivity {
         String update = "update pedidos set estado = 1 where idCliente = " + idCli +
                             " and hora = '" + hora+ "'";
         new ConsultasPedidos(update, dialogo).execute();
+        actualizacionPedidos.cancel(true);
         Intent intent = new Intent(getApplicationContext(), ActivityPedidosDetalles.class);
         startActivity(intent);
     }//Fin lanzarDetalles

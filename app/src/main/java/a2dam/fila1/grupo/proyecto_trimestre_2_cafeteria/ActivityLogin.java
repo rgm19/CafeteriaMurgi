@@ -50,7 +50,7 @@ public class ActivityLogin extends AppCompatActivity {
 
         if((this.getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE){
+                <= Configuration.SCREENLAYOUT_SIZE_LARGE){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
