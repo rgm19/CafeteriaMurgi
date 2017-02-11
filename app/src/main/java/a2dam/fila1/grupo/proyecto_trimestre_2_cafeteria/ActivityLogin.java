@@ -29,7 +29,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     AlertDialog dialogo;
 
-    public static Usuario USER = null;
+    public static Usuario USER;
     public static String ip = null;
 
     EditText usuario, pass;
@@ -50,6 +50,12 @@ public class ActivityLogin extends AppCompatActivity {
 
         login();
     }//Fin onCreate
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        USER = null;
+    }
 
     /**
      * calcularIP, compruba los radioButton y establece una IP para la conexión con la BBDD

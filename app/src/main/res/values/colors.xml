@@ -14,4 +14,8 @@
     <color name="fondo_blanco">#ededed</color>
     <color name="tono_negro">#b9393e43</color>
     <color name="tono_negro_oscuro">#5a000000</color>
+
+    <!-- pedidos -->
+    <color name="hecho">#90d78f</color>
+    <color name="enproceso">#e1b1b1</color>
 </resources>

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,9 +67,9 @@ public class AdapterPedidos extends BaseAdapter {
         tvHora.setText(getItem(i).getHora());
 
         switch (getItem(i).getEstado()){
-            case 1: fondo.setBackgroundColor(0xFFACADF9);
+            case 1: fondo.setBackgroundColor(0xffe1b1b1);
                 break;
-            case 2: fondo.setBackgroundColor(0xFFAFFFD7);
+            case 2: fondo.setBackgroundColor(0xff90d78f);
                 break;
             default:
         }
