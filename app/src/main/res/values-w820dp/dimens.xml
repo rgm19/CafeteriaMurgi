@@ -9,10 +9,14 @@
     <dimen name="margin_top_logotipo">48dp</dimen>
     <dimen name="margin_top_et_hasta_logotipo">64dp</dimen>
     <dimen name="margin_left_iconos">48dp</dimen>
+    <dimen name="margin_start_list">8dp</dimen>
+    <dimen name="margin_16_0">0dp</dimen>
 
     <!-- DIMENSIONES -->
     <dimen name="alto_logotipo">160dp</dimen>
     <dimen name="size_icon">88dp</dimen>
+    <dimen name="ancho_list_movil_tablet">400dp</dimen>
+    <dimen name="size_check_box">0dp</dimen>
 
     <!-- TAMAÑO LETRA -->
     <dimen name="text_size_normal">26sp</dimen>
