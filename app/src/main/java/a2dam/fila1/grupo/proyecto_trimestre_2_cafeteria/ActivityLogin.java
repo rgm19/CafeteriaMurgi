@@ -57,6 +57,11 @@ public class ActivityLogin extends AppCompatActivity {
         USER = null;
     }
 
+    @Override
+    protected void onRestart() {
+        onStart();
+    }
+
     /**
      * calcularIP, compruba los radioButton y establece una IP para la conexión con la BBDD
      */
