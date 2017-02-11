@@ -15,8 +15,6 @@
         android:scaleType="centerCrop"
         />
 
-
-
     <android.support.constraint.ConstraintLayout
         android:background="@color/tono_negro"
         android:layout_height="wrap_content"

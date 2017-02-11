@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_cafe"
-    android:background="#e4e4e4"
+    android:background="@color/fondo_blanco"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.ActivityCafe">
@@ -68,30 +68,6 @@
 
     <!-- RELATIVE -->
 
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/linearLayout">
-        <include layout="@layout/menu_cantidad"/>
-    </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:clickable="true"
-        app:srcCompat="@drawable/ic_coffee_cup"
-        android:id="@+id/fab_cf"
-        android:scaleType="center"
-        android:layout_marginEnd="@dimen/margin_general"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        android:layout_marginBottom="@dimen/margin_general" />
-
     <RelativeLayout
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="0dp"
@@ -104,11 +80,9 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/margin_general"
-            android:layout_marginStart="@dimen/margin_general"
-            android:layout_marginEnd="@dimen/margin_general"
+            android:padding="@dimen/margin_general"
+            android:background="@color/blanco"
             android:elevation="8dp"
-            android:layout_marginBottom="@dimen/margin_general"
             android:layout_height="wrap_content">
 
 
@@ -253,5 +227,28 @@
         </android.support.constraint.ConstraintLayout>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/linearLayout">
+        <include layout="@layout/menu_cantidad"/>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_coffee_cup"
+        android:id="@+id/fab_cf"
+        android:scaleType="center"
+        android:layout_marginEnd="@dimen/margin_general"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        android:layout_marginBottom="@dimen/margin_general" />
 
 </android.support.constraint.ConstraintLayout>

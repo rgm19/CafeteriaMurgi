@@ -9,7 +9,7 @@
 
     <TextView
         android:text="@string/dp_contraseñas"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_size_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:layout_constraintTop_creator="1"
@@ -65,8 +65,12 @@
         app:layout_constraintRight_toRightOf="@+id/btnAceptar" />
 
     <Button
+        android:layout_marginTop="@dimen/margin_general"
         android:id="@+id/btnAceptar"
+        android:background="@color/accent"
+        android:textColor="@color/blanco"
         android:text="@string/dp_aceptar"
+        android:elevation="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:layout_constraintTop_creator="1"
@@ -75,5 +79,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.45" />
+        app:layout_constraintHorizontal_bias="0.45"
+        android:textStyle="normal|bold" />
 </android.support.constraint.ConstraintLayout>

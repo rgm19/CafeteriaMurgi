@@ -45,13 +45,9 @@ public class ActivityPedidos extends AppCompatActivity {
 
 //        updateBBDD();
 
-        actualizar = (Button)findViewById(R.id.btnAPedidos);
-        actualizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onStart();
-            }
-        });
+        //actualizar = (Button)findViewById(R.id.btnAPedidos);
+        //actualizar.setOnClickListener(new View.OnClickListener() {
+
 
     }//Fin onCreate
 

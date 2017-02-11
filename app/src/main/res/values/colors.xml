@@ -9,8 +9,9 @@
     <color name="accent">#38857c</color>
 
     <!-- otros -->
-    <color name="negro">#000</color>
+    <color name="negro">#000000</color>
     <color name="blanco">#fff</color>
+    <color name="fondo_blanco">#ededed</color>
     <color name="tono_negro">#b9393e43</color>
     <color name="tono_negro_oscuro">#5a000000</color>
 </resources>
