@@ -2,6 +2,7 @@ package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -115,6 +116,21 @@ public class ActivityPedidos extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ActivityPedidosDetalles.class);
         startActivity(intent);
     }//Fin lanzarDetalles
+
+//    /**
+//     * Borra todos los pedidos del usuario y hora seleccionados para limpiar la lista de pedidos
+//     * finalizados
+//     * @param usuario
+//     * @param hora
+//     * @param context
+//     */
+//    public static void borrarPedido(String usuario, String hora, Context context){
+//        AlertDialog dialogo = new SpotsDialog(context,  "Cargando pedidos...");
+//        dialogo.show();
+//        String delete = "delete from pedidos where idCliente = (Select id_cli from usuarios where " +
+//                "username = '" + usuario + "') and hora = '" + hora + "')";
+//        new ConsultasPedidos(delete, dialogo).execute();
+//    }
 
     /**
      * Captura la acción de pulsar el botón atrás y vuelve a la pantalla de login
@@ -253,6 +269,5 @@ public class ActivityPedidos extends AppCompatActivity {
             dialogo.dismiss();
         }
     }//Fin AsynTack
-
 
 }//Fin Activity
