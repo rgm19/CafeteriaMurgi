@@ -16,12 +16,14 @@
         tools:layout_editor_absoluteY="0dp"
         android:textSize="@dimen/text_size_big"
         android:id="@+id/btn_cnt_menos"
+        android:elevation="0dp"
         app:layout_constraintRight_toLeftOf="@+id/tv_cnt_cantidad"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textStyle="normal|bold"
         app:layout_constraintHorizontal_bias="0.7" />
 
     <Button
+        android:elevation="0dp"
         android:textColor="@color/blanco"
         android:text="+"
         android:textSize="@dimen/text_size_big"

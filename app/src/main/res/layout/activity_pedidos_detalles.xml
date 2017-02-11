@@ -19,8 +19,8 @@
         <ListView
             android:layout_centerInParent="true"
             android:id="@+id/lvAPedidosD"
-            android:elevation="3dp"
-            android:background="#fff"
+            android:elevation="@dimen/elevation_listview"
+            android:background="@color/blanco"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_general"
@@ -34,13 +34,13 @@
     </RelativeLayout>
     <TextView
         android:text="@string/apd_nombre_cliente"
-        android:textColor="#000"
         android:paddingLeft="@dimen/margin_general"
+        android:textColor="@color/negro"
         android:paddingTop="@dimen/margin_general"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/tvAPedidosDNomCli"
-        android:textSize="19sp"
+        android:textSize="@dimen/text_size_normal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -55,12 +55,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/tvAPedidosDHora"
-        android:textSize="19sp"
+        android:textSize="@dimen/text_size_normal"
         app:layout_constraintTop_toBottomOf="@+id/tvAPedidosDNomCli"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintRight_toLeftOf="@+id/tvAPedidosDPrecioT"
-        android:textStyle="normal|bold" />
+         />
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="56dp"
@@ -75,7 +75,6 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvAPedidosDPrecioT"
@@ -85,7 +84,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@color/accent"
         android:textStyle="normal|bold"
-        android:textSize="36sp"
+        android:textSize="@dimen/tex_size_biggest"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="@dimen/margin_general"
         app:layout_constraintBottom_toBottomOf="@+id/tvAPedidosDHora" />

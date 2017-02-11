@@ -38,19 +38,21 @@
         android:textSize="@dimen/tex_size_biggest"
         android:textColor="@color/accent"
         android:textStyle="normal|bold"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivListPedidosLogo"
+        android:layout_marginEnd="@dimen/margin_general"
         app:layout_constraintBottom_toBottomOf="@+id/ivListPedidosLogo"
-        app:layout_constraintTop_toTopOf="@+id/ivListPedidosLogo" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:text="12:45"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvListPedidosHora"
-        android:textSize="18dp"
+        android:textSize="@dimen/text_size_small"
         app:layout_constraintBottom_toBottomOf="@+id/ivListPedidosLogo"
         app:layout_constraintLeft_toRightOf="@+id/ivListPedidosLogo"
         android:layout_marginStart="8dp" />
+
+
 
 </android.support.constraint.ConstraintLayout>
