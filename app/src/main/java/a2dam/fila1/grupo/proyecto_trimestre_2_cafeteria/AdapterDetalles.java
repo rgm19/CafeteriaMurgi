@@ -62,23 +62,23 @@ public class AdapterDetalles extends BaseAdapter {
             ((ImageView)vista.findViewById(R.id.ivListPedidosAlert)).setVisibility(View.GONE);
         }
 
-        vista.findViewById(R.id.ibListPedidosDelete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(parent.getContext())
-                        .setTitle("Eliminar producto")
-                        .setMessage("¿Quiere eliminar el producto?")
-                        .setNegativeButton("Cancelar", null)
-                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                pedidos.remove(pedidoActual);
-                                BDPruebas.pedidos = pedidos;
-                                ActivityDetalles.lanzarAdapter();
-                            }
-                        }).create().show();
-            }
-        });
+//        vista.findViewById(R.id.ibListPedidosDelete).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new AlertDialog.Builder(parent.getContext())
+//                        .setTitle("Eliminar producto")
+//                        .setMessage("¿Quiere eliminar el producto?")
+//                        .setNegativeButton("Cancelar", null)
+//                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+//
+//                            public void onClick(DialogInterface arg0, int arg1) {
+//                                pedidos.remove(pedidoActual);
+//                                BDPruebas.pedidos = pedidos;
+//                                ActivityDetalles.lanzarAdapter();
+//                            }
+//                        }).create().show();
+//            }
+//        });
 
         return vista;
     }

@@ -94,7 +94,9 @@ public class ActivityCafe extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-       datos = false;
+        BDFinal.productosFinal.clear();
+        arrayTipo.clear();
+        datos = false;
         init();
     }
 
