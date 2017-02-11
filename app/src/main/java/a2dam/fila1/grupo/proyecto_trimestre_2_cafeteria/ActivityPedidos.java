@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,11 +47,11 @@ public class ActivityPedidos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos);
 
-//        updateBBDD();
-
-        //actualizar = (Button)findViewById(R.id.btnAPedidos);
-        //actualizar.setOnClickListener(new View.OnClickListener() {
-
+        if((this.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                <= Configuration.SCREENLAYOUT_SIZE_LARGE){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
     }//Fin onCreate
 

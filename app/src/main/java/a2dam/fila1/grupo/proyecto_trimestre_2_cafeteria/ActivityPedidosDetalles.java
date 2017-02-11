@@ -1,6 +1,8 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
 import android.app.AlertDialog;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +33,12 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos_detalles);
+
+        if((this.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                <= Configuration.SCREENLAYOUT_SIZE_LARGE){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
         inflar();
         listeners();//Todos los listener

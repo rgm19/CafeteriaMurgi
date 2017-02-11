@@ -2,12 +2,17 @@ package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
 
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -73,6 +78,13 @@ public class ActivityCafe extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cafe);
+
+        if((this.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                <= Configuration.SCREENLAYOUT_SIZE_LARGE){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         inflar();
     }//Fin onCreate
 
@@ -82,8 +94,11 @@ public class ActivityCafe extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+       datos = false;
         init();
     }
+
+
 
     /**
      * Llama a los metodos para cargar la bbdd e inicializa los datos
