@@ -3,9 +3,13 @@ package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,12 +41,18 @@ public class ActivityLogin extends AppCompatActivity {
     ImageButton ayuda;
     RadioButton local, externa;
 
-    static boolean loginCorrecto = false;
+    static boolean loginCorrecto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if((this.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                <= Configuration.SCREENLAYOUT_SIZE_LARGE){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
         inflar();
         calcularIP();
@@ -55,6 +65,12 @@ public class ActivityLogin extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         USER = null;
+        loginCorrecto = false;
+    }
+
+    @Override
+    protected void onRestart() {
+        onStart();
     }
 
     /**

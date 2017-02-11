@@ -27,9 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityPedidos"  />
-        <activity android:name=".ActivityPedidosDetalles" />
-        <activity android:name=".ActivityLogin"/>
+        <activity android:name=".ActivityPedidos" />
+        <activity android:name=".ActivityPedidosDetalles"/>
+        <activity android:name=".ActivityPedidosPago" />
+        <activity android:name=".ActivityLogin" />
         <activity android:name=".ActivityCafe" />
         <activity android:name=".ActivityDetalles" />
     </application>
