@@ -152,7 +152,6 @@ public class ActivityCafe extends AppCompatActivity {
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         //ActivityLogin.USER=null;
-                        ActivityLogin.loginCorrecto=false;
                         BDFinal.pedidosFinal.clear();
                         finish();
 //                        Intent i = new Intent(getApplicationContext(), ActivityLogin.class);

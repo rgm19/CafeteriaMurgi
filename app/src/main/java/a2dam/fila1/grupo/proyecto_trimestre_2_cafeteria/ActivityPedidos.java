@@ -34,7 +34,9 @@ public class ActivityPedidos extends AppCompatActivity {
 
     AlertDialog dialogo;
     ListView listView;
-    Button actualizar;
+
+    ActualizacionPedidos actualizacionPedidos = new ActualizacionPedidos();
+
 
     ArrayList<VistaPedido> vistaPedidos = new ArrayList<>();
 
@@ -65,7 +67,7 @@ public class ActivityPedidos extends AppCompatActivity {
             String consulta = "select username, hora, sum(precio) as total, estado from pedidos, usuarios " +
                     "where id_cli = idCliente group by username, hora order by hora, num_pedido, username, estado, total";
             new ConsultasPedidos(consulta, dialogo).execute();
-            new ActualizacionPedidos().execute();
+            actualizacionPedidos.execute();
 
 
     }
@@ -123,7 +125,7 @@ public class ActivityPedidos extends AppCompatActivity {
                 .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
-                        ActivityLogin.loginCorrecto = false;
+                        actualizacionPedidos.cancel(true);
                         finish();
 //                        Intent i = new Intent(getApplicationContext(), ActivityLogin.class);
 //                        startActivity(i);
