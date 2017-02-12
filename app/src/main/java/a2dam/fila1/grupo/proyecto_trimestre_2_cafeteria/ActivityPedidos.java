@@ -96,8 +96,25 @@ public class ActivityPedidos extends AppCompatActivity {
                         "username = '" + vistaPedidos.get(position).getNombre() + "' AND " +
                         "hora = '" + vistaPedidos.get(position).getHora() + "'" +
                         "group by idCliente, hora, num_pedido;";
-
                 new ConsultasPedidos(consulta, dialogo).execute();
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final String nombre = vistaPedidos.get(position).getNombre();
+                final String hora = vistaPedidos.get(position).getHora();
+                new android.support.v7.app.AlertDialog.Builder(ActivityPedidos.this)
+                        .setTitle("Finalizar Pedido")
+                        .setMessage("¿Finalizar y eliminar el pedido?")
+                        .setNegativeButton("Cancelar", null)
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                borrarPedido(nombre,hora);
+                            }
+                        }).create().show();
+                return false;
             }
         });
     }//Fin itemlistener
@@ -108,29 +125,27 @@ public class ActivityPedidos extends AppCompatActivity {
      * @param hora
      */
     private void lanzarDetalles(String usuario, int idCli, String hora) {
+        actualizacionPedidos.cancel(true);
         dialogo.show();
         String update = "update pedidos set estado = 1 where idCliente = " + idCli +
                             " and hora = '" + hora+ "'";
         new ConsultasPedidos(update, dialogo).execute();
-        actualizacionPedidos.cancel(true);
         Intent intent = new Intent(getApplicationContext(), ActivityPedidosDetalles.class);
         startActivity(intent);
     }//Fin lanzarDetalles
 
-//    /**
-//     * Borra todos los pedidos del usuario y hora seleccionados para limpiar la lista de pedidos
-//     * finalizados
-//     * @param usuario
-//     * @param hora
-//     * @param context
-//     */
-//    public static void borrarPedido(String usuario, String hora, Context context){
-//        AlertDialog dialogo = new SpotsDialog(context,  "Cargando pedidos...");
-//        dialogo.show();
-//        String delete = "delete from pedidos where idCliente = (Select id_cli from usuarios where " +
-//                "username = '" + usuario + "') and hora = '" + hora + "')";
-//        new ConsultasPedidos(delete, dialogo).execute();
-//    }
+    /**
+     * Borra todos los pedidos del usuario y hora seleccionados para limpiar la lista de pedidos
+     * finalizados
+     * @param usuario
+     * @param hora
+     */
+    public void borrarPedido(String usuario, String hora){
+        String delete = "delete from pedidos where idCliente = (Select id_cli " +
+                "from usuarios where username = '" + usuario + "') " +
+                "and hora = '" + hora + "'";
+        new ConsultasPedidos(delete, dialogo).execute();
+    }
 
     /**
      * Captura la acción de pulsar el botón atrás y vuelve a la pantalla de login
@@ -220,6 +235,10 @@ public class ActivityPedidos extends AppCompatActivity {
                 }
 
                 if (consultaPd.contains("update")){
+                    sentenciaPd.executeUpdate(consultaPd);
+                }
+
+                if (consultaPd.contains("delete")){
                     sentenciaPd.executeUpdate(consultaPd);
                 }
 

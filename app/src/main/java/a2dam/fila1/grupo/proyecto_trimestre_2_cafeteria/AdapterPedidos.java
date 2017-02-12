@@ -44,7 +44,6 @@ public class AdapterPedidos extends BaseAdapter {
     private View listItemView;
     private TextView tvNombre, tvHora, tvPrecio;
     private ConstraintLayout fondo;
-    private ImageButton borrar;
 
     public AdapterPedidos(ArrayList<VistaPedido> pedidos) {
         this.pedidos = pedidos;
@@ -89,27 +88,6 @@ public class AdapterPedidos extends BaseAdapter {
             default:
         }
 
-//        borrar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new android.support.v7.app.AlertDialog.Builder(viewGroup.getContext())
-//                        .setTitle("Finalizar Pedido")
-//                        .setMessage("¿Finalizar y eliminar el pedido?")
-//                        .setNegativeButton("Cancelar", null)
-//                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-//
-//                            public void onClick(DialogInterface arg0, int arg1) {
-//                                AlertDialog dialogo = new SpotsDialog(viewGroup.getContext(),  "Cargando pedidos...");
-//                                String delete = "delete from pedidos where idCliente = (Select id_cli " +
-//                                        "from usuarios where username = '" + nombre + "') " +
-//                                        "and hora = '" + hora + "'";
-//                                new BorrarPedido(delete, dialogo).execute();
-//                            }
-//                        }).create().show();
-//            }
-//        });
-
-
         return listItemView;
     }
 
@@ -118,50 +96,6 @@ public class AdapterPedidos extends BaseAdapter {
         tvHora = (TextView) listItemView.findViewById(R.id.tvListPedidosHora);
         tvPrecio = (TextView) listItemView.findViewById(R.id.tvListPedidosPrecio);
         fondo = (ConstraintLayout) listItemView.findViewById(R.id.layout);
-        borrar = (ImageButton) listItemView.findViewById(R.id.ibListPedidoDelete);
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public class BorrarPedido extends AsyncTask<Void,Void,Statement> {
-
-        android.app.AlertDialog dialog;
-        String consultaPd;
-        Connection conexPd;
-        Statement sentenciaPd;
-
-        public BorrarPedido(String consulta, android.app.AlertDialog dialog){
-            this.consultaPd=consulta;
-            this.dialog=dialog;
-        }
-
-        @Override
-        protected Statement doInBackground(Void... params) {
-
-            try {
-                conexPd = DriverManager.getConnection("jdbc:mysql://" + ActivityLogin.ip + "/base20171",
-                        "ubase20171", "pbase20171");
-                sentenciaPd = conexPd.createStatement();
-                publishProgress();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return sentenciaPd;
-        }
-
-        @Override
-        protected void onPostExecute(Statement sentencia) {
-            super.onPostExecute(sentencia);
-
-            try{
-                sentencia.executeUpdate(consultaPd);
-
-                conexPd.close();
-                sentenciaPd.close();
-
-            }catch (Exception ex) { Log.d("Fallo de cojones",""); }
-        }
-    }//Fin AsynTack
 
 }//Fin Adapter
