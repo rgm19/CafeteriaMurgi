@@ -89,26 +89,25 @@ public class AdapterPedidos extends BaseAdapter {
             default:
         }
 
-        borrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new android.support.v7.app.AlertDialog.Builder(viewGroup.getContext())
-                        .setTitle("Finalizar Pedido")
-                        .setMessage("¿Finalizar y eliminar el pedido?")
-                        .setNegativeButton("Cancelar", null)
-                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                AlertDialog dialogo = new SpotsDialog(viewGroup.getContext(),  "Cargando pedidos...");
-                                dialogo.show();
-                                String delete = "delete from pedidos where idCliente = (Select id_cli " +
-                                        "from usuarios where username = '" + nombre
-                                        + "') and hora = '" + hora + "'";
-                                new BorrarPedido(delete, dialogo).execute();
-                            }
-                        }).create().show();
-            }
-        });
+//        borrar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new android.support.v7.app.AlertDialog.Builder(viewGroup.getContext())
+//                        .setTitle("Finalizar Pedido")
+//                        .setMessage("¿Finalizar y eliminar el pedido?")
+//                        .setNegativeButton("Cancelar", null)
+//                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+//
+//                            public void onClick(DialogInterface arg0, int arg1) {
+//                                AlertDialog dialogo = new SpotsDialog(viewGroup.getContext(),  "Cargando pedidos...");
+//                                String delete = "delete from pedidos where idCliente = (Select id_cli " +
+//                                        "from usuarios where username = '" + nombre + "') " +
+//                                        "and hora = '" + hora + "'";
+//                                new BorrarPedido(delete, dialogo).execute();
+//                            }
+//                        }).create().show();
+//            }
+//        });
 
 
         return listItemView;
@@ -160,7 +159,6 @@ public class AdapterPedidos extends BaseAdapter {
 
                 conexPd.close();
                 sentenciaPd.close();
-                dialog.dismiss();
 
             }catch (Exception ex) { Log.d("Fallo de cojones",""); }
         }
