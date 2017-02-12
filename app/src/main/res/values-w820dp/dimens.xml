@@ -22,4 +22,7 @@
     <dimen name="text_size_normal">26sp</dimen>
     <dimen name="text_size_small">18sp</dimen>
     <dimen name="text_size_big">28sp</dimen>
+
+    <!-- recursos -->
+    <drawable name="fondo_pedidos_mv_tb">@drawable/fondo_pedidos</drawable>
 </resources>

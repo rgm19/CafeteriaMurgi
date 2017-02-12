@@ -39,4 +39,5 @@
     <string name="dp_aceptar">Aceptar</string>
     <string name="lp_nombre_del_cliente">Nombre del Cliente</string>
     <string name="lpp_nombre_del_cafe">Nombre del Café</string>
+
 </resources>

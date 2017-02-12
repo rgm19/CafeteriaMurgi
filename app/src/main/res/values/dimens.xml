@@ -26,4 +26,7 @@
 
     <!-- ELEVATION -->
     <dimen name="elevation_listview">3dp</dimen>
+
+    <!-- recursos -->
+    <drawable name="fondo_pedidos_mv_tb">@color/fondo_blanco</drawable>
 </resources>
