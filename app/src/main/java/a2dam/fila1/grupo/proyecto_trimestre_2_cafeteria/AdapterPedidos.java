@@ -111,21 +111,6 @@ public class AdapterPedidos extends BaseAdapter {
         });
 
 
-        /**
-         * Esto es mejor ponerlo con un onIntemClickListener en el Activity
-         */
-//        // Si se pulsa la vista iremos a detalles del pedido.
-//        // En el proceso envía el id del cliente
-//        listItemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                final Context context = view.getContext();
-//                Intent intent = new Intent(context, ActivityPedidosDetalles.class);
-//                intent.putExtra("id", pedidos.get(i).getUsuario().getId());
-//                context.startActivity(intent);
-//            }
-//        });
-
         return listItemView;
     }
 
