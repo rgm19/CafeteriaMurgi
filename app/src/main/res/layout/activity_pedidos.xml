@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_pedidos"
@@ -10,7 +10,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:elevation="@dimen/elevation_listview"
         android:background="@color/blanco"
         android:layout_height="wrap_content"
@@ -61,7 +61,6 @@
             app:layout_constraintLeft_toRightOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="@+id/imageView2"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintVertical_bias="0.0"
             android:layout_marginStart="8dp" />
         <ListView
             android:layout_below="@id/cl1"
@@ -69,14 +68,10 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_width="@dimen/ancho_list_movil_tablet"
-            app:layout_constraintHorizontal_bias="0.56"
+            android:layout_width="0dp"
             android:layout_marginTop="@dimen/margin_general"
-
-            app:layout_constraintTop_toBottomOf="@+id/textView8"
-            android:layout_marginBottom="@dimen/margin_general"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     </android.support.constraint.ConstraintLayout>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

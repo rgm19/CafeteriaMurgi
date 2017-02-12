@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="16dp">
+        android:layout_margin="@dimen/margin_general">
 
         <ImageView
             android:layout_height="100dp"
@@ -41,14 +41,14 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/blanco"
+            android:textColor="@color/fondo_blanco"
             android:id="@+id/et_lg_usuario"
             android:textAlignment="center"
-            android:hint="@string/al_usuario"
+            android:hint="@string/al_usuari"
             android:layout_marginEnd="@dimen/margin_general"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginStart="@dimen/margin_general"
-            android:textColorHint="@color/blanco"
+            android:textColorHint="#90ffffff"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="@dimen/margin_top_et_hasta_logotipo"
             app:layout_constraintTop_toBottomOf="@+id/iv_lg_icono"
@@ -56,7 +56,7 @@
 
         <EditText
             android:textColor="@color/blanco"
-            android:textColorHint="@color/blanco"
+            android:textColorHint="#90ffffff"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"

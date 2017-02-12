@@ -65,7 +65,7 @@
         </ListView>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="@dimen/ancho_list_movil_tablet"
             android:background="#979797"
             android:id="@+id/tv_dt_espacio1"
             app:layout_constraintLeft_toLeftOf="@+id/lv_dt"

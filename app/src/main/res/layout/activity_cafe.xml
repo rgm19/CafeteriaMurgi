@@ -28,7 +28,8 @@
         app:layout_constraintTop_toBottomOf="@+id/tb_cf"
         app:layout_constraintLeft_toLeftOf="parent"
         android:scaleType="centerCrop"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <Button
         android:text="@string/ac_pedir"
@@ -74,7 +75,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_cf_foto"
+        app:layout_constraintTop_toBottomOf="@+id/tb_cf"
         >
 
         <android.support.constraint.ConstraintLayout
