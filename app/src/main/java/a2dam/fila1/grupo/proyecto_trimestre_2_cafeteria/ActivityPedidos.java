@@ -102,7 +102,7 @@ public class ActivityPedidos extends AppCompatActivity {
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 final String nombre = vistaPedidos.get(position).getNombre();
                 final String hora = vistaPedidos.get(position).getHora();
                 new android.support.v7.app.AlertDialog.Builder(ActivityPedidos.this)
@@ -114,7 +114,7 @@ public class ActivityPedidos extends AppCompatActivity {
                                 borrarPedido(nombre,hora);
                             }
                         }).create().show();
-                return false;
+                return true;
             }
         });
     }//Fin itemlistener
