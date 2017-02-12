@@ -103,7 +103,7 @@ public class AdapterPedidos extends BaseAdapter {
                                 dialogo.show();
                                 String delete = "delete from pedidos where idCliente = (Select id_cli " +
                                         "from usuarios where username = '" + nombre
-                                        + "') and hora = '" + hora + "')";
+                                        + "') and hora = '" + hora + "'";
                                 new BorrarPedido(delete, dialogo).execute();
                             }
                         }).create().show();
