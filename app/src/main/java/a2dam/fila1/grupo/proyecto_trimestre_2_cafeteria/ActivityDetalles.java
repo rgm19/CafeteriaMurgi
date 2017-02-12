@@ -137,6 +137,7 @@ public class ActivityDetalles extends AppCompatActivity {
                         new Insertar(insert, dialogo).execute();
                     }
                     confirmar.setEnabled(false);
+                    confirmar.setBackgroundColor(0xaa76A39D);
                     BDFinal.pedidosFinal.clear();
                     Toast.makeText(getApplicationContext(),"Pedido realizado con exito.", Toast.LENGTH_LONG).show();
                 }

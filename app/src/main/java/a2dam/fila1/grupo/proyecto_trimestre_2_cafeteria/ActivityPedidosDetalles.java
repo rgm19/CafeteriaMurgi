@@ -96,7 +96,7 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
                     fab.setImageResource(R.drawable.ic_done);
                     mail = true;
 
-                    dialogo.show();
+//                    dialogo.show();
                     String update = "update pedidos set estado = 2 where idCliente = " +
                             BDFinal.pedidosFinal.get(0).getUsuario().getId() +
                             " and hora = '" + BDFinal.pedidosFinal.get(0).getHora() + "'";
@@ -117,7 +117,8 @@ public class ActivityPedidosDetalles extends AppCompatActivity {
         for (Pedido pd : BDFinal.pedidosFinal){
             p += pd.getPrecio();
         }
-        return p;
+        float redondeo = (float) (Math.round(p*100.0)/100.0);
+        return redondeo;
     }
 
     public class UpdatePedido extends AsyncTask<Void,Void,Statement> {
