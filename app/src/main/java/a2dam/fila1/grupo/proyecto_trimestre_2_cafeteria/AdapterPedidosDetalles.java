@@ -51,6 +51,9 @@ public class AdapterPedidosDetalles extends BaseAdapter {
         if (!getItem(i).getComentarios().contains("lactosa")){
             (listItemView.findViewById(R.id.ivListPedidosAlert)).setVisibility(View.GONE);
         }
+        if (ActivityLogin.USER.getCategoria()<2){
+            listItemView.findViewById(R.id.ibListDelete).setVisibility(View.GONE);
+        }
 
         return listItemView;
     }
