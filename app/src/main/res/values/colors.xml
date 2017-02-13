@@ -6,7 +6,8 @@
 
     <color name="primary">#46a79a</color>
     <color name="primary_dark">#38857c</color>
-    <color name="accent">#38857c</color>
+    <color name="accent">#ff6138</color>
+    <!--<color name="accent">#38857c</color>-->
 
     <!-- otros -->
     <color name="negro">#000000</color>

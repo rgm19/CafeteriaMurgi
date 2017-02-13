@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
+            android:theme="@style/AppThemeVerde"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/fondo_blanco"
             android:id="@+id/et_lg_usuario"
@@ -52,13 +53,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="@dimen/margin_top_et_hasta_logotipo"
             app:layout_constraintTop_toBottomOf="@+id/iv_lg_icono"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColorLink="?attr/colorPrimaryDark" />
 
         <EditText
             android:textColor="@color/blanco"
             android:textColorHint="#90ffffff"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:theme="@style/AppThemeVerde"
             android:ems="10"
             android:textSize="@dimen/text_size_normal"
             android:id="@+id/et_lg_pass"
@@ -71,7 +74,8 @@
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/margin_general"
             android:layout_marginEnd="@dimen/margin_general"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColorLink="?attr/colorPrimaryDark" />
 
         <ImageView
             android:text="@string/al_usuario"
@@ -130,23 +134,27 @@
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/blanco"
                 android:text="@string/al_red_local"
+                android:theme="@style/AppThemeVerde"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/rb_lg_local"
                 android:layout_weight="1"
                 android:layout_marginRight="@dimen/margin_general"
-                android:onClick="radio"/>
+                android:onClick="radio"
+                android:textColorLink="?attr/colorPrimary" />
 
             <RadioButton
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/blanco"
                 android:text="@string/al_red_externa"
+                android:theme="@style/AppThemeVerde"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/rb_lg_externa"
                 android:layout_weight="1"
                 android:onClick="radio"
-                android:checked="true" />
+                android:checked="true"
+                android:textColorLink="?attr/colorPrimary" />
         </RadioGroup>
 
     </android.support.constraint.ConstraintLayout>
