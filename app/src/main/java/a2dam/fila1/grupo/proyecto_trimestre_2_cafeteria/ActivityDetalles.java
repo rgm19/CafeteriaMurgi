@@ -121,10 +121,11 @@ public class ActivityDetalles extends AppCompatActivity {
                 }
                 int hora = hour * 10000 + minute * 100;
 
-
                 if (BDFinal.pedidosFinal.size()==0)
                     Toast.makeText(getApplicationContext(),"No se han añadido productos.", Toast.LENGTH_SHORT).show();
-                else{
+                else if (!comprobarHora(hora)){
+                    Toast.makeText(getApplicationContext(),"Hora incorrecta. Horario 8:15-14:45.", Toast.LENGTH_SHORT).show();
+                }else {
                     for (Pedido p : BDFinal.pedidosFinal){
                         dialogo.show();
 
@@ -145,6 +146,17 @@ public class ActivityDetalles extends AppCompatActivity {
             }
         });
     }//Fin Listener
+
+    /**
+     * Horario de cafeteria de 8:15 a 14:45
+     * @param hora
+     * @return
+     */
+    private boolean comprobarHora(int hora) {
+        if (hora > 81500 && hora < 144500)
+            return true;
+        return false;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
