@@ -107,7 +107,7 @@ public class ActivityCafe extends AppCompatActivity {
      */
     private void init(){
         lanzarDialogo("Cargando BBDD...");
-        new ConsultasCafe("Select * from productos", dialogo).execute();
+        new ConsultasCafe("Select * from productos order by nom_pro", dialogo).execute();
         listenerBotones();
         llevaLeche(leche);
     }
@@ -189,9 +189,17 @@ public class ActivityCafe extends AppCompatActivity {
         spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                dialogo.show();
-                new ConsultasCafe("Select precio, leche from productos where nom_pro = '"+parent.getSelectedItem().toString().trim()+"'",dialogo).execute();
-            }
+                    switch (position){
+                        case 0: precioCafe =0;
+                                setPrecio();
+                                llevaLeche(false);
+                                dialogo.dismiss();
+                            break;
+                        default: dialogo.show();
+                            new ConsultasCafe("Select precio, leche from productos where nom_pro = '"
+                                    + parent.getSelectedItem().toString().trim() + "'", dialogo).execute();
+                    }
+                }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 //No se usa pero no se puede borrar
@@ -240,15 +248,18 @@ public class ActivityCafe extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Producto producto = BDFinal.productosFinal.get(spTipo.getSelectedItemPosition());
-                String comentarios = generarComentarios();
+                if (spTipo.getSelectedItemPosition() != 0){
+                    Producto producto = BDFinal.productosFinal.get(spTipo.getSelectedItemPosition()-1);
+                    String comentarios = generarComentarios();
 
-                BDFinal.pedidosFinal.add(new Pedido(ActivityLogin.USER, producto,
-                        Integer.parseInt(cantidad.getText().toString().trim()),
-                        Float.parseFloat(precio.getText().toString().trim()),comentarios, "14:45"));
+                    BDFinal.pedidosFinal.add(new Pedido(ActivityLogin.USER, producto,
+                            Integer.parseInt(cantidad.getText().toString().trim()),
+                            Float.parseFloat(precio.getText().toString().trim()),comentarios, "14:45"));
 
-                Toast.makeText(getApplicationContext(),"Café "+producto.getNombre()+" añadido a tus pedidos",Toast.LENGTH_SHORT).show();
-                limpiar();
+                    Toast.makeText(getApplicationContext(),"Café "+producto.getNombre()+" añadido a tus pedidos",Toast.LENGTH_SHORT).show();
+                    limpiar();
+                }else
+                    Toast.makeText(getApplicationContext(),"Debe seleccionar un TIPO de café",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -405,6 +416,9 @@ public class ActivityCafe extends AppCompatActivity {
             try{
                 while (resultSet.next()) {
                     if (!datos){
+                        if (arrayTipo.size() == 0)
+                            arrayTipo.add("");
+
                         BDFinal.productosFinal.add(new Producto(resultSet.getInt(1),resultSet.getString(2),resultSet.getFloat(3), resultSet.getBoolean(4)));
                         arrayTipo.add(resultSet.getString(2));
                     }
