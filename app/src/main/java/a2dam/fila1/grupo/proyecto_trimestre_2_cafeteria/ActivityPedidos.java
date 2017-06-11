@@ -1,37 +1,22 @@
 package a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria;
 
+import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.*;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-
-import com.mysql.jdbc.PreparedStatement;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDFinal;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.BDPruebas;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Pedido;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Producto;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.Usuario;
-import a2dam.fila1.grupo.proyecto_trimestre_2_cafeteria.Bd.VistaPedido;
 import dmax.dialog.SpotsDialog;
+
+import java.sql.*;
+import java.util.ArrayList;
 
 public class ActivityPedidos extends AppCompatActivity {
 
